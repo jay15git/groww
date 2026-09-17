@@ -5,21 +5,31 @@ import { useState } from "react"
 import { Icon, type IconName } from "@/components/icon"
 import { Screen } from "@/components/screen"
 import { ScreenHeader } from "@/components/screen-header"
-import { useStore } from "@/lib/store"
+import { usePersona, useStore } from "@/lib/store"
+import { inr } from "@/lib/utils"
 import type React from "react"
 
-const rows: { label: string; icon: IconName; text: string }[] = [
-  { label: "Why this", icon: "target", text: "Matches 3-mo goal · low cost · diversified" },
-  { label: "Risk", icon: "chart", text: "Medium. Value can fall short-term." },
-  { label: "Cost", icon: "percent", text: "0.1% expense ratio · ₹3/yr per ₹1k" },
-  { label: "Exit", icon: "exchange", text: "Anytime. Money back in 2–3 days" },
-  { label: "Source", icon: "fileVerified", text: "Goal plan · Future A · your ₹4,200 surplus" },
-]
-
 export default function Receipt() {
-  const { invest } = useStore()
+  const { invest, pendingInvest, profile } = useStore()
+  const p = usePersona()
   const router = useRouter()
   const [done, setDone] = useState(false)
+
+  const inv = pendingInvest ?? {
+    amount: p.planAmount,
+    product: "Nifty 50 index fund",
+    goal: profile.firstGoal || "New laptop",
+    future: "A",
+  }
+
+  const rows: { label: string; icon: IconName; text: string }[] = [
+    { label: "Why this", icon: "target", text: `Matches your ${inv.goal.toLowerCase()} goal · low cost · diversified` },
+    { label: "Risk", icon: "chart", text: "Medium. Value can fall short-term." },
+    { label: "Cost", icon: "percent", text: `0.1% expense ratio · ~₹${Math.max(1, Math.round(inv.amount * 0.001))}/yr on ${inr(inv.amount)}` },
+    { label: "Exit", icon: "exchange", text: "Anytime. Money back in 2–3 days" },
+    { label: "Source", icon: "fileVerified", text: `Goal plan${inv.future ? ` · Future ${inv.future}` : ""} · your ${inr(p.safeToInvest)} surplus` },
+    { label: "Cap check", icon: "shield", text: `${inr(inv.amount)} is within your ${inr(p.safeToInvest)} safe-to-invest` },
+  ]
 
   const confirm = () => {
     setDone(true)
@@ -52,7 +62,7 @@ export default function Receipt() {
             Order placed
           </h1>
           <p className="mt-1.5 text-sm text-muted-foreground">
-            ₹3,000 · Nifty 50 index fund
+            {inr(inv.amount)} · {inv.product}
           </p>
           <p className="mt-1 text-xs text-muted-foreground">
             Following your money →
@@ -79,10 +89,10 @@ export default function Receipt() {
               You&rsquo;re about to
             </p>
             <h1 className="mt-1.5 font-heading text-[26px] font-extrabold leading-tight tracking-tight">
-              Invest ₹3,000
+              Invest {inr(inv.amount)}
             </h1>
             <p className="mt-0.5 text-xs text-muted-foreground">
-              toward New laptop · via Nifty 50 index fund
+              toward {inv.goal} · via {inv.product}
             </p>
           </div>
 
@@ -118,7 +128,7 @@ export default function Receipt() {
             onClick={confirm}
             className="press flex h-14 w-full items-center justify-center rounded-full bg-ink font-heading text-base font-bold text-lime"
           >
-            I get it — invest ₹3,000
+            I get it — invest {inr(inv.amount)}
           </button>
           <button
             type="button"

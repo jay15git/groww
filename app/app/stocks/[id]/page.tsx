@@ -1,6 +1,6 @@
 "use client"
 
-import { useParams, useRouter } from "next/navigation"
+import { notFound, useParams, useRouter } from "next/navigation"
 import { useState } from "react"
 import Link from "next/link"
 import { Icon } from "@/components/icon"
@@ -15,7 +15,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet"
-import { allStocks, stocks } from "@/lib/data"
+import { allStocks } from "@/lib/data"
 import { cn, inr, pct } from "@/lib/utils"
 import { useStore } from "@/lib/store"
 import type React from "react"
@@ -26,8 +26,9 @@ export default function StockDetail() {
   const { id } = useParams<{ id: string }>()
   const router = useRouter()
   const { watchIds, toggleWatch } = useStore()
-  const s = allStocks.find((x) => x.id === id) ?? stocks[0]
+  const s = allStocks.find((x) => x.id === id)
   const [range, setRange] = useState(0)
+  if (!s) notFound()
   const watched = watchIds.includes(s.id)
   const neg = s.change < 0
 
@@ -37,7 +38,7 @@ export default function StockDetail() {
     { label: "Day high", value: inr(s.high, { decimals: 2 }) },
     { label: "Day low", value: inr(s.low, { decimals: 2 }) },
     { label: "Market cap", value: s.mcap },
-    { label: "P/E", value: String(s.pe) },
+    { label: "P/E", value: s.pe ? String(s.pe) : "—" },
   ]
 
   return (
@@ -175,7 +176,7 @@ function OrderSheet({ stock, side }: { stock: (typeof allStocks)[number]; side: 
               {side === "BUY" ? "Bought" : "Sold"} {qty} × {stock.name}
             </p>
             <p className="mt-1 text-xs text-muted-foreground">
-              {product} · {inr(cost, { decimals: 2 })} · Executed at market
+              {product} · {inr(cost, { decimals: 2 })} · Simulated — no real money moved
             </p>
             <Link
               href="/markets"

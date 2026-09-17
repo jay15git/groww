@@ -382,52 +382,62 @@ Vision feature containing college finance clubs, delayed-data simulations, regio
 
 ---
 
-## 7. App information architecture
+## 7. App information architecture (as built)
 
-## Today
+Bottom nav: **Home · Explore · Portfolio · Squad** + a persistent **Wise** FAB. Everything else hangs off these.
 
-- Financial snapshot
-- Current goal
-- Income Autopilot
-- Money Multiverse
-- Next recommended action
-- First Red Day state
+### Home (`/today`)
 
-## Discover
+- Safe-to-invest snapshot (persona-aware)
+- Quick actions: Add money, Invest, Ask Wise, Markets
+- Reality Check entry card
+- Goal progress ("Your next moves")
+- Recent moves → Money Trail
+- Profile sheet (full profile, persona switcher, Autopilot, Wrapped, reset)
+- Notifications sheet
 
-- Personalized content
-- Reality Check entry
-- Promptfolios
-- Verified creators
-- Product discovery
-- Direct search
+### Explore (`/explore`)
 
-## Wise
+- Market mood gauge + index cards
+- "What moved today" news with Reality Check hooks
+- Promptfolio entry
+- Mutual funds entry
 
-- Plan
-- Explain
-- Check
-- Simulate
-- Build
-- Reflect
-- Draft action
+### Wise (`/wise`, `/wise/voice`)
 
-## Squads
+- Chat with scripted deterministic replies + suggestion chips
+- Decision Receipt card inline in chat
+- Voice mode demo (Hindi/English/Hinglish framing)
 
-- Friends
-- Family
-- Campus
-- Creator rooms
-- Shared goals
+### Squad (`/squad`)
 
-## Portfolio
+- Learning challenge progress
+- Consistency board (streaks, not returns)
+- Invite-link flow; "money stays individual" guarantee
 
-- Holdings
-- Goals
-- Portfolio DNA
-- Calm/full view
-- Money Trail
-- Wrapped
+### Portfolio (`/portfolio`)
+
+- Total value + range chart + hide-balance toggle
+- First Red Day card (appears after first invest)
+- Holdings → stock/fund detail
+- Portfolio DNA (`/dna`), Wrapped (`/wrapped`), Money Trail (`/trail`)
+
+### Market depth (GrowWise parity layer)
+
+- Stocks hub (`/markets`): Explore / Holdings / Positions / Orders / Watchlist tabs — most bought, top movers, MTF, intraday, volume shockers, trading screens, sectors, ETFs, stocks-in-news
+- Mutual funds hub (`/mutual-funds`): Explore / Dashboard / SIPs / Watchlist — categories, collections, popular funds, SIP start/pause
+- F&O hub (`/fno`) + option chains (`/fno/chain/[id]`) with one-tap lot orders
+- IPOs (`/ipo`): open/upcoming/closed, UPI apply flow, allotment state
+- Stock detail (`/stocks/[id]`): chart, facts, Wise read, buy/sell order sheet
+- Fund detail (`/funds/[id]`): NAV chart, stats, goal fit, one-time + SIP flows
+- Screener (`/screener`), Sectors (`/sectors`), Products (`/products/mtf|stock-sip|etf|bonds|events`)
+- Universal search (`/search`): stocks, funds, F&O, IPOs
+
+### Plan spine
+
+- Onboarding (`/`, `/onboarding`): name → money situation → income rhythm → first goal + experience → persona-derived Today
+- Reality Check (`/reality-check`) → Money Multiverse (`/multiverse`) → Income Autopilot (`/autopilot`) → Decision Receipt (`/receipt`) → Money Trail (`/trail`)
+- Add money (`/add-money`), Goals (`/goals`), Watchlists (`/watchlist`), Profile (`/profile`), Persona switcher (`/persona`), 404
 
 ---
 
@@ -496,12 +506,13 @@ Humor never replaces clarity.
 10. Follow Money Trail
 11. View First Red Day response
 
-### Secondary surfaces
+### Secondary surfaces (all built, interactive)
 
-- Promptfolio
-- Squad
-- Portfolio DNA
-- GrowWise Wrapped
+- Promptfolio — prompt → interpreted basket with risk, stress test, exclusions, fees, invalidators
+- Squad — challenge progress, consistency board, invite link
+- Portfolio DNA — behaviour dimensions + archetype matches
+- GrowWise Wrapped — privacy-preserving milestone cards
+- GrowWise-parity market layer — stocks, mutual funds, F&O chains, IPOs, screener, sectors, products, orders/positions/watchlists, search
 
 ### Prototype assumptions
 
@@ -516,23 +527,26 @@ Humor never replaces clarity.
 
 ---
 
-## 10. In scope
+## 10. In scope (as built)
 
-- Adaptive Gen Z onboarding
-- Three income contexts
-- AI social-content verification
-- Future scenario simulator
-- Flexible contribution planning
+- Multi-step adaptive onboarding: name, 7 money situations, income rhythm, first goal, experience; skip path; persona derived from situation
+- Three income contexts, switchable via `/persona` (demo affordance; production = one profile)
+- AI social-content verification (Reality Check)
+- Future scenario simulator (Money Multiverse)
+- Flexible contribution planning (Income Autopilot: % mode, buffer-first, hard cap, pause)
 - Decision Receipt
-- Money Trail
-- First Red Day
-- Promptfolio preview
-- Squads preview
-- Portfolio DNA
-- Wrapped preview
-- Complete visual redesign
-- Mocked interactive data
-- Responsive no-login web prototype
+- Money Trail with step-by-step settlement states
+- First Red Day card on Portfolio after first investment
+- Promptfolio, Squads, Portfolio DNA, Wrapped — all functional previews
+- Full GrowWise-parity market layer: stocks hub, mutual funds hub (SIP flows), F&O hub + option chains, IPOs with UPI apply, screener, sectors, products & tools, universal search
+- Working orders (incl. cancel→Cancelled lifecycle), positions, watchlists, goal creation, fund/stock save toggles
+- Cross-page pending-investment context: every path into Decision Receipt carries real amount/product/goal
+- Persona-aware Money Multiverse and Wise replies; EN/हिं reply toggle
+- Reality Check paste-link input with simulated scan; Portfolio hide-balances toggle; Autopilot pause; SIP pause/resume; IPO notify state; privacy/consent + reports sheets on Profile
+- Hydration-gated persisted state (localStorage): profile, persona, autopilot, pending invest, watchlists, orders, SIPs, IPO applications/notifications, goals, notification read state
+- Complete visual redesign (ink/lime/mint/cobalt/mango system, Anek + Inter, receipt edges, check animations)
+- Wise chat (deterministic script + regex replies) and voice-mode demo
+- Responsive no-login web prototype, 31 routes, clean typecheck/lint/build
 
 ---
 
@@ -735,7 +749,7 @@ Connecting discovery, decision, and post-investment trust into one journey inste
 | 300–700-word page (not AI-written) | Candidate rewrites from sections 0, 2, 4, 5, 9–11 — outline provided separately | Pending candidate rewrite |
 | Prompts used to create the tool | Prompt packet (separate file) | Pending after build |
 | Evals used to test the solution | Eval packet from section 13, run against the build | Pending after build |
-| Working app link | Vercel preview deployment | Pending build |
+| Working app link | Vercel deployment of `app/` (Next.js 16; 31 routes, clean typecheck/lint/build) | Built — deploy pending |
 
 ---
 
@@ -754,3 +768,60 @@ Use First Red Day to complete the investor lifecycle. Use Promptfolio, Squads, P
 The product should leave the reviewer with one clear idea:
 
 > GrowWise does not make GrowWise younger by adding slang. It redesigns GrowWise around how young Indians actually earn, learn, decide, worry, and invest.
+
+---
+
+## 16. As-built delta, known gaps, and last-minute backlog
+
+Written after the build. What changed versus plan, what's honestly weak, and what a last pass should fix first.
+
+### 16.1 Shipped beyond the original plan
+
+- Full GrowWise-parity market layer: stocks hub with 5 tabs, mutual funds hub with 4 tabs and real SIP create/pause, F&O hub with option chains and lot orders, IPO apply flow, screener, sectors, products/tools pages, universal search.
+- Rebrand executed in-app: Groww → GrowWise, assistant GR-1 → Wise, route `/gr1` → `/wise`.
+- Persisted state across reloads (profile, persona, autopilot, orders, SIPs, watchlists, IPO applications, goals).
+- Wise chat with deterministic regex replies + voice-mode demo; notifications and profile sheets on Home.
+- Goal creation, watchlist management, order cancel, IPO allotment state — the app is stateful, not a click-through.
+
+### 16.2 Last-minute pass — what shipped
+
+All P0 + most P1/P2 from the original gap list are now fixed in code:
+
+| Gap found | Fix shipped |
+|---|---|
+| Receipt hardcoded ₹3,000/laptop | `pendingInvest` in store carries amount/product/goal/future from every entry point — Multiverse, Autopilot, Add Money, fund detail, Promptfolio, Wise receipt card. Amount derives from persona `planAmount`, stays inside `safeToInvest` cap |
+| Multiverse identical across personas | Scenario amounts derive from persona `planAmount`/`safeToInvest` |
+| Onboarding `firstGoal` unused | "Grow wealth" goal seeds `/goals` on finish; receipt uses `profile.firstGoal` |
+| Home "Invest" → reality-check | Now routes to `/mutual-funds` |
+| Portfolio never reflects the order | `investedAmount` + a "just added" holding row; total updates; balances hide behind a working toggle |
+| Fund bookmark local-only | Wired to `fundWatchIds` → surfaces in MF watchlist tab |
+| SIP "Pause" deleted it | `paused` flag + Resume; monthly total excludes paused |
+| Order cancel unreachable | `cancelOrder` now marks `Cancelled` — history preserved, row dims |
+| Notification dot never cleared | `notifSeen` persisted; dot clears on open |
+| `/` re-showed "Create account" | Redirects to `/today` once `onboarded` |
+| Hydration flash | Store gates render until localStorage loads (`hydrated`) |
+| Reality Check had no input | Paste-link field with simulated scan — closes the demo loop |
+| No consent surface (eval task) | "Privacy & data" sheet with toggles + "Reports & statements" sheet replacing the self-link |
+| IPO "Notify me" dead | Persisted `ipoNotified` state |
+| Autopilot one-way | Pause path when `on` |
+| Wise generic | Persona `planAmount` injected into replies (`{safe}` token); EN/हिं reply toggle with Hinglish reply set |
+| Unknown detail ids fell back silently | `notFound()` on `/stocks/[id]` and `/funds/[id]` |
+| Money Trail static ₹3,000 | Reads `pendingInvest`/`investedAmount`; marked "simulated" |
+
+### 16.3 Still honest gaps (documented, not hidden)
+
+- Multiple watchlists share one `watchIds` pool — list scoping is cosmetic.
+- Stock order flow doesn't go through Decision Receipt (fund/SIP/plan flows do) — acceptable: receipts target first-time decisions, not trades.
+- Trail "refresh" advances state manually; production would poll order status.
+- `products/[tool]` pages are shallow previews; sector rows aren't links.
+- F&O chains silently fall back to NIFTY for unknown ids (deliberate — demo shouldn't 404 mid-presentation).
+- Wise is a deterministic script; eval claims in §13 are the production bar, not the demo's behavior.
+- Market prices are static seeds; no live data anywhere.
+
+### 16.4 Remaining roadmap (if continued)
+
+**Now (demo polish):** share-sheet preview for Wrapped; recent searches on `/search`; "Learn first" experience branch on Home.
+
+**Next (production-shaped):** real holdings derived from orders; per-watchlist scoping; order status lifecycle (pending → executed/cancelled) with timers; AmountAA-style income detection replacing persona selection.
+
+**Later (needs licensing/review):** real Reality Check pipeline with citations; Promptfolio behind advisory controls; Squad moderation; vernacular QA beyond Hinglish.

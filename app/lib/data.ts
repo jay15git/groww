@@ -12,6 +12,7 @@ export const personas: Record<
     city: string
     income: string
     safeToInvest: number
+    planAmount: number
     incomeNote: string
     autopilotLine: string
     autopilotSub: string
@@ -26,6 +27,7 @@ export const personas: Record<
     city: "Mumbai",
     income: "₹6,000/mo allowance",
     safeToInvest: 1200,
+    planAmount: 500,
     incomeNote: "Start with ₹100. Pause anytime.",
     autopilotLine: "₹500 when you can",
     autopilotSub: "Manual nudges, never auto-debit. You're in charge.",
@@ -39,6 +41,7 @@ export const personas: Record<
     city: "Bengaluru",
     income: "₹52,000/mo salary",
     safeToInvest: 8400,
+    planAmount: 5000,
     incomeNote: "Salary hits on the 1st. Invest on the 2nd.",
     autopilotLine: "₹5,000 every month",
     autopilotSub: "Fixed SIP on the 2nd. Pause with one tap.",
@@ -52,6 +55,7 @@ export const personas: Record<
     city: "Pune",
     income: "₹18–62k/mo, varies",
     safeToInvest: 4200,
+    planAmount: 2400,
     incomeNote: "Income zigzags. Your plan shouldn't.",
     autopilotLine: "12% of every invoice",
     autopilotSub: "₹0 when you earn ₹0. Capped at ₹6,000/mo.",
@@ -416,7 +420,7 @@ export const chatScript: Record<string, ChatMsg[]> = {
 
 export const wiseReplies: [RegExp, string][] = [
   [/penny|10x|reel|guarantee/i, "That reel is a pump script. 'Guaranteed 10x' has no basis — the creator holds the stock and sells when followers buy. Want me to Reality-Check it properly?"],
-  [/sip|invest|500|5000|₹/i, "For your income rhythm, I'd keep SIPs below 15% of a bad month — not a good one. Simulate it in Money Multiverse before locking."],
+  [/sip|invest|500|5000|₹/i, "For your income rhythm, I'd keep SIPs under ~{safe}/mo — sized for a bad month, not a good one. Simulate it in Money Multiverse before locking."],
   [/goa|trip|vietnam|travel/i, "Goa in December is possible without killing your SIP — ₹1,900/mo for 4 months covers it. Your buffer stays intact either way."],
   [/crash|fall|red|loss|down/i, "Red days are normal — NIFTY has a down day ~46% of the time. Panic-selling is what turns a dip into a loss. Your plan is built for this."],
   [/elss|tax|80c/i, "ELSS funds save up to ₹46,800 tax under 80C, but lock money for 3 years. Good for salary income you won't need soon."],
@@ -586,7 +590,19 @@ export const extraTickers: Stock[] = [
   { id: "tatachem", ticker: "TC", name: "Tata Chemicals", exchange: "NSE", price: 865.4, change: 1.62, changeAbs: 13.8, open: 852, prevClose: 851.6, high: 872, low: 848, mcap: "₹22k Cr", pe: 62.8, spark: [4.8, 5, 5.4, 5.2, 5.8, 6, 6.2, 6.4] },
 ]
 
-export const allStocks = [...stocks, ...extraTickers]
+/* ── Wise replies (English + Hinglish) ──────────────────────── */
+
+export const wiseRepliesHi: [RegExp, string][] = [
+  [/penny|10x|reel|guarantee/i, "Woh reel pump script hai. 'Guaranteed 10x' ka koi basis nahi — creator ke paas stock hai, followers kharidte hain to woh bech deta hai. Proper Reality Check karoon?"],
+  [/sip|invest|500|5000|₹/i, "Aapki income rhythm pe SIP ~{safe}/mo se zyada nahi — bad month pe bhi chale. Pehle Money Multiverse mein simulate karo."],
+  [/goa|trip|vietnam|travel/i, "Goa December possible hai bina SIP mare — ₹1,900/mo × 4 mahine. Buffer safe rahega."],
+  [/crash|fall|red|loss|down/i, "Red days normal hain — NIFTY ~46% din red hota hai. Panic-sell dip ko loss banata hai. Aapka plan isi ke liye bana hai."],
+  [/elss|tax|80c/i, "ELSS 80C mein ₹46,800 tak tax bachata hai, par 3 saal lock-in. Sirf woh paisa jo jaldi na chahiye."],
+  [/hi|hey|hello|yo/i, "Hey! Reel, stock ya koi sawaal — main aapke actual numbers se check karke bataunga."],
+]
+
+export const wiseFallbackHi =
+  "Main products explain kar sakta hoon, claims Reality-Check kar sakta hoon, ya goals ke against simulate. Try: 'Kya main December mein Goa afford kar sakta hoon?'"
 
 export const volumeShockers = [
   { id: "v1", ticker: "IP", name: "India Pesticides", spike: 34029, volume: "2,84,19,570" },
@@ -626,6 +642,26 @@ export const etfs = [
   { id: "nippon-nifty", ticker: "N", name: "Nippon India ETF Nifty 50 BeES", price: 265.02, change: 0.17, byGrowWise: false },
   { id: "nippon-gold", ticker: "N", name: "Nippon India ETF Gold BeES", price: 124.91, change: 1.04, byGrowWise: false },
 ]
+
+/* ETFs projected into Stock shape so detail pages + search work */
+export const etfStocks: Stock[] = etfs.map((e) => ({
+  id: e.id,
+  ticker: e.ticker,
+  name: e.name,
+  exchange: "NSE",
+  price: e.price,
+  change: e.change,
+  changeAbs: +((e.price * e.change) / 100).toFixed(2),
+  open: +(e.price * 0.995).toFixed(2),
+  prevClose: +(e.price / (1 + e.change / 100)).toFixed(2),
+  high: +(e.price * 1.008).toFixed(2),
+  low: +(e.price * 0.99).toFixed(2),
+  mcap: "—",
+  pe: 0,
+  spark: [4, 4.4, 4.2, 4.8, 5, 5.4, 5.2, 5.8],
+}))
+
+export const allStocks = [...stocks, ...extraTickers, ...etfStocks]
 
 /* ── F&O ────────────────────────────────────────────────────── */
 
@@ -735,6 +771,7 @@ export type Sip = {
   fundId: string
   amount: number
   date: string
+  paused?: boolean
 }
 
 export const seedSips: Sip[] = [
@@ -750,7 +787,7 @@ export type Order = {
   product: "Delivery" | "Intraday"
   qty: number
   price: number
-  status: "Executed" | "Pending"
+  status: "Executed" | "Pending" | "Cancelled"
   time: string
 }
 

@@ -12,7 +12,7 @@ type Row = { key: "pctMode" | "bufferFirst" | "hardCap" | "pause"; label: string
 
 export default function Autopilot() {
   const p = usePersona()
-  const { autopilot, setAutopilot } = useStore()
+  const { autopilot, setAutopilot, pendingInvest, setPendingInvest, profile } = useStore()
   const router = useRouter()
 
   const rows: Row[] = [
@@ -74,16 +74,38 @@ export default function Autopilot() {
         </div>
 
         <div className="mt-auto pt-6">
-          <button
-            type="button"
-            onClick={() => {
-              setAutopilot({ on: true })
-              router.push("/receipt")
-            }}
-            className="press flex h-14 w-full items-center justify-center rounded-full bg-lime font-heading text-base font-bold text-ink"
-          >
-            Turn on autopilot
-          </button>
+          {autopilot.on ? (
+            <div className="flex flex-col gap-2.5">
+              <p className="flex items-center justify-center gap-1.5 rounded-full bg-mint2 py-2.5 text-xs font-bold text-growwise">
+                <Icon name="check" size={14} /> Autopilot is on · {p.autopilotLine}
+              </p>
+              <button
+                type="button"
+                onClick={() => setAutopilot({ on: false })}
+                className="press flex h-14 w-full items-center justify-center rounded-full bg-muted font-heading text-base font-bold text-ink"
+              >
+                Pause autopilot
+              </button>
+            </div>
+          ) : (
+            <button
+              type="button"
+              onClick={() => {
+                setAutopilot({ on: true })
+                if (!pendingInvest) {
+                  setPendingInvest({
+                    amount: p.planAmount,
+                    product: "Nifty 50 index fund",
+                    goal: profile.firstGoal || "New laptop",
+                  })
+                }
+                router.push("/receipt")
+              }}
+              className="press flex h-14 w-full items-center justify-center rounded-full bg-lime font-heading text-base font-bold text-ink"
+            >
+              Turn on autopilot
+            </button>
+          )}
         </div>
       </div>
     </Screen>

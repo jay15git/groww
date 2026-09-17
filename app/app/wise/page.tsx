@@ -7,18 +7,27 @@ import { Icon } from "@/components/icon"
 import { Screen } from "@/components/screen"
 import { ScreenHeader } from "@/components/screen-header"
 import { ScrollArea } from "@/components/ui/scroll-area"
-import { chatScript, wiseFallback, wiseReplies, type ChatMsg } from "@/lib/data"
+import { chatScript, wiseFallback, wiseFallbackHi, wiseReplies, wiseRepliesHi, type ChatMsg } from "@/lib/data"
+import { inr } from "@/lib/utils"
+import { usePersona, useStore } from "@/lib/store"
 import { cn } from "@/lib/utils"
 import type React from "react"
 
 const chips = ["Check this reel", "Can I afford Goa?", "Why is my portfolio red?"]
-
-function replyFor(text: string): string {
-  for (const [re, msg] of wiseReplies) if (re.test(text)) return msg
-  return wiseFallback
-}
+const chipsHi = ["Reel check karo", "Goa afford hoga?", "Portfolio red kyun?"]
 
 export default function WiseChat() {
+  const p = usePersona()
+  const { setPendingInvest, profile } = useStore()
+  const [hi, setHi] = useState(false)
+  const safe = inr(p.planAmount)
+
+  const replyFor = (text: string): string => {
+    const replies = hi ? wiseRepliesHi : wiseReplies
+    for (const [re, msg] of replies)
+      if (re.test(text)) return msg.replace("{safe}", safe)
+    return hi ? wiseFallbackHi : wiseFallback
+  }
   const [msgs, setMsgs] = useState<ChatMsg[]>(chatScript.default)
   const [input, setInput] = useState("")
   const [thinking, setThinking] = useState(false)
@@ -46,13 +55,27 @@ export default function WiseChat() {
         title="Wise"
         onBack={() => router.push("/today")}
         right={
-          <Link
-            href="/wise/voice"
-            aria-label="Switch to voice"
-            className="press flex size-10 items-center justify-center rounded-full bg-ink text-lime"
-          >
-            <Icon name="mic" size={17} />
-          </Link>
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={() => setHi((v) => !v)}
+              aria-pressed={hi}
+              aria-label="Toggle language"
+              className={cn(
+                "press flex h-10 items-center rounded-full px-3 font-heading text-xs font-bold",
+                hi ? "bg-lime text-ink" : "bg-paper text-ink shadow-sm"
+              )}
+            >
+              {hi ? "EN" : "हिं"}
+            </button>
+            <Link
+              href="/wise/voice"
+              aria-label="Switch to voice"
+              className="press flex size-10 items-center justify-center rounded-full bg-ink text-lime"
+            >
+              <Icon name="mic" size={17} />
+            </Link>
+          </div>
         }
       />
 
@@ -67,7 +90,14 @@ export default function WiseChat() {
               <button
                 key={m.id}
                 type="button"
-                onClick={() => router.push("/receipt")}
+                onClick={() => {
+                  setPendingInvest({
+                    amount: Math.min(3500, Math.max(p.planAmount, 500)),
+                    product: "Nifty 50 index fund",
+                    goal: profile.firstGoal || "New laptop",
+                  })
+                  router.push("/receipt")
+                }}
                 className="press rise mr-auto w-full rounded-3xl border border-line bg-paper p-4 text-left shadow-sm"
               >
                 <div className="flex items-center gap-2">
@@ -115,7 +145,7 @@ export default function WiseChat() {
 
       <div className="shrink-0 px-5 pb-5 pt-2">
         <div className="mb-3 flex gap-2 overflow-x-auto pb-1 [scrollbar-width:none]">
-          {chips.map((c) => (
+          {(hi ? chipsHi : chips).map((c) => (
             <button
               key={c}
               type="button"

@@ -31,7 +31,7 @@ const moves = [
 
 export default function Today() {
   const p = usePersona()
-  const { profile, reset } = useStore()
+  const { profile, reset, notifSeen, markNotifsSeen, autopilot } = useStore()
   return (
     <Screen nav>
       <div className="px-5 pb-6">
@@ -41,6 +41,9 @@ export default function Today() {
             <h1 className="font-heading text-2xl font-extrabold tracking-tight">
               {p.name}
             </h1>
+            <p className="mt-0.5 flex items-center gap-1 text-[11px] font-semibold text-mango">
+              <Icon name="fire" size={11} /> 12-week streak{autopilot.on ? " · autopilot on" : ""}
+            </p>
           </div>
           <div className="flex items-center gap-2">
             <Sheet>
@@ -103,13 +106,15 @@ export default function Today() {
                 </div>
               </SheetContent>
             </Sheet>
-            <Sheet>
+            <Sheet onOpenChange={(o) => o && markNotifsSeen()}>
               <SheetTrigger
                 aria-label="Notifications"
                 className="press relative flex size-10 items-center justify-center rounded-full bg-paper shadow-sm"
               >
                 <Icon name="bell" size={18} />
-                <span className="absolute right-2 top-2 size-2 rounded-full bg-coral" />
+                {!notifSeen && (
+                  <span className="absolute right-2 top-2 size-2 rounded-full bg-coral" />
+                )}
               </SheetTrigger>
               <SheetContent
                 side="bottom"
@@ -158,7 +163,7 @@ export default function Today() {
           </div>
           <div className="mt-4 flex gap-2">
             <Link
-              href="/reality-check"
+              href="/mutual-funds"
               className="press flex h-10 flex-1 items-center justify-center gap-1.5 rounded-full bg-lime font-heading text-sm font-bold text-ink"
             >
               <Icon name="up2" size={16} /> Invest

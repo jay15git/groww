@@ -20,7 +20,7 @@ const steps = ["You", "Money life", "Rhythm", "First move"]
 
 export default function Onboarding() {
   const router = useRouter()
-  const { completeOnboarding } = useStore()
+  const { completeOnboarding, addGoal } = useStore()
   const [step, setStep] = useState(0)
   const [name, setName] = useState("")
   const [situationId, setSituationId] = useState("")
@@ -49,6 +49,10 @@ export default function Onboarding() {
       experience: experiences.find((e) => e.id === experience)?.label ?? "",
     }
     completeOnboarding(profile, situation.persona)
+    // Seed the picked goal — gadget/trip/buffer already exist in seed data
+    if (firstGoal === "wealth") {
+      addGoal({ id: "g-wealth", name: "Grow wealth", icon: "shield", saved: 0, target: 100000, tint: "mint" })
+    }
     router.push("/today")
   }
 

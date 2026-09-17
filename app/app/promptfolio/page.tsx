@@ -6,6 +6,7 @@ import { Icon, type IconName } from "@/components/icon"
 import { Screen } from "@/components/screen"
 import { ScreenHeader } from "@/components/screen-header"
 import { promptfolio } from "@/lib/data"
+import { useStore } from "@/lib/store"
 import { cn } from "@/lib/utils"
 import type React from "react"
 
@@ -18,6 +19,7 @@ const suggestions = [
 export default function Promptfolio() {
   const [text, setText] = useState("")
   const [state, setState] = useState<"idle" | "thinking" | "done">("idle")
+  const { setPendingInvest, profile } = useStore()
 
   const build = (t: string) => {
     setText(t)
@@ -156,6 +158,13 @@ export default function Promptfolio() {
               </Link>
               <Link
                 href="/receipt"
+                onClick={() =>
+                  setPendingInvest({
+                    amount: 1000,
+                    product: "Promptfolio basket",
+                    goal: profile.firstGoal || "New laptop",
+                  })
+                }
                 className="press flex h-13 flex-1 items-center justify-center rounded-full bg-ink font-heading text-sm font-bold text-paper"
               >
                 Preview order

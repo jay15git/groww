@@ -8,13 +8,30 @@ import { TickerLogo } from "@/components/goal-icon"
 import { holdings } from "@/lib/data"
 import { inr, pct } from "@/lib/utils"
 import { useStore } from "@/lib/store"
-import type React from "react"
+import { useState, type CSSProperties } from "react"
 
 const ranges = ["1D", "1W", "1M", "6M", "1Y"]
 const portfolioLine = [6, 6.5, 6.2, 6.9, 6.6, 7.2, 7, 6.4, 6.8, 6.2, 5.9, 5.6]
 
 export default function Portfolio() {
-  const { invested } = useStore()
+  const { invested, investedAmount, pendingInvest } = useStore()
+  const [hidden, setHidden] = useState(false)
+  const total = 21380 + investedAmount
+  const rows = invested
+    ? [
+        ...holdings,
+        {
+          id: pendingInvest?.product ?? "invested",
+          name: pendingInvest?.product ?? "Nifty 50 index fund",
+          ticker: "GW",
+          kind: "mf" as const,
+          meta: "Added just now",
+          value: investedAmount,
+          change: -2.4,
+          spark: [7, 7.2, 7, 6.8, 6.6, 6.4],
+        },
+      ]
+    : holdings
   return (
     <Screen nav>
       <div className="px-5 pb-6">
@@ -22,18 +39,24 @@ export default function Portfolio() {
           <h1 className="font-heading text-2xl font-extrabold tracking-tight">
             Portfolio
           </h1>
-          <button type="button" aria-label="Hide balances" className="press flex size-10 items-center justify-center rounded-full bg-paper shadow-sm">
+          <button
+            type="button"
+            aria-label={hidden ? "Show balances" : "Hide balances"}
+            aria-pressed={hidden}
+            onClick={() => setHidden((v) => !v)}
+            className="press flex size-10 items-center justify-center rounded-full bg-paper shadow-sm"
+          >
             <Icon name="eye" size={18} />
           </button>
         </div>
 
-        <section className="rise mt-4 rounded-3xl bg-ink p-5 text-paper" style={{ "--i": 0 } as React.CSSProperties}>
+        <section className="rise mt-4 rounded-3xl bg-ink p-5 text-paper" style={{ "--i": 0 } as CSSProperties}>
           <p className="text-xs uppercase tracking-wider text-paper/50">
             Total value
           </p>
           <div className="mt-1 flex items-end justify-between">
             <p className="tabular font-heading text-[36px] font-extrabold leading-none tracking-tight">
-              {inr(21380)}
+              {hidden ? "••••••" : inr(total)}
             </p>
             <span className="tabular rounded-full bg-loss/20 px-2.5 py-1 text-xs font-bold text-[#ff8a8a]">
               ▼ 2.4% today
@@ -61,7 +84,7 @@ export default function Portfolio() {
         </section>
 
         {invested && (
-          <section className="rise mt-3 rounded-2xl border border-loss/30 bg-paper p-4" style={{ "--i": 1 } as React.CSSProperties}>
+          <section className="rise mt-3 rounded-2xl border border-loss/30 bg-paper p-4" style={{ "--i": 1 } as CSSProperties}>
             <div className="flex items-center gap-2">
               <span className="flex size-8 items-center justify-center rounded-full bg-loss/10 text-loss">
                 <Icon name="down2" size={16} />
@@ -83,7 +106,7 @@ export default function Portfolio() {
           </section>
         )}
 
-        <div className="rise mt-6 flex items-center justify-between" style={{ "--i": 2 } as React.CSSProperties}>
+        <div className="rise mt-6 flex items-center justify-between" style={{ "--i": 2 } as CSSProperties}>
           <h2 className="font-heading text-base font-bold uppercase tracking-wide text-muted-foreground">
             Holdings
           </h2>
@@ -92,8 +115,8 @@ export default function Portfolio() {
           </Link>
         </div>
 
-        <div className="rise mt-3 flex flex-col divide-y divide-line/60 rounded-2xl bg-paper px-4" style={{ "--i": 3 } as React.CSSProperties}>
-          {holdings.map((h) => (
+        <div className="rise mt-3 flex flex-col divide-y divide-line/60 rounded-2xl bg-paper px-4" style={{ "--i": 3 } as CSSProperties}>
+          {rows.map((h) => (
             <Link
               key={h.id}
               href={h.kind === "mf" ? `/funds/${h.id}` : `/stocks/${h.id}`}
@@ -111,7 +134,7 @@ export default function Portfolio() {
                 color={h.change >= 0 ? "#00b386" : "#d94a4a"}
               />
               <div className="w-20 text-right">
-                <p className="tabular text-sm font-bold">{inr(h.value)}</p>
+                <p className="tabular text-sm font-bold">{hidden ? "••••" : inr(h.value)}</p>
                 <p
                   className={
                     h.change >= 0
@@ -126,7 +149,7 @@ export default function Portfolio() {
           ))}
         </div>
 
-        <div className="rise mt-4 grid grid-cols-2 gap-2.5" style={{ "--i": 4 } as React.CSSProperties}>
+        <div className="rise mt-4 grid grid-cols-2 gap-2.5" style={{ "--i": 4 } as CSSProperties}>
           <Link href="/dna" className="press flex items-center gap-3 rounded-2xl bg-paper p-4">
             <span className="flex size-9 items-center justify-center rounded-xl bg-lilac text-ink">
               <Icon name="brain" size={16} />
@@ -150,7 +173,7 @@ export default function Portfolio() {
         <Link
           href="/trail"
           className="press rise mt-3 flex items-center gap-3 rounded-2xl bg-mint2 p-4"
-          style={{ "--i": 5 } as React.CSSProperties}
+          style={{ "--i": 5 } as CSSProperties}
         >
           <span className="pulse-dot flex size-10 items-center justify-center rounded-full bg-growwise text-paper">
             <Icon name="package" size={18} />

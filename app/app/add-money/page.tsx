@@ -6,7 +6,7 @@ import { Icon } from "@/components/icon"
 import { Screen } from "@/components/screen"
 import { ScreenHeader } from "@/components/screen-header"
 import { cn, inr } from "@/lib/utils"
-import { usePersona } from "@/lib/store"
+import { usePersona, useStore } from "@/lib/store"
 import type React from "react"
 
 const chips = [1000, 2000, 5000, 10000]
@@ -18,6 +18,7 @@ export default function AddMoney() {
   const [done, setDone] = useState(false)
   const router = useRouter()
   const p = usePersona()
+  const { setPendingInvest, profile } = useStore()
 
   const methods = [
     { icon: "phone" as const, label: `UPI · ${p.name.toLowerCase()}@okhdfc`, sub: "Instant · no fee" },
@@ -56,12 +57,19 @@ export default function AddMoney() {
             {inr(Number(amt) || 0)} added
           </h1>
           <p className="mt-1.5 text-sm text-muted-foreground">
-            Sitting in your GrowWise balance — ready when you are.
+            Sitting in your GrowWise balance — ready when you are. (Simulated — no real money moved.)
           </p>
           <div className="mt-6 flex w-full flex-col gap-2.5">
             <button
               type="button"
-              onClick={() => router.push("/receipt")}
+              onClick={() => {
+                setPendingInvest({
+                  amount: Number(amt) || p.planAmount,
+                  product: "Nifty 50 index fund",
+                  goal: profile.firstGoal || "New laptop",
+                })
+                router.push("/receipt")
+              }}
               className="press flex h-13 w-full items-center justify-center rounded-full bg-ink font-heading text-sm font-bold text-paper"
             >
               Invest it now

@@ -1,7 +1,17 @@
+"use client"
+
 import Link from "next/link"
+import { useRouter } from "next/navigation"
+import { useEffect } from "react"
 import { Icon } from "@/components/icon"
+import { useStore } from "@/lib/store"
 
 export default function Onboarding() {
+  const { onboarded } = useStore()
+  const router = useRouter()
+  useEffect(() => {
+    if (onboarded) router.replace("/today")
+  }, [onboarded, router])
   return (
     <div className="flex min-h-0 flex-1 flex-col bg-lime">
       <div className="flex flex-1 flex-col px-6 pb-8">

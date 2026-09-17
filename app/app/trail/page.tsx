@@ -5,11 +5,13 @@ import { Screen } from "@/components/screen"
 import { ScreenHeader } from "@/components/screen-header"
 import { trailSteps } from "@/lib/data"
 import { useStore } from "@/lib/store"
-import { cn } from "@/lib/utils"
+import { cn, inr } from "@/lib/utils"
 import type React from "react"
 
 export default function Trail() {
-  const { invested, trailStep, setTrailStep } = useStore()
+  const { invested, investedAmount, pendingInvest, trailStep, setTrailStep } = useStore()
+  const product = pendingInvest?.product ?? "Nifty 50 index fund"
+  const amount = investedAmount || pendingInvest?.amount || 3000
   const steps = trailSteps.map((s, i) => ({
     ...s,
     state: !invested
@@ -36,9 +38,9 @@ export default function Trail() {
           </span>
           <div className="flex-1">
             <p className="tabular font-heading text-base font-bold">
-              ₹3,000 · Nifty 50 index fund
+              {inr(amount)} · {product}
             </p>
-            <p className="text-xs text-paper/60">Order #GW-8214 · UPI</p>
+            <p className="text-xs text-paper/60">Order #GW-8214 · UPI · simulated</p>
           </div>
           <span className="rounded-full bg-lime px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-ink">
             {invested ? "In transit" : "Preview"}

@@ -470,7 +470,7 @@ function OrdersTab() {
       ) : (
         <div className="rise mt-4 flex flex-col divide-y divide-paper/8 rounded-2xl bg-paper/5 px-4" style={{ "--i": 0 } as React.CSSProperties}>
           {orders.map((o) => (
-            <div key={o.id} className="flex items-center gap-3 py-3.5">
+            <div key={o.id} className={cn("flex items-center gap-3 py-3.5", o.status === "Cancelled" && "opacity-45")}>
               <span className={cn("flex size-9 items-center justify-center rounded-full text-[10px] font-bold", o.kind === "BUY" ? "bg-growwise/15 text-growwise" : "bg-loss/15 text-[#ff8a8a]")}>
                 {o.kind === "BUY" ? "B" : "S"}
               </span>

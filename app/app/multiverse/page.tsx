@@ -1,18 +1,60 @@
 "use client"
 
-import Link from "next/link"
+import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { Icon } from "@/components/icon"
 import { Screen } from "@/components/screen"
 import { ScreenHeader } from "@/components/screen-header"
-import { futures } from "@/lib/data"
-import { cn } from "@/lib/utils"
+import { usePersona, useStore } from "@/lib/store"
+import { cn, inr } from "@/lib/utils"
 import type React from "react"
 
 const tint = { lime: "bg-lime", sand: "bg-sand", lilac: "bg-lilac" }
 
 export default function Multiverse() {
   const [picked, setPicked] = useState("A")
+  const p = usePersona()
+  const { setPendingInvest, profile } = useStore()
+  const router = useRouter()
+
+  const corpus = Math.round((p.planAmount * 42) / 1000) * 1000
+  const futures = [
+    {
+      id: "A",
+      title: `Invest ${inr(p.planAmount)}/mo, skip nothing.`,
+      amount: `${inr(corpus)} by 2029`,
+      detail: `${p.goalDelta} · buffer intact`,
+      tone: "lime" as const,
+      featured: true,
+    },
+    {
+      id: "B",
+      title: "Career break, 4 months",
+      amount: `${inr(Math.round(corpus * 0.65))} · goal delayed`,
+      detail: "Buffer covers the gap. Goal moves 5 months right.",
+      tone: "sand" as const,
+      featured: false,
+    },
+    {
+      id: "C",
+      title: "Income dip, −30% earnings",
+      amount: "Buffer holds 6 months",
+      detail: "Autopilot pauses at ₹0 income. SIP resumes on recovery.",
+      tone: "lilac" as const,
+      featured: false,
+    },
+  ]
+
+  const build = () => {
+    setPendingInvest({
+      amount: p.planAmount,
+      product: "Nifty 50 index fund",
+      goal: profile.firstGoal || "New laptop",
+      future: picked,
+    })
+    router.push("/autopilot")
+  }
+
   return (
     <Screen>
       <ScreenHeader title="Money Multiverse" action="sparkles" actionLabel="Ask Wise" actionHref="/wise" />
@@ -59,17 +101,19 @@ export default function Multiverse() {
         </div>
 
         <p className="rise mt-4 text-[11px] leading-relaxed text-muted-foreground" style={{ "--i": 4 } as React.CSSProperties}>
-          All numbers are ranges, not promises. Assumptions inside each future.
+          Ranges, not promises — sized from your {inr(p.safeToInvest)} monthly
+          surplus. Assumptions inside each future.
         </p>
 
         <div className="mt-auto pt-6">
-          <Link
-            href="/autopilot"
+          <button
+            type="button"
+            onClick={build}
             className="press flex h-14 w-full items-center justify-center gap-2 rounded-full bg-ink font-heading text-base font-bold text-paper"
           >
             Build my plan on Future {picked}
             <Icon name="next" size={18} />
-          </Link>
+          </button>
         </div>
       </div>
     </Screen>

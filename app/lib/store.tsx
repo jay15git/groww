@@ -52,6 +52,13 @@ const defaultAutopilot: Autopilot = {
   cap: 6000,
 }
 
+export type PendingInvest = {
+  amount: number
+  product: string
+  goal: string
+  future?: string
+}
+
 type Store = {
   persona: Persona | null
   setPersona: (p: Persona) => void
@@ -63,6 +70,11 @@ type Store = {
   setAutopilot: (a: Partial<Autopilot>) => void
   invested: boolean
   invest: () => void
+  investedAmount: number
+  pendingInvest: PendingInvest | null
+  setPendingInvest: (p: PendingInvest | null) => void
+  notifSeen: boolean
+  markNotifsSeen: () => void
   trailStep: number
   setTrailStep: (n: number) => void
   watchIds: string[]
@@ -77,8 +89,11 @@ type Store = {
   sips: Sip[]
   addSip: (s: Omit<Sip, "id">) => void
   removeSip: (id: string) => void
+  toggleSipPause: (id: string) => void
   ipoApplied: string[]
   applyIpo: (id: string) => void
+  ipoNotified: string[]
+  notifyIpo: (id: string) => void
   extraGoals: Goal[]
   addGoal: (g: Goal) => void
   hydrated: boolean
@@ -110,6 +125,10 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   const [orders, setOrders] = useState<Order[]>(seedOrders)
   const [sips, setSips] = useState<Sip[]>(seedSips)
   const [ipoApplied, setIpoApplied] = useState<string[]>([])
+  const [ipoNotified, setIpoNotified] = useState<string[]>([])
+  const [pendingInvest, setPendingInvest] = useState<PendingInvest | null>(null)
+  const [investedAmount, setInvestedAmount] = useState(0)
+  const [notifSeen, setNotifSeen] = useState(false)
   const [hydrated, setHydrated] = useState(false)
 
   useEffect(() => {
@@ -130,6 +149,10 @@ export function StoreProvider({ children }: { children: ReactNode }) {
           if (Array.isArray(s.orders)) setOrders(s.orders)
           if (Array.isArray(s.sips)) setSips(s.sips)
           if (Array.isArray(s.ipoApplied)) setIpoApplied(s.ipoApplied)
+          if (Array.isArray(s.ipoNotified)) setIpoNotified(s.ipoNotified)
+          if (s.pendingInvest) setPendingInvest(s.pendingInvest)
+          if (s.investedAmount) setInvestedAmount(s.investedAmount)
+          if (s.notifSeen) setNotifSeen(true)
         }
       } catch {}
       setHydrated(true)
@@ -154,10 +177,14 @@ export function StoreProvider({ children }: { children: ReactNode }) {
           orders,
           sips,
           ipoApplied,
+          ipoNotified,
+          pendingInvest,
+          investedAmount,
+          notifSeen,
         })
       )
     } catch {}
-  }, [persona, profile, onboarded, autopilot, invested, watchIds, extraGoals, fundWatchIds, watchlists, orders, sips, ipoApplied, hydrated])
+  }, [persona, profile, onboarded, autopilot, invested, watchIds, extraGoals, fundWatchIds, watchlists, orders, sips, ipoApplied, ipoNotified, pendingInvest, investedAmount, notifSeen, hydrated])
 
   const value = useMemo<Store>(
     () => ({
@@ -176,8 +203,14 @@ export function StoreProvider({ children }: { children: ReactNode }) {
       invested,
       invest: () => {
         setInvested(true)
+        setInvestedAmount(pendingInvest?.amount ?? 3000)
         setTrailStep(2)
       },
+      investedAmount,
+      pendingInvest,
+      setPendingInvest,
+      notifSeen,
+      markNotifsSeen: () => setNotifSeen(true),
       trailStep,
       setTrailStep,
       watchIds,
@@ -205,13 +238,23 @@ export function StoreProvider({ children }: { children: ReactNode }) {
           },
           ...os,
         ]),
-      cancelOrder: (id) => setOrders((os) => os.filter((o) => o.id !== id)),
+      cancelOrder: (id) =>
+        setOrders((os) =>
+          os.map((o) => (o.id === id ? { ...o, status: "Cancelled" } : o))
+        ),
       sips,
       addSip: (s) => setSips((ss) => [...ss, { ...s, id: `sip${Date.now()}` }]),
       removeSip: (id) => setSips((ss) => ss.filter((s) => s.id !== id)),
+      toggleSipPause: (id) =>
+        setSips((ss) =>
+          ss.map((s) => (s.id === id ? { ...s, paused: !s.paused } : s))
+        ),
       ipoApplied,
       applyIpo: (id) =>
         setIpoApplied((a) => (a.includes(id) ? a : [...a, id])),
+      ipoNotified,
+      notifyIpo: (id) =>
+        setIpoNotified((a) => (a.includes(id) ? a : [...a, id])),
       hydrated,
       reset: () => {
         setPersonaState(null)
@@ -227,15 +270,27 @@ export function StoreProvider({ children }: { children: ReactNode }) {
         setOrders(seedOrders)
         setSips(seedSips)
         setIpoApplied([])
+        setIpoNotified([])
+        setPendingInvest(null)
+        setInvestedAmount(0)
+        setNotifSeen(false)
         try {
           localStorage.removeItem(KEY)
         } catch {}
       },
     }),
-    [persona, profile, onboarded, autopilot, invested, trailStep, watchIds, extraGoals, fundWatchIds, watchlists, orders, sips, ipoApplied, hydrated]
+    [persona, profile, onboarded, autopilot, invested, trailStep, watchIds, extraGoals, fundWatchIds, watchlists, orders, sips, ipoApplied, ipoNotified, pendingInvest, investedAmount, notifSeen, hydrated]
   )
 
-  return <Ctx.Provider value={value}>{children}</Ctx.Provider>
+  return (
+    <Ctx.Provider value={value}>
+      {hydrated ? children : (
+        <div className="flex min-h-0 flex-1 items-center justify-center">
+          <span className="pulse-dot size-10 rounded-full bg-lime" />
+        </div>
+      )}
+    </Ctx.Provider>
+  )
 }
 
 export function useStore() {

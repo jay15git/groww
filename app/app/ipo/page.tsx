@@ -69,8 +69,9 @@ export default function Ipos() {
 }
 
 function IpoCard({ ipo, i }: { ipo: Ipo; i: number }) {
-  const { ipoApplied } = useStore()
+  const { ipoApplied, ipoNotified, notifyIpo } = useStore()
   const applied = ipoApplied.includes(ipo.id)
+  const notified = ipoNotified.includes(ipo.id)
   return (
     <div
       className="rise rounded-2xl bg-paper p-4"
@@ -107,11 +108,20 @@ function IpoCard({ ipo, i }: { ipo: Ipo; i: number }) {
         ) : (
           <ApplySheet ipo={ipo} />
         ))}
-      {ipo.status === "upcoming" && (
-        <button type="button" className="press mt-3 w-full rounded-full bg-muted py-2.5 text-xs font-bold text-muted-foreground">
-          Notify me
-        </button>
-      )}
+      {ipo.status === "upcoming" &&
+        (notified ? (
+          <p className="mt-3 flex items-center justify-center gap-1.5 rounded-full bg-mint2 py-2.5 text-xs font-bold text-growwise">
+            <Icon name="bell" size={13} /> Notified when it opens
+          </p>
+        ) : (
+          <button
+            type="button"
+            onClick={() => notifyIpo(ipo.id)}
+            className="press mt-3 w-full rounded-full bg-muted py-2.5 text-xs font-bold text-muted-foreground"
+          >
+            Notify me
+          </button>
+        ))}
     </div>
   )
 }

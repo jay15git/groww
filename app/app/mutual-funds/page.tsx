@@ -263,8 +263,8 @@ function MfDashboard() {
 /* ── SIPs ────────────────────────────────────────────────── */
 
 function MfSips() {
-  const { sips, removeSip } = useStore()
-  const monthly = sips.reduce((s, x) => s + x.amount, 0)
+  const { sips, toggleSipPause } = useStore()
+  const monthly = sips.filter((x) => !x.paused).reduce((s, x) => s + x.amount, 0)
   const under500 = funds.filter((f) => f.minSip <= 500).sort((a, b) => b.threeY - a.threeY)
 
   return (
@@ -277,7 +277,7 @@ function MfSips() {
           {inr(monthly)}
         </p>
         <p className="mt-1.5 text-xs text-paper/45">
-          {sips.length} active {sips.length === 1 ? "SIP" : "SIPs"}
+          {sips.filter((x) => !x.paused).length} active {sips.length === 1 ? "SIP" : "SIPs"}
         </p>
       </section>
 
@@ -290,20 +290,24 @@ function MfSips() {
             {sips.map((s) => {
               const f = fundById(s.fundId)
               return (
-                <div key={s.id} className="flex items-center gap-3 py-3.5">
+                <div key={s.id} className={cn("flex items-center gap-3 py-3.5", s.paused && "opacity-50")}>
                   <TickerLogo ticker={f?.ticker ?? "S"} />
                   <div className="min-w-0 flex-1">
                     <p className="truncate text-sm font-bold">{f?.name ?? s.fundId}</p>
                     <p className="text-xs text-muted-foreground">
-                      {inr(s.amount)}/mo · every {s.date}
+                      {inr(s.amount)}/mo · every {s.date}{s.paused ? " · paused" : ""}
                     </p>
                   </div>
                   <button
                     type="button"
-                    onClick={() => removeSip(s.id)}
-                    className="press rounded-full bg-muted px-3 py-1.5 text-xs font-bold text-muted-foreground"
+                    onClick={() => toggleSipPause(s.id)}
+                    aria-pressed={!!s.paused}
+                    className={cn(
+                      "press rounded-full px-3 py-1.5 text-xs font-bold",
+                      s.paused ? "bg-ink text-lime" : "bg-muted text-muted-foreground"
+                    )}
                   >
-                    Pause
+                    {s.paused ? "Resume" : "Pause"}
                   </button>
                 </div>
               )

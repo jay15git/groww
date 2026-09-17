@@ -1,6 +1,6 @@
 "use client"
 
-import { useParams, useRouter } from "next/navigation"
+import { notFound, useParams, useRouter } from "next/navigation"
 import { useState } from "react"
 import Link from "next/link"
 import { Icon } from "@/components/icon"
@@ -25,8 +25,10 @@ const navLine = [4, 4.6, 4.3, 5, 5.4, 5.1, 5.8, 6.2, 6, 6.5, 6.9, 7.3]
 export default function FundDetail() {
   const { id } = useParams<{ id: string }>()
   const router = useRouter()
-  const [saved, setSaved] = useState(false)
-  const f = funds.find((x) => x.id === id) ?? funds[0]
+  const { fundWatchIds, toggleFundWatch, setPendingInvest, profile } = useStore()
+  const f = funds.find((x) => x.id === id)
+  if (!f) notFound()
+  const saved = fundWatchIds.includes(f.id)
 
   const stats = [
     { label: "3Y return", value: `${f.threeY}%` },
@@ -44,7 +46,7 @@ export default function FundDetail() {
             type="button"
             aria-label={saved ? "Remove saved fund" : "Save fund"}
             aria-pressed={saved}
-            onClick={() => setSaved((v) => !v)}
+            onClick={() => toggleFundWatch(f.id)}
             className={cn(
               "press flex size-10 items-center justify-center rounded-full",
               saved ? "bg-ink text-lime" : "bg-paper text-ink shadow-sm"
@@ -101,7 +103,14 @@ export default function FundDetail() {
         <div className="mt-auto flex gap-2.5 pt-5">
           <button
             type="button"
-            onClick={() => router.push("/receipt")}
+            onClick={() => {
+              setPendingInvest({
+                amount: Math.max(1000, f.minSip),
+                product: f.name,
+                goal: profile.firstGoal || "New laptop",
+              })
+              router.push("/receipt")
+            }}
             className="press h-13 flex-1 rounded-full bg-ink font-heading text-sm font-bold text-paper"
           >
             One-time
