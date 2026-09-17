@@ -1,5 +1,6 @@
 "use client"
 
+import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { cn } from "@/lib/utils"
 import { Icon, type IconName } from "@/components/icon"
@@ -8,6 +9,8 @@ export function ScreenHeader({
   title,
   action,
   actionLabel,
+  actionHref,
+  onAction,
   dark = false,
   onBack,
   right,
@@ -15,11 +18,17 @@ export function ScreenHeader({
   title?: string
   action?: IconName
   actionLabel?: string
+  actionHref?: string
+  onAction?: () => void
   dark?: boolean
   onBack?: () => void
   right?: React.ReactNode
 }) {
   const router = useRouter()
+  const btnCls = cn(
+    "press flex size-10 items-center justify-center rounded-full",
+    dark ? "bg-paper/10 text-paper" : "bg-paper text-ink shadow-sm"
+  )
   return (
     <header
       className={cn(
@@ -31,10 +40,7 @@ export function ScreenHeader({
         type="button"
         aria-label="Back"
         onClick={onBack ?? (() => router.back())}
-        className={cn(
-          "press flex size-10 items-center justify-center rounded-full",
-          dark ? "bg-paper/10 text-paper" : "bg-paper text-ink shadow-sm"
-        )}
+        className={btnCls}
       >
         <Icon name="back" size={20} />
       </button>
@@ -46,14 +52,16 @@ export function ScreenHeader({
         <span />
       )}
       {right ??
-        (action ? (
+        (action && actionHref ? (
+          <Link href={actionHref} aria-label={actionLabel ?? "Action"} className={btnCls}>
+            <Icon name={action} size={18} />
+          </Link>
+        ) : action && onAction ? (
           <button
             type="button"
             aria-label={actionLabel ?? "Action"}
-            className={cn(
-              "press flex size-10 items-center justify-center rounded-full",
-              dark ? "bg-paper/10 text-paper" : "bg-paper text-ink shadow-sm"
-            )}
+            onClick={onAction}
+            className={btnCls}
           >
             <Icon name={action} size={18} />
           </button>

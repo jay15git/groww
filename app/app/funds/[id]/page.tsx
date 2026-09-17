@@ -1,13 +1,14 @@
 "use client"
 
 import { useParams, useRouter } from "next/navigation"
+import { useState } from "react"
 import { Icon } from "@/components/icon"
 import { Screen } from "@/components/screen"
 import { ScreenHeader } from "@/components/screen-header"
 import { AreaChart } from "@/components/chart"
 import { TickerLogo } from "@/components/goal-icon"
 import { funds } from "@/lib/data"
-import { inr } from "@/lib/utils"
+import { cn, inr } from "@/lib/utils"
 import type React from "react"
 
 const navLine = [4, 4.6, 4.3, 5, 5.4, 5.1, 5.8, 6.2, 6, 6.5, 6.9, 7.3]
@@ -15,6 +16,7 @@ const navLine = [4, 4.6, 4.3, 5, 5.4, 5.1, 5.8, 6.2, 6, 6.5, 6.9, 7.3]
 export default function FundDetail() {
   const { id } = useParams<{ id: string }>()
   const router = useRouter()
+  const [saved, setSaved] = useState(false)
   const f = funds.find((x) => x.id === id) ?? funds[0]
 
   const stats = [
@@ -26,7 +28,23 @@ export default function FundDetail() {
 
   return (
     <Screen>
-      <ScreenHeader title={f.category} action="bookmark" actionLabel="Save fund" />
+      <ScreenHeader
+        title={f.category}
+        right={
+          <button
+            type="button"
+            aria-label={saved ? "Remove saved fund" : "Save fund"}
+            aria-pressed={saved}
+            onClick={() => setSaved((v) => !v)}
+            className={cn(
+              "press flex size-10 items-center justify-center rounded-full",
+              saved ? "bg-ink text-lime" : "bg-paper text-ink shadow-sm"
+            )}
+          >
+            <Icon name="bookmark" size={16} />
+          </button>
+        }
+      />
       <div className="flex min-h-full flex-col px-5 pb-6">
         <section className="rise mt-2 flex items-center gap-3.5" style={{ "--i": 0 } as React.CSSProperties}>
           <TickerLogo ticker={f.ticker} />

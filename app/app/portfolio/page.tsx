@@ -126,10 +126,31 @@ export default function Portfolio() {
           ))}
         </div>
 
+        <div className="rise mt-4 grid grid-cols-2 gap-2.5" style={{ "--i": 4 } as React.CSSProperties}>
+          <Link href="/dna" className="press flex items-center gap-3 rounded-2xl bg-paper p-4">
+            <span className="flex size-9 items-center justify-center rounded-xl bg-lilac text-ink">
+              <Icon name="brain" size={16} />
+            </span>
+            <div>
+              <p className="font-heading text-sm font-bold">Portfolio DNA</p>
+              <p className="text-[11px] text-muted-foreground">Curious Builder</p>
+            </div>
+          </Link>
+          <Link href="/wrapped" className="press flex items-center gap-3 rounded-2xl bg-paper p-4">
+            <span className="flex size-9 items-center justify-center rounded-xl bg-butter text-ink">
+              <Icon name="award" size={16} />
+            </span>
+            <div>
+              <p className="font-heading text-sm font-bold">Wrapped</p>
+              <p className="text-[11px] text-muted-foreground">90-day milestones</p>
+            </div>
+          </Link>
+        </div>
+
         <Link
           href="/trail"
-          className="press rise mt-4 flex items-center gap-3 rounded-2xl bg-mint2 p-4"
-          style={{ "--i": 4 } as React.CSSProperties}
+          className="press rise mt-3 flex items-center gap-3 rounded-2xl bg-mint2 p-4"
+          style={{ "--i": 5 } as React.CSSProperties}
         >
           <span className="pulse-dot flex size-10 items-center justify-center rounded-full bg-groww text-paper">
             <Icon name="package" size={18} />

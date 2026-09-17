@@ -9,14 +9,14 @@ import { cn } from "@/lib/utils"
 import type React from "react"
 
 export default function Trail() {
-  const { invested } = useStore()
+  const { invested, trailStep, setTrailStep } = useStore()
   const steps = trailSteps.map((s, i) => ({
     ...s,
     state: !invested
       ? ("pending" as const)
-      : i < 2
+      : i < trailStep
         ? ("done" as const)
-        : i === 2
+        : i === trailStep
           ? ("active" as const)
           : ("pending" as const),
   }))
@@ -27,6 +27,7 @@ export default function Trail() {
         title="Money Trail"
         action="refresh"
         actionLabel="Refresh status"
+        onAction={() => invested && setTrailStep(Math.min(trailStep + 1, trailSteps.length - 1))}
       />
       <div className="px-5 pb-6">
         <section className="rise mt-3 flex items-center gap-3.5 rounded-3xl bg-ink p-5 text-paper" style={{ "--i": 0 } as React.CSSProperties}>

@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import { useState } from "react"
 import { Icon } from "@/components/icon"
 import { Screen } from "@/components/screen"
 import { ScreenHeader } from "@/components/screen-header"
@@ -9,13 +10,15 @@ import { funds } from "@/lib/data"
 import { cn, inr } from "@/lib/utils"
 import type React from "react"
 
-const cats = ["All", "Index", "Flexi cap", "ELSS"]
+const cats = ["All", "Flexi cap", "Large cap", "Small cap"]
 
 export default function MutualFunds() {
+  const [cat, setCat] = useState("All")
+  const shown = cat === "All" ? funds : funds.filter((f) => f.category === cat)
   const total = funds.reduce((s, f) => s + (f.value ?? 0), 0)
   return (
     <Screen>
-      <ScreenHeader title="Mutual funds" action="search" actionLabel="Search funds" />
+      <ScreenHeader title="Mutual funds" action="sparkles" actionLabel="Ask GR-1" actionHref="/gr1" />
       <div className="px-5 pb-8">
         <section className="rise mt-2 rounded-3xl bg-ink p-5 text-paper" style={{ "--i": 0 } as React.CSSProperties}>
           <p className="text-xs uppercase tracking-wider text-paper/50">MF portfolio</p>
@@ -26,16 +29,19 @@ export default function MutualFunds() {
         </section>
 
         <div className="rise mt-4 flex gap-2 overflow-x-auto pb-1 [scrollbar-width:none]" style={{ "--i": 1 } as React.CSSProperties}>
-          {cats.map((c, i) => (
-            <span
+          {cats.map((c) => (
+            <button
               key={c}
+              type="button"
+              onClick={() => setCat(c)}
+              aria-pressed={cat === c}
               className={cn(
-                "shrink-0 rounded-full px-3.5 py-1.5 text-xs font-bold",
-                i === 0 ? "bg-ink text-lime" : "bg-paper text-muted-foreground"
+                "press shrink-0 rounded-full px-3.5 py-1.5 text-xs font-bold transition-colors",
+                cat === c ? "bg-ink text-lime" : "bg-paper text-muted-foreground"
               )}
             >
               {c}
-            </span>
+            </button>
           ))}
         </div>
 
@@ -43,7 +49,7 @@ export default function MutualFunds() {
           Your funds
         </h2>
         <div className="mt-3 flex flex-col gap-2.5">
-          {funds.map((f, i) => (
+          {shown.map((f, i) => (
             <Link
               key={f.id}
               href={`/funds/${f.id}`}

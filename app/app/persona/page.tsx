@@ -1,12 +1,14 @@
 "use client"
 
 import { useRouter } from "next/navigation"
-import { useState } from "react"
+import Link from "next/link"
 import { cn } from "@/lib/utils"
 import { Icon, type IconName } from "@/components/icon"
 import { Screen } from "@/components/screen"
+import { ScreenHeader } from "@/components/screen-header"
 import { personas, type Persona } from "@/lib/data"
 import { useStore } from "@/lib/store"
+import type React from "react"
 
 const personaIcons: Record<Persona, IconName> = {
   student: "grad",
@@ -14,58 +16,48 @@ const personaIcons: Record<Persona, IconName> = {
   freelancer: "invoice",
 }
 
+const personaDetail: Record<Persona, string> = {
+  student: "₹6,000/mo allowance · ₹1,200 safe to invest",
+  salaried: "₹52,000/mo salary · ₹8,400 safe to invest",
+  freelancer: "₹18–62k/mo, varies · ₹4,200 safe to invest",
+}
+
 export default function PersonaPage() {
   const router = useRouter()
-  const { setPersona } = useStore()
-  const [selected, setSelected] = useState<Persona | null>(null)
+  const { persona, setPersona, setProfile } = useStore()
+  const current = persona ?? "student"
+
+  const pick = (id: Persona) => {
+    setPersona(id)
+    setProfile({ name: personas[id].name, situationLabel: personas[id].label })
+    router.push("/today")
+  }
 
   return (
     <Screen>
+      <ScreenHeader title="Demo context" />
       <div className="flex min-h-full flex-col px-6 pb-8">
-        <div className="flex items-center gap-1.5 pt-1">
-          <span className="font-heading text-base font-bold tracking-tight">
-            groww
-          </span>
-          <span className="rounded-md bg-lime px-1.5 py-0.5 font-heading text-[10px] font-bold uppercase tracking-wide">
-            IRL
-          </span>
-        </div>
-
-        <div className="rise mt-6 overflow-hidden rounded-3xl bg-acid" style={{ "--i": 0 } as React.CSSProperties}>
-          <div className="flex h-36 items-center justify-center">
-            <div className="relative flex size-24 items-center justify-center">
-              <Icon name="piggy" size={88} strokeWidth={1.4} className="text-ink" />
-              <span className="absolute -right-3 top-1 rotate-12 text-ink"><Icon name="coins" size={22} /></span>
-              <span className="absolute -left-4 bottom-2 -rotate-12 text-ink"><Icon name="banknote" size={20} /></span>
-              <span className="absolute -top-2 left-0 text-ink"><Icon name="sparkles" size={18} /></span>
-            </div>
-          </div>
-        </div>
-
-        <h1 className="rise mt-7 font-heading text-[34px] font-extrabold leading-[1.08] tracking-tight" style={{ "--i": 1 } as React.CSSProperties}>
-          Investing that gets your life.
-        </h1>
-        <p className="rise mt-2 text-sm leading-relaxed text-muted-foreground" style={{ "--i": 2 } as React.CSSProperties}>
-          Plans built around hostel budgets, first salaries and freelance chaos —
-          not boring fund lists.
+        <p className="rise mt-2 text-sm leading-relaxed text-muted-foreground" style={{ "--i": 0 } as React.CSSProperties}>
+          Prototype switcher — the same app, re-tuned for three income lives.
+          Plans, numbers and copy change; your goals and orders stay.
         </p>
 
-        <div className="mt-6 flex flex-col gap-3">
+        <div className="mt-5 flex flex-col gap-2.5">
           {(Object.values(personas)).map((p, i) => (
             <button
               key={p.id}
               type="button"
-              onClick={() => setSelected(p.id)}
-              aria-pressed={selected === p.id}
+              onClick={() => pick(p.id)}
+              aria-pressed={current === p.id}
               className={cn(
                 "press rise flex items-center gap-3.5 rounded-2xl border bg-paper p-4 text-left transition-colors",
-                selected === p.id
-                  ? "border-ink shadow-[3px_3px_0_0_#101915]"
-                  : "border-transparent"
+                current === p.id
+                  ? "border-ink bg-mint2"
+                  : "border-line/60"
               )}
-              style={{ "--i": 3 + i } as React.CSSProperties}
+              style={{ "--i": 1 + i } as React.CSSProperties}
             >
-              <span className="flex size-11 items-center justify-center rounded-xl bg-mint2 text-ink">
+              <span className="flex size-11 items-center justify-center rounded-xl bg-paper text-ink shadow-sm">
                 <Icon name={personaIcons[p.id]} size={20} />
               </span>
               <span className="flex-1">
@@ -73,42 +65,34 @@ export default function PersonaPage() {
                   {p.label}
                 </span>
                 <span className="block text-xs text-muted-foreground">
-                  {p.tag}
+                  {personaDetail[p.id]}
                 </span>
               </span>
-              <span
-                className={cn(
-                  "flex size-5 items-center justify-center rounded-full border transition-colors",
-                  selected === p.id
-                    ? "border-ink bg-ink text-lime"
-                    : "border-line"
-                )}
-              >
-                {selected === p.id && <Icon name="tick" size={12} />}
-              </span>
+              {current === p.id && (
+                <span className="flex size-5 items-center justify-center rounded-full bg-ink text-lime">
+                  <Icon name="tick" size={11} />
+                </span>
+              )}
             </button>
           ))}
         </div>
 
+        <div className="rise mt-5 flex items-start gap-2.5 rounded-2xl bg-sand p-4" style={{ "--i": 5 } as React.CSSProperties}>
+          <Icon name="info" size={16} className="mt-0.5 shrink-0 text-ink" />
+          <p className="text-xs leading-relaxed text-ink/80">
+            In production this is one profile, not a switcher — onboarding reads
+            your income rhythm and adapts. This page exists so reviewers can see
+            all three contexts.
+          </p>
+        </div>
+
         <div className="mt-auto pt-6">
-          <button
-            type="button"
-            disabled={!selected}
-            onClick={() => {
-              if (!selected) return
-              setPersona(selected)
-              router.push("/today")
-            }}
-            className={cn(
-              "press flex h-14 w-full items-center justify-center gap-2 rounded-full font-heading text-base font-bold transition-colors",
-              selected
-                ? "bg-ink text-lime"
-                : "bg-ink/10 text-muted-foreground"
-            )}
+          <Link
+            href="/onboarding"
+            className="press flex h-13 w-full items-center justify-center gap-2 rounded-full bg-ink font-heading text-sm font-bold text-paper"
           >
-            Pick your vibe
-            <Icon name="next" size={18} />
-          </button>
+            <Icon name="refresh" size={16} /> Run full onboarding again
+          </Link>
         </div>
       </div>
     </Screen>

@@ -4,14 +4,21 @@ import Link from "next/link"
 import { Icon, type IconName } from "@/components/icon"
 import { Screen } from "@/components/screen"
 import { GoalIcon } from "@/components/goal-icon"
-import { goals } from "@/lib/data"
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet"
+import { goals, notifications } from "@/lib/data"
 import { inr } from "@/lib/utils"
-import { usePersona } from "@/lib/store"
+import { usePersona, useStore } from "@/lib/store"
 import type React from "react"
 
 const quickActions: { label: string; icon: IconName; href: string }[] = [
   { label: "Add", icon: "down", href: "/add-money" },
-  { label: "Invest", icon: "up2", href: "/reality-check" },
+  { label: "Invest", icon: "up2", href: "/mutual-funds" },
   { label: "Ask GR-1", icon: "sparkles", href: "/gr1" },
   { label: "More", icon: "more", href: "/markets" },
 ]
@@ -24,6 +31,7 @@ const moves = [
 
 export default function Today() {
   const p = usePersona()
+  const { profile, reset } = useStore()
   return (
     <Screen nav>
       <div className="px-5 pb-6">
@@ -35,16 +43,91 @@ export default function Today() {
             </h1>
           </div>
           <div className="flex items-center gap-2">
-            <Link
-              href="/persona"
-              aria-label="Switch persona"
-              className="press flex size-10 items-center justify-center rounded-full bg-paper text-[13px] font-bold shadow-sm"
-            >
-              {p.name.slice(0, 2).toUpperCase()}
-            </Link>
-            <button type="button" aria-label="Notifications" className="press flex size-10 items-center justify-center rounded-full bg-paper shadow-sm">
-              <Icon name="bell" size={18} />
-            </button>
+            <Sheet>
+              <SheetTrigger
+                aria-label="Profile and settings"
+                className="press flex size-10 items-center justify-center rounded-full bg-paper text-[13px] font-bold shadow-sm"
+              >
+                {p.name.slice(0, 2).toUpperCase()}
+              </SheetTrigger>
+              <SheetContent
+                side="bottom"
+                className="mx-auto max-w-[430px] rounded-t-3xl border-t-0 px-5 pb-8"
+              >
+                <SheetHeader className="px-0">
+                  <SheetTitle className="font-heading text-lg font-extrabold">
+                    {p.name}
+                  </SheetTitle>
+                </SheetHeader>
+                <div className="flex flex-col gap-2">
+                  <Link href="/persona" className="press flex items-center gap-3 rounded-2xl bg-muted px-4 py-3.5 text-left">
+                    <Icon name="user" size={18} />
+                    <span className="flex-1">
+                      <span className="block text-sm font-bold">
+                        {profile.situationLabel || p.label}
+                      </span>
+                      <span className="block text-xs text-muted-foreground">
+                        {p.income} · {profile.rhythm || p.incomeNote}
+                      </span>
+                    </span>
+                    <Icon name="next" size={16} className="text-muted-foreground" />
+                  </Link>
+                  <Link href="/autopilot" className="press flex items-center gap-3 rounded-2xl bg-muted px-4 py-3.5 text-left">
+                    <Icon name="refresh" size={18} />
+                    <span className="flex-1 text-sm font-bold">Autopilot settings</span>
+                    <Icon name="next" size={16} className="text-muted-foreground" />
+                  </Link>
+                  <Link href="/wrapped" className="press flex items-center gap-3 rounded-2xl bg-muted px-4 py-3.5 text-left">
+                    <Icon name="award" size={18} />
+                    <span className="flex-1 text-sm font-bold">Groww Wrapped</span>
+                    <Icon name="next" size={16} className="text-muted-foreground" />
+                  </Link>
+                  <button
+                    type="button"
+                    onClick={reset}
+                    className="press flex items-center gap-3 rounded-2xl px-4 py-3.5 text-left text-loss"
+                  >
+                    <Icon name="trash" size={18} />
+                    <span className="flex-1 text-sm font-bold">Reset demo data</span>
+                  </button>
+                </div>
+              </SheetContent>
+            </Sheet>
+            <Sheet>
+              <SheetTrigger
+                aria-label="Notifications"
+                className="press relative flex size-10 items-center justify-center rounded-full bg-paper shadow-sm"
+              >
+                <Icon name="bell" size={18} />
+                <span className="absolute right-2 top-2 size-2 rounded-full bg-coral" />
+              </SheetTrigger>
+              <SheetContent
+                side="bottom"
+                className="mx-auto max-w-[430px] rounded-t-3xl border-t-0 px-5 pb-8"
+              >
+                <SheetHeader className="px-0">
+                  <SheetTitle className="font-heading text-lg font-extrabold">
+                    Notifications
+                  </SheetTitle>
+                </SheetHeader>
+                <div className="flex flex-col divide-y divide-line/60">
+                  {notifications.map((n) => (
+                    <Link key={n.id} href={n.href} className="press flex items-start gap-3 py-3.5">
+                      <span className="flex size-9 shrink-0 items-center justify-center rounded-xl bg-mint2 text-ink">
+                        <Icon name={n.icon} size={16} />
+                      </span>
+                      <span className="flex-1">
+                        <span className="block text-sm font-bold">{n.title}</span>
+                        <span className="mt-0.5 block text-xs leading-relaxed text-muted-foreground">
+                          {n.sub}
+                        </span>
+                      </span>
+                      <span className="tabular text-[11px] text-muted-foreground">{n.time}</span>
+                    </Link>
+                  ))}
+                </div>
+              </SheetContent>
+            </Sheet>
           </div>
         </div>
 

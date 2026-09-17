@@ -61,13 +61,13 @@
   --color-card: var(--card);
   --color-foreground: var(--foreground);
   --color-background: var(--background);
-  --radius-sm: calc(var(--radius) * 0.6);
-  --radius-md: calc(var(--radius) * 0.8);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) * 1.4);
-  --radius-2xl: calc(var(--radius) * 1.8);
-  --radius-3xl: calc(var(--radius) * 2.2);
-  --radius-4xl: calc(var(--radius) * 2.6);
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 0.875rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.25rem;
+  --radius-3xl: 1.5rem;
+  --radius-4xl: 1.75rem;
 }
 
 :root {
@@ -94,7 +94,7 @@
   --chart-3: #ffb547;
   --chart-4: #ff7657;
   --chart-5: #d94a4a;
-  --radius: 1.25rem;
+  --radius: 0.875rem;
   --sidebar: #fffdf8;
   --sidebar-foreground: #101915;
   --sidebar-primary: #101915;

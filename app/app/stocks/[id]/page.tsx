@@ -9,6 +9,7 @@ import { AreaChart } from "@/components/chart"
 import { TickerLogo } from "@/components/goal-icon"
 import { stocks } from "@/lib/data"
 import { cn, inr, pct } from "@/lib/utils"
+import { useStore } from "@/lib/store"
 import type React from "react"
 
 const periods = ["1D", "1W", "1M", "6M", "1Y"]
@@ -16,8 +17,10 @@ const periods = ["1D", "1W", "1M", "6M", "1Y"]
 export default function StockDetail() {
   const { id } = useParams<{ id: string }>()
   const router = useRouter()
+  const { watchIds, toggleWatch } = useStore()
   const s = stocks.find((x) => x.id === id) ?? stocks[0]
   const [range, setRange] = useState(0)
+  const watched = watchIds.includes(s.id)
   const neg = s.change < 0
 
   const facts = [
@@ -34,7 +37,16 @@ export default function StockDetail() {
       <ScreenHeader
         title={s.name}
         right={
-          <button type="button" aria-label="Bookmark" className="press flex size-10 items-center justify-center rounded-full bg-paper shadow-sm">
+          <button
+            type="button"
+            aria-label={watched ? "Remove from watchlist" : "Add to watchlist"}
+            aria-pressed={watched}
+            onClick={() => toggleWatch(s.id)}
+            className={cn(
+              "press flex size-10 items-center justify-center rounded-full",
+              watched ? "bg-ink text-lime" : "bg-paper text-ink shadow-sm"
+            )}
+          >
             <Icon name="bookmark" size={16} />
           </button>
         }

@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from "react"
 import { Icon } from "@/components/icon"
 import { Screen } from "@/components/screen"
 import { ScreenHeader } from "@/components/screen-header"
+import { ScrollArea } from "@/components/ui/scroll-area"
 import { chatScript, gr1Fallback, gr1Replies, type ChatMsg } from "@/lib/data"
 import { cn } from "@/lib/utils"
 import type React from "react"
@@ -40,7 +41,7 @@ export default function GR1Chat() {
   }
 
   return (
-    <Screen>
+    <Screen scroll={false}>
       <ScreenHeader
         title="GR-1"
         onBack={() => router.push("/today")}
@@ -55,8 +56,8 @@ export default function GR1Chat() {
         }
       />
 
-      <div className="screen flex flex-1 flex-col px-5 pb-4">
-        <div className="rise mt-2 flex flex-col gap-3">
+      <ScrollArea className="min-h-0 flex-1">
+        <div className="flex flex-col gap-3 px-5 pb-4 pt-2">
           {msgs.map((m) =>
             m.from === "user" ? (
               <div key={m.id} className="rise ml-auto max-w-[80%] rounded-3xl rounded-br-md bg-ink px-4 py-2.5 text-sm text-paper">
@@ -67,7 +68,7 @@ export default function GR1Chat() {
                 key={m.id}
                 type="button"
                 onClick={() => router.push("/receipt")}
-                className="press rise mr-auto w-full rounded-3xl border border-ink/15 bg-paper p-4 text-left shadow-[3px_3px_0_0_#101915]"
+                className="press rise mr-auto w-full rounded-3xl border border-line bg-paper p-4 text-left shadow-sm"
               >
                 <div className="flex items-center gap-2">
                   <Icon name="receipt" size={16} />
@@ -110,46 +111,46 @@ export default function GR1Chat() {
           )}
           <div ref={endRef} />
         </div>
+      </ScrollArea>
 
-        <div className="mt-auto pt-4">
-          <div className="mb-3 flex gap-2 overflow-x-auto pb-1 [scrollbar-width:none]">
-            {chips.map((c) => (
-              <button
-                key={c}
-                type="button"
-                onClick={() => send(c)}
-                className="press shrink-0 rounded-full border border-ink/10 bg-paper px-3.5 py-1.5 text-xs font-bold text-ink"
-              >
-                {c}
-              </button>
-            ))}
-          </div>
-          <form
-            className="flex items-center gap-2"
-            onSubmit={(e) => {
-              e.preventDefault()
-              send(input)
-            }}
-          >
-            <div className="flex flex-1 items-center gap-2 rounded-full bg-paper px-4 py-3 shadow-sm">
-              <Icon name="attach" size={16} className="text-muted-foreground" />
-              <input
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                placeholder="Ask GR-1 anything…"
-                aria-label="Message GR-1"
-                className="min-w-0 flex-1 bg-transparent text-sm outline-none placeholder:text-muted-foreground"
-              />
-            </div>
+      <div className="shrink-0 px-5 pb-5 pt-2">
+        <div className="mb-3 flex gap-2 overflow-x-auto pb-1 [scrollbar-width:none]">
+          {chips.map((c) => (
             <button
-              type="submit"
-              aria-label="Send"
-              className="press flex size-12 shrink-0 items-center justify-center rounded-full bg-ink text-lime"
+              key={c}
+              type="button"
+              onClick={() => send(c)}
+              className="press shrink-0 rounded-full border border-line/60 bg-paper px-3.5 py-1.5 text-xs font-bold text-ink"
             >
-              <Icon name="sent" size={18} />
+              {c}
             </button>
-          </form>
+          ))}
         </div>
+        <form
+          className="flex items-center gap-2"
+          onSubmit={(e) => {
+            e.preventDefault()
+            send(input)
+          }}
+        >
+          <div className="flex flex-1 items-center gap-2 rounded-full bg-paper px-4 py-3 shadow-sm">
+            <Icon name="attach" size={16} className="text-muted-foreground" />
+            <input
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              placeholder="Ask GR-1 anything…"
+              aria-label="Message GR-1"
+              className="min-w-0 flex-1 bg-transparent text-sm outline-none placeholder:text-muted-foreground"
+            />
+          </div>
+          <button
+            type="submit"
+            aria-label="Send"
+            className="press flex size-12 shrink-0 items-center justify-center rounded-full bg-ink text-lime"
+          >
+            <Icon name="sent" size={18} />
+          </button>
+        </form>
       </div>
     </Screen>
   )

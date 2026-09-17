@@ -46,13 +46,13 @@ export default function Onboarding() {
 
           <div className="rise mt-8 flex flex-col gap-3" style={{ "--i": 3 } as React.CSSProperties}>
             <Link
-              href="/persona"
+              href="/onboarding"
               className="press flex h-14 items-center justify-center rounded-full bg-ink font-heading text-base font-bold text-paper"
             >
               Create account
             </Link>
             <Link
-              href="/persona"
+              href="/today"
               className="press flex h-14 items-center justify-center rounded-full bg-paper font-heading text-base font-bold text-ink"
             >
               Sign in

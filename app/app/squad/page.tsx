@@ -1,14 +1,23 @@
 "use client"
 
 import Link from "next/link"
+import { useState } from "react"
 import { Icon } from "@/components/icon"
 import { Screen } from "@/components/screen"
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet"
 import { squad } from "@/lib/data"
 import { cn } from "@/lib/utils"
 import type React from "react"
 
 export default function Squad() {
   const pctChallenge = Math.round((squad.challenge.progress / squad.challenge.total) * 100)
+  const [copied, setCopied] = useState(false)
   return (
     <Screen nav>
       <div className="px-5 pb-6">
@@ -16,9 +25,41 @@ export default function Squad() {
           <h1 className="font-heading text-2xl font-extrabold tracking-tight">
             Squad
           </h1>
-          <button type="button" aria-label="Invite" className="press flex size-10 items-center justify-center rounded-full bg-paper shadow-sm">
-            <Icon name="plus" size={18} />
-          </button>
+          <Sheet>
+            <SheetTrigger aria-label="Invite to squad" className="press flex size-10 items-center justify-center rounded-full bg-paper shadow-sm">
+              <Icon name="plus" size={18} />
+            </SheetTrigger>
+            <SheetContent
+              side="bottom"
+              className="mx-auto max-w-[430px] rounded-t-3xl border-t-0 px-5 pb-8"
+            >
+              <SheetHeader className="px-0">
+                <SheetTitle className="font-heading text-lg font-extrabold">
+                  Invite to {squad.name}
+                </SheetTitle>
+              </SheetHeader>
+              <p className="text-xs leading-relaxed text-muted-foreground">
+                Members join to learn together — streaks, challenges, Reality
+                Checks. Money stays individual. Always.
+              </p>
+              <div className="mt-4 flex items-center gap-2 rounded-2xl bg-muted px-4 py-3.5">
+                <span className="flex-1 font-heading text-sm font-bold tracking-wide">
+                  groww.in/squad/B27-XK4
+                </span>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setCopied(true)
+                    setTimeout(() => setCopied(false), 1500)
+                  }}
+                  className="press flex items-center gap-1.5 rounded-full bg-ink px-3.5 py-1.5 text-xs font-bold text-lime"
+                >
+                  <Icon name={copied ? "tick" : "copy"} size={13} />
+                  {copied ? "Copied" : "Copy"}
+                </button>
+              </div>
+            </SheetContent>
+          </Sheet>
         </div>
 
         <section className="rise mt-4 rounded-3xl bg-cobalt p-5 text-paper" style={{ "--i": 0 } as React.CSSProperties}>

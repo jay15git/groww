@@ -109,17 +109,34 @@ export default function Explore() {
         </div>
 
         <Link
+          href="/promptfolio"
+          className="press rise mt-5 flex items-center gap-3 rounded-2xl bg-ink p-4 text-paper"
+          style={{ "--i": 7 } as React.CSSProperties}
+        >
+          <span className="flex size-10 items-center justify-center rounded-full bg-lime text-ink">
+            <Icon name="sparkles" size={18} />
+          </span>
+          <div className="flex-1">
+            <p className="font-heading text-sm font-bold">Promptfolio</p>
+            <p className="text-xs text-paper/60">
+              Describe an idea — GR-1 drafts a basket you can inspect
+            </p>
+          </div>
+          <Icon name="next" size={16} className="text-paper/60" />
+        </Link>
+
+        <Link
           href="/mutual-funds"
-          className="press rise mt-6 flex items-center justify-between rounded-2xl bg-ink p-4 text-paper"
+          className="press rise mt-3 flex items-center justify-between rounded-2xl bg-mint2 p-4"
           style={{ "--i": 8 } as React.CSSProperties}
         >
           <div>
             <p className="font-heading text-sm font-bold">Mutual funds</p>
-            <p className="text-xs text-paper/60">
+            <p className="text-xs text-muted-foreground">
               SIPs, ELSS tax savers, index funds
             </p>
           </div>
-          <span className="flex size-9 items-center justify-center rounded-full bg-lime text-ink">
+          <span className="flex size-9 items-center justify-center rounded-full bg-ink text-lime">
             <Icon name="next" size={16} />
           </span>
         </Link>

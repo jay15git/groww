@@ -1,3 +1,5 @@
+import type { IconName } from "@/components/icon"
+
 export type Persona = "student" | "salaried" | "freelancer"
 
 export const personas: Record<
@@ -315,3 +317,123 @@ export const navTabs = [
   { href: "/portfolio", label: "Portfolio", icon: "pie" },
   { href: "/squad", label: "Squad", icon: "users" },
 ] as const
+
+/* ── Onboarding ─────────────────────────────────────────────── */
+
+export type Situation = {
+  id: string
+  label: string
+  sub: string
+  icon: IconName
+  persona: Persona
+  rhythmHint: string
+}
+
+export const situations: Situation[] = [
+  { id: "student", label: "Student", sub: "Pocket money, hostel budget, stipend", icon: "grad", persona: "student", rhythmHint: "whenever" },
+  { id: "intern", label: "Intern / trainee", sub: "Small stipend, first paydays", icon: "notebook", persona: "student", rhythmHint: "variable" },
+  { id: "first-job", label: "First job", sub: "Fixed salary hits monthly", icon: "briefcase", persona: "salaried", rhythmHint: "fixed" },
+  { id: "freelancer", label: "Freelancer / creator", sub: "Client invoices, brand deals", icon: "invoice", persona: "freelancer", rhythmHint: "variable" },
+  { id: "gig", label: "Gig work", sub: "Deliveries, rides, task apps", icon: "energy", persona: "freelancer", rhythmHint: "variable" },
+  { id: "mixed", label: "Mixed income", sub: "Salary plus side gigs", icon: "exchange", persona: "salaried", rhythmHint: "mixed" },
+  { id: "family", label: "Supporting family", sub: "Shared expenses come first", icon: "users", persona: "salaried", rhythmHint: "fixed" },
+]
+
+export const rhythms = [
+  { id: "fixed", label: "Fixed, monthly", sub: "Same date, same amount" },
+  { id: "variable", label: "It varies", sub: "Good months and dry months" },
+  { id: "whenever", label: "Whenever it comes", sub: "Allowance, tasks, odd jobs" },
+  { id: "mixed", label: "A mix", sub: "Base pay plus extras" },
+]
+
+export const firstGoals: { id: string; label: string; sub: string; icon: IconName }[] = [
+  { id: "gadget", label: "A gadget", sub: "Laptop, phone, camera", icon: "laptop" },
+  { id: "trip", label: "A trip", sub: "Vietnam, Goa, somewhere", icon: "plane" },
+  { id: "buffer", label: "Emergency buffer", sub: "3 months of safety", icon: "shieldPlain" },
+  { id: "wealth", label: "Just grow money", sub: "No deadline, build the habit", icon: "up2" },
+  { id: "learn", label: "Learn first", sub: "Simulate before I invest", icon: "book" },
+]
+
+export const experiences = [
+  { id: "new", label: "Brand new", sub: "Never invested" },
+  { id: "some", label: "Dabbled", sub: "A SIP or a stock or two" },
+  { id: "confident", label: "Comfortable", sub: "I know the basics" },
+]
+
+/* ── Notifications ──────────────────────────────────────────── */
+
+export const notifications: { id: string; icon: IconName; title: string; sub: string; href: string; time: string }[] = [
+  { id: "n1", icon: "fire", title: "Reel going viral in your circle", sub: "\"Guaranteed 10x\" — Reality Check it before anyone acts", href: "/reality-check", time: "2h" },
+  { id: "n2", icon: "target", title: "New laptop is 66% funded", sub: "₹4,200 more and the goal moves to \"book it\"", href: "/goals", time: "1d" },
+  { id: "n3", icon: "package", title: "Units allotted", sub: "Your Nifty 50 order settled at declared NAV", href: "/trail", time: "2d" },
+  { id: "n4", icon: "users", title: "No-FOMO week: day 5 of 7", sub: "Squad streak intact — 0 hype buys this week", href: "/squad", time: "3d" },
+]
+
+/* ── Market tabs ────────────────────────────────────────────── */
+
+export const fnoRows = [
+  { id: "nifty-fut", name: "NIFTY Nov FUT", meta: "Futures · 25 Nov", price: 25148.5, change: 0.5, note: "OI +4.2%" },
+  { id: "banknifty-fut", name: "BANKNIFTY Nov FUT", meta: "Futures · 25 Nov", price: 53895.2, change: -0.3, note: "OI −1.8%" },
+  { id: "nifty-ce", name: "NIFTY 25200 CE", meta: "Call · weekly", price: 86.4, change: 12.6, note: "High IV" },
+  { id: "nifty-pe", name: "NIFTY 25000 PE", meta: "Put · weekly", price: 54.1, change: -8.2, note: "High IV" },
+]
+
+export const commodityRows = [
+  { id: "gold", name: "Gold", meta: "MCX · 10g", price: 78420, change: 0.6, spark: [4, 4.3, 4.1, 4.6, 5, 5.2, 5.5] },
+  { id: "silver", name: "Silver", meta: "MCX · 1kg", price: 92150, change: 1.1, spark: [3, 3.4, 4, 4.2, 4.6, 5.1, 5.6] },
+  { id: "crude", name: "Crude oil", meta: "MCX · barrel", price: 5840, change: -1.4, spark: [7, 6.6, 6.9, 6.2, 5.8, 5.4, 5] },
+  { id: "natgas", name: "Natural gas", meta: "MCX · mmBtu", price: 246.8, change: 2.3, spark: [3, 3.2, 3.8, 4.4, 4.1, 4.8, 5.4] },
+]
+
+/* ── Promptfolio ────────────────────────────────────────────── */
+
+export const promptfolio = {
+  prompt: "Indian consumer growth, no tobacco or gambling, medium risk, ₹1,000/mo",
+  interpretation: "Broad domestic consumption theme · excludes sin stocks · mid volatility band · SIP-sized contributions",
+  holdings: [
+    { ticker: "N", name: "Nifty 50 Index", weight: 40, why: "Broad base — consumer majors inside" },
+    { ticker: "C", name: "Consumption ETF", weight: 30, why: "Direct theme exposure, screened" },
+    { ticker: "F", name: "Flexi-cap fund", weight: 20, why: "Manager can rotate across sectors" },
+    { ticker: "L", name: "Liquid fund", weight: 10, why: "Drag reducer for re-entry" },
+  ],
+  risk: "Medium — equity-heavy, single-theme tilt adds concentration",
+  stress: "In the March 2020 fall this basket drew down ~31%. It recovered to pre-fall levels in ~9 months.",
+  exclusions: "No tobacco, gambling, alcohol or weapons manufacturers — screened at index level",
+  fees: "Blended expense ~0.4% — about ₹4/yr per ₹1,000 invested",
+  invalidators: "Rural demand slump · inflation squeezing discretionary spend · screening rules change",
+}
+
+/* ── Portfolio DNA ──────────────────────────────────────────── */
+
+export const dna = {
+  title: "Curious Builder",
+  tagline: "You research before you buy — rare at this stage.",
+  dims: [
+    { label: "Patience", value: 72, note: "Held through 3 red days" },
+    { label: "Diversification", value: 58, note: "4 instruments, equity-tilted" },
+    { label: "Research depth", value: 81, note: "9 Reality Checks this month" },
+    { label: "Automation", value: 44, note: "Autopilot off — manual for now" },
+    { label: "Goal alignment", value: 66, note: "2 of 3 goals on track" },
+  ],
+  archetypes: [
+    { name: "Calm Investor", match: 34 },
+    { name: "Theme Hunter", match: 61 },
+    { name: "Research Nerd", match: 77 },
+    { name: "FOMO Fighter", match: 52 },
+  ],
+}
+
+/* ── Wrapped ────────────────────────────────────────────────── */
+
+export const wrapped = {
+  period: "Your first 90 days",
+  stats: [
+    { label: "Questions asked before investing", value: "23", icon: "help" },
+    { label: "Hype claims Reality-Checked", value: "9", icon: "shield" },
+    { label: "Hype buys skipped", value: "6", icon: "fire" },
+    { label: "Red days without panic-selling", value: "4", icon: "down2" },
+    { label: "Weeks of consistent contributions", value: "11", icon: "calendar" },
+    { label: "Goals funded past 50%", value: "1", icon: "target" },
+  ],
+  note: "Amounts and holdings stay private by default. Milestones, not money.",
+}

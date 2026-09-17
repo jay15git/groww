@@ -15,7 +15,7 @@ export default function Multiverse() {
   const [picked, setPicked] = useState("A")
   return (
     <Screen>
-      <ScreenHeader title="Money Multiverse" action="sparkles" actionLabel="Ask GR-1" />
+      <ScreenHeader title="Money Multiverse" action="sparkles" actionLabel="Ask GR-1" actionHref="/gr1" />
       <div className="flex min-h-full flex-col px-5 pb-8">
         <p className="rise mt-2 text-sm text-muted-foreground" style={{ "--i": 0 } as React.CSSProperties}>
           Same you. Different futures. Pick one to live in.
@@ -29,10 +29,10 @@ export default function Multiverse() {
               onClick={() => setPicked(f.id)}
               aria-pressed={picked === f.id}
               className={cn(
-                "press rise rounded-3xl p-5 text-left transition-shadow",
+                "press rise rounded-3xl border-2 p-5 text-left transition-all",
                 tint[f.tone],
                 f.featured && "min-h-44",
-                picked === f.id && "shadow-[4px_4px_0_0_#101915]"
+                picked === f.id ? "border-ink" : "border-transparent"
               )}
               style={{ "--i": 1 + i } as React.CSSProperties}
             >
