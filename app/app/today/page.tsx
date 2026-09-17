@@ -1,0 +1,195 @@
+"use client"
+
+import Link from "next/link"
+import { Icon, type IconName } from "@/components/icon"
+import { Screen } from "@/components/screen"
+import { GoalIcon } from "@/components/goal-icon"
+import { goals } from "@/lib/data"
+import { inr } from "@/lib/utils"
+import { usePersona } from "@/lib/store"
+import type React from "react"
+
+const quickActions: { label: string; icon: IconName; href: string }[] = [
+  { label: "Add", icon: "down", href: "/add-money" },
+  { label: "Invest", icon: "up2", href: "/reality-check" },
+  { label: "Ask GR-1", icon: "sparkles", href: "/gr1" },
+  { label: "More", icon: "more", href: "/markets" },
+]
+
+const moves = [
+  { icon: "laptop" as IconName, label: "New laptop SIP", meta: "Today · 10:24", amount: -3000 },
+  { icon: "invoice" as IconName, label: "Invoice payout · 12% auto", meta: "Yesterday", amount: 8600 },
+  { icon: "shieldPlain" as IconName, label: "Emergency buffer refill", meta: "Mon", amount: -1500 },
+]
+
+export default function Today() {
+  const p = usePersona()
+  return (
+    <Screen nav>
+      <div className="px-5 pb-6">
+        <div className="flex items-center justify-between pt-1">
+          <div>
+            <p className="text-xs text-muted-foreground">Good morning</p>
+            <h1 className="font-heading text-2xl font-extrabold tracking-tight">
+              {p.name}
+            </h1>
+          </div>
+          <div className="flex items-center gap-2">
+            <Link
+              href="/persona"
+              aria-label="Switch persona"
+              className="press flex size-10 items-center justify-center rounded-full bg-paper text-[13px] font-bold shadow-sm"
+            >
+              {p.name.slice(0, 2).toUpperCase()}
+            </Link>
+            <button type="button" aria-label="Notifications" className="press flex size-10 items-center justify-center rounded-full bg-paper shadow-sm">
+              <Icon name="bell" size={18} />
+            </button>
+          </div>
+        </div>
+
+        <section className="rise mt-4 rounded-3xl bg-ink p-5 text-paper" style={{ "--i": 0 } as React.CSSProperties}>
+          <div className="flex items-start justify-between">
+            <div>
+              <p className="text-xs text-paper/60">Safe to invest</p>
+              <p className="tabular mt-1 font-heading text-[40px] font-extrabold leading-none tracking-tight">
+                {inr(p.safeToInvest)}
+              </p>
+              <p className="mt-1.5 text-xs text-paper/60">
+                after rent · food · emergency buffer
+              </p>
+            </div>
+            <span className="rounded-full bg-lime/15 px-2.5 py-1 text-[10px] font-semibold text-lime">
+              ● this month
+            </span>
+          </div>
+          <div className="mt-4 flex gap-2">
+            <Link
+              href="/reality-check"
+              className="press flex h-10 flex-1 items-center justify-center gap-1.5 rounded-full bg-lime font-heading text-sm font-bold text-ink"
+            >
+              <Icon name="up2" size={16} /> Invest
+            </Link>
+            <Link
+              href="/multiverse"
+              className="press flex h-10 flex-1 items-center justify-center gap-1.5 rounded-full bg-paper/10 text-sm font-semibold text-paper"
+            >
+              <Icon name="chart" size={16} /> Simulate
+            </Link>
+            <Link
+              href="/gr1"
+              className="press flex h-10 flex-1 items-center justify-center gap-1.5 rounded-full bg-paper/10 text-sm font-semibold text-paper"
+            >
+              <Icon name="sparkles" size={16} /> Ask GR-1
+            </Link>
+          </div>
+        </section>
+
+        <div className="rise mt-4 grid grid-cols-4 gap-2" style={{ "--i": 1 } as React.CSSProperties}>
+          {quickActions.map((a) => (
+            <Link
+              key={a.label}
+              href={a.href}
+              className="press flex flex-col items-center gap-1.5 rounded-2xl bg-paper py-3"
+            >
+              <span className="flex size-9 items-center justify-center rounded-full bg-muted text-ink">
+                <Icon name={a.icon} size={16} />
+              </span>
+              <span className="text-[10px] font-bold">{a.label}</span>
+            </Link>
+          ))}
+        </div>
+
+        <Link
+          href="/reality-check"
+          className="press rise mt-3 flex items-center gap-3 rounded-2xl bg-lime p-4"
+          style={{ "--i": 2 } as React.CSSProperties}
+        >
+          <span className="flex size-10 items-center justify-center rounded-full bg-ink text-lime">
+            <Icon name="shield" size={18} />
+          </span>
+          <div className="flex-1">
+            <p className="font-heading text-sm font-bold text-ink">
+              Reality Check
+            </p>
+            <p className="text-xs text-ink/60">
+              Drop a finance reel — GR-1 checks the hype
+            </p>
+          </div>
+          <Icon name="next" size={18} className="text-ink" />
+        </Link>
+
+        <div className="rise mt-7 flex items-center justify-between" style={{ "--i": 3 } as React.CSSProperties}>
+          <h2 className="font-heading text-base font-bold uppercase tracking-wide text-muted-foreground">
+            Your next moves
+          </h2>
+          <Link href="/goals" className="text-xs font-semibold text-groww">
+            See all
+          </Link>
+        </div>
+
+        <div className="mt-3 flex flex-col gap-2.5">
+          {goals.slice(0, 2).map((g, i) => {
+            const pc = Math.round((g.saved / g.target) * 100)
+            return (
+              <Link
+                href="/goals"
+                key={g.id}
+                className="press rise flex items-center gap-3.5 rounded-2xl bg-paper p-4"
+                style={{ "--i": 4 + i } as React.CSSProperties}
+              >
+                <GoalIcon goal={g} />
+                <div className="flex-1">
+                  <div className="flex items-baseline justify-between">
+                    <p className="font-heading text-[15px] font-bold">{g.name}</p>
+                    <span className="tabular text-xs font-bold text-groww">{pc}%</span>
+                  </div>
+                  <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-muted">
+                    <div
+                      className="h-full rounded-full bg-groww"
+                      style={{ width: `${pc}%` }}
+                    />
+                  </div>
+                  <p className="tabular mt-1.5 text-xs text-muted-foreground">
+                    {inr(g.saved)} of {inr(g.target)}
+                  </p>
+                </div>
+              </Link>
+            )
+          })}
+        </div>
+
+        <div className="rise mt-7 flex items-center justify-between" style={{ "--i": 6 } as React.CSSProperties}>
+          <h2 className="font-heading text-base font-bold uppercase tracking-wide text-muted-foreground">
+            Recent moves
+          </h2>
+          <Link href="/trail" className="text-xs font-semibold text-groww">
+            See all
+          </Link>
+        </div>
+        <div className="rise mt-3 flex flex-col divide-y divide-line/60 rounded-2xl bg-paper px-4" style={{ "--i": 7 } as React.CSSProperties}>
+          {moves.map((m) => (
+            <Link href="/trail" key={m.label} className="press flex items-center gap-3 py-3.5">
+              <span className="flex size-9 items-center justify-center rounded-xl bg-mint2 text-ink">
+                <Icon name={m.icon} size={16} />
+              </span>
+              <div className="flex-1">
+                <p className="text-sm font-semibold">{m.label}</p>
+                <p className="text-xs text-muted-foreground">{m.meta}</p>
+              </div>
+              <span
+                className={
+                  m.amount > 0
+                    ? "tabular text-sm font-bold text-groww"
+                    : "tabular text-sm font-semibold text-ink"
+                }
+              >
+                {m.amount > 0 ? `+${inr(m.amount)}` : `−${inr(-m.amount)}`}
+              </span>
+            </Link>
+          ))}
+        </div>
+      </div>
+    </Screen>
+  )
+}
