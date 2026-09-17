@@ -60,6 +60,16 @@ export default function Today() {
                   </SheetTitle>
                 </SheetHeader>
                 <div className="flex flex-col gap-2">
+                  <Link href="/profile" className="press flex items-center gap-3 rounded-2xl bg-muted px-4 py-3.5 text-left">
+                    <Icon name="receipt" size={18} />
+                    <span className="flex-1">
+                      <span className="block text-sm font-bold">Full profile</span>
+                      <span className="block text-xs text-muted-foreground">
+                        Orders, IPO bids, reports, settings
+                      </span>
+                    </span>
+                    <Icon name="next" size={16} className="text-muted-foreground" />
+                  </Link>
                   <Link href="/persona" className="press flex items-center gap-3 rounded-2xl bg-muted px-4 py-3.5 text-left">
                     <Icon name="user" size={18} />
                     <span className="flex-1">

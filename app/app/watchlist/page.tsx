@@ -19,8 +19,10 @@ import { useStore } from "@/lib/store"
 import type React from "react"
 
 export default function Watchlist() {
-  const { watchIds, toggleWatch } = useStore()
+  const { watchIds, toggleWatch, watchlists, addWatchlist } = useStore()
   const [q, setQ] = useState("")
+  const [list, setList] = useState(0)
+  const [newList, setNewList] = useState("")
   const query = q.trim().toLowerCase()
 
   const watched = stocks.filter(
@@ -86,7 +88,57 @@ export default function Watchlist() {
         }
       />
       <div className="px-5 pb-8 text-paper">
-        <div className="rise mt-2 flex items-center gap-2 rounded-full bg-paper/5 px-4 py-3" style={{ "--i": 0 } as React.CSSProperties}>
+        <div className="rise mt-2 flex gap-2 overflow-x-auto pb-1 [scrollbar-width:none]" style={{ "--i": 0 } as React.CSSProperties}>
+          {watchlists.map((w, i) => (
+            <button
+              key={w}
+              type="button"
+              onClick={() => setList(i)}
+              aria-pressed={list === i}
+              className={cn(
+                "press shrink-0 rounded-full px-3.5 py-1.5 text-xs font-bold",
+                list === i ? "bg-paper text-ink" : "bg-paper/8 text-paper/60"
+              )}
+            >
+              {w}
+            </button>
+          ))}
+          <Sheet>
+            <SheetTrigger className="press flex shrink-0 items-center gap-1 rounded-full bg-paper/8 px-3.5 py-1.5 text-xs font-bold text-paper/60">
+              <Icon name="plus" size={12} /> New list
+            </SheetTrigger>
+            <SheetContent
+              side="bottom"
+              className="mx-auto max-w-[430px] rounded-t-3xl border-t-0 px-5 pb-8"
+            >
+              <SheetHeader className="px-0">
+                <SheetTitle className="font-heading text-lg font-extrabold">
+                  New watchlist
+                </SheetTitle>
+              </SheetHeader>
+              <input
+                value={newList}
+                onChange={(e) => setNewList(e.target.value)}
+                placeholder="e.g. EV bets, Dividend payers"
+                aria-label="Watchlist name"
+                className="w-full rounded-2xl bg-muted px-4 py-3 text-sm outline-none placeholder:text-muted-foreground"
+              />
+              <button
+                type="button"
+                disabled={!newList.trim()}
+                onClick={() => {
+                  addWatchlist(newList.trim())
+                  setNewList("")
+                }}
+                className="press mt-4 h-12 w-full rounded-full bg-ink font-heading text-sm font-bold text-paper disabled:opacity-40"
+              >
+                Create list
+              </button>
+            </SheetContent>
+          </Sheet>
+        </div>
+
+        <div className="rise mt-3 flex items-center gap-2 rounded-full bg-paper/5 px-4 py-3" style={{ "--i": 1 } as React.CSSProperties}>
           <Icon name="search" size={16} className="text-paper/40" />
           <input
             value={q}

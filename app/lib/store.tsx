@@ -8,7 +8,15 @@ import {
   useState,
   type ReactNode,
 } from "react"
-import { personas, type Goal, type Persona } from "@/lib/data"
+import {
+  personas,
+  seedOrders,
+  seedSips,
+  type Goal,
+  type Order,
+  type Persona,
+  type Sip,
+} from "@/lib/data"
 
 type Autopilot = {
   on: boolean
@@ -59,6 +67,18 @@ type Store = {
   setTrailStep: (n: number) => void
   watchIds: string[]
   toggleWatch: (id: string) => void
+  fundWatchIds: string[]
+  toggleFundWatch: (id: string) => void
+  watchlists: string[]
+  addWatchlist: (name: string) => void
+  orders: Order[]
+  placeOrder: (o: Omit<Order, "id" | "time" | "status">) => void
+  cancelOrder: (id: string) => void
+  sips: Sip[]
+  addSip: (s: Omit<Sip, "id">) => void
+  removeSip: (id: string) => void
+  ipoApplied: string[]
+  applyIpo: (id: string) => void
   extraGoals: Goal[]
   addGoal: (g: Goal) => void
   hydrated: boolean
@@ -85,6 +105,11 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     "zomato",
   ])
   const [extraGoals, setExtraGoals] = useState<Goal[]>([])
+  const [fundWatchIds, setFundWatchIds] = useState<string[]>(["ppf"])
+  const [watchlists, setWatchlists] = useState<string[]>(["Watchlist 1"])
+  const [orders, setOrders] = useState<Order[]>(seedOrders)
+  const [sips, setSips] = useState<Sip[]>(seedSips)
+  const [ipoApplied, setIpoApplied] = useState<string[]>([])
   const [hydrated, setHydrated] = useState(false)
 
   useEffect(() => {
@@ -100,6 +125,11 @@ export function StoreProvider({ children }: { children: ReactNode }) {
           if (s.invested) setInvested(true)
           if (Array.isArray(s.watchIds)) setWatchIds(s.watchIds)
           if (Array.isArray(s.extraGoals)) setExtraGoals(s.extraGoals)
+          if (Array.isArray(s.fundWatchIds)) setFundWatchIds(s.fundWatchIds)
+          if (Array.isArray(s.watchlists)) setWatchlists(s.watchlists)
+          if (Array.isArray(s.orders)) setOrders(s.orders)
+          if (Array.isArray(s.sips)) setSips(s.sips)
+          if (Array.isArray(s.ipoApplied)) setIpoApplied(s.ipoApplied)
         }
       } catch {}
       setHydrated(true)
@@ -119,10 +149,15 @@ export function StoreProvider({ children }: { children: ReactNode }) {
           invested,
           watchIds,
           extraGoals,
+          fundWatchIds,
+          watchlists,
+          orders,
+          sips,
+          ipoApplied,
         })
       )
     } catch {}
-  }, [persona, profile, onboarded, autopilot, invested, watchIds, extraGoals, hydrated])
+  }, [persona, profile, onboarded, autopilot, invested, watchIds, extraGoals, fundWatchIds, watchlists, orders, sips, ipoApplied, hydrated])
 
   const value = useMemo<Store>(
     () => ({
@@ -152,6 +187,31 @@ export function StoreProvider({ children }: { children: ReactNode }) {
         ),
       extraGoals,
       addGoal: (g) => setExtraGoals((gs) => [...gs, g]),
+      fundWatchIds,
+      toggleFundWatch: (id) =>
+        setFundWatchIds((w) =>
+          w.includes(id) ? w.filter((x) => x !== id) : [...w, id]
+        ),
+      watchlists,
+      addWatchlist: (name) => setWatchlists((w) => [...w, name]),
+      orders,
+      placeOrder: (o) =>
+        setOrders((os) => [
+          {
+            ...o,
+            id: `o${Date.now()}`,
+            status: "Executed",
+            time: "Just now",
+          },
+          ...os,
+        ]),
+      cancelOrder: (id) => setOrders((os) => os.filter((o) => o.id !== id)),
+      sips,
+      addSip: (s) => setSips((ss) => [...ss, { ...s, id: `sip${Date.now()}` }]),
+      removeSip: (id) => setSips((ss) => ss.filter((s) => s.id !== id)),
+      ipoApplied,
+      applyIpo: (id) =>
+        setIpoApplied((a) => (a.includes(id) ? a : [...a, id])),
       hydrated,
       reset: () => {
         setPersonaState(null)
@@ -162,12 +222,17 @@ export function StoreProvider({ children }: { children: ReactNode }) {
         setAutopilotState(defaultAutopilot)
         setWatchIds(["reliance", "tcs", "hdfc", "infy", "itc", "zomato"])
         setExtraGoals([])
+        setFundWatchIds(["ppf"])
+        setWatchlists(["Watchlist 1"])
+        setOrders(seedOrders)
+        setSips(seedSips)
+        setIpoApplied([])
         try {
           localStorage.removeItem(KEY)
         } catch {}
       },
     }),
-    [persona, profile, onboarded, autopilot, invested, trailStep, watchIds, extraGoals, hydrated]
+    [persona, profile, onboarded, autopilot, invested, trailStep, watchIds, extraGoals, fundWatchIds, watchlists, orders, sips, ipoApplied, hydrated]
   )
 
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>
