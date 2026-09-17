@@ -55,7 +55,7 @@ export default function Explore() {
                 <span
                   className={
                     ix.change >= 0
-                      ? "tabular text-xs font-bold text-groww"
+                      ? "tabular text-xs font-bold text-growwise"
                       : "tabular text-xs font-bold text-loss"
                   }
                 >
@@ -77,7 +77,7 @@ export default function Explore() {
           <h2 className="font-heading text-base font-bold uppercase tracking-wide text-muted-foreground">
             What moved today
           </h2>
-          <Link href="/markets" className="text-xs font-semibold text-groww">
+          <Link href="/markets" className="text-xs font-semibold text-growwise">
             Markets
           </Link>
         </div>
@@ -119,7 +119,7 @@ export default function Explore() {
           <div className="flex-1">
             <p className="font-heading text-sm font-bold">Promptfolio</p>
             <p className="text-xs text-paper/60">
-              Describe an idea — GR-1 drafts a basket you can inspect
+              Describe an idea — Wise drafts a basket you can inspect
             </p>
           </div>
           <Icon name="next" size={16} className="text-paper/60" />

@@ -14,7 +14,7 @@ export default function Wrapped() {
   const p = usePersona()
   return (
     <Screen>
-      <ScreenHeader title="Groww Wrapped" />
+      <ScreenHeader title="GrowWise Wrapped" />
       <div className="px-5 pb-8">
         <section className="rise mt-2 rounded-3xl bg-ink p-5 text-paper" style={{ "--i": 0 } as React.CSSProperties}>
           <div className="flex items-center justify-between">

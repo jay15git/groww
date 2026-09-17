@@ -1,16 +1,16 @@
-# Groww for Gen Z: product solution
+# GrowWise for Gen Z: product solution
 
 ## 0. The decision (read first)
 
-Build **Groww IRL**: a version of Groww organized around a young Indian's real financial life — income rhythm, goals, internet influence, friends, fear — instead of around product categories.
+Build **GrowWise**: a version of GrowWise organized around a young Indian's real financial life — income rhythm, goals, internet influence, friends, fear — instead of around product categories.
 
 One demonstrable spine:
 
 > **See a claim → check the evidence → explore futures → create an adaptive plan → understand the action → track the money.**
 
-Hypothesis: the barrier for Gen Z is not access — Groww already solved account opening. It is the gap between internet-driven curiosity and confident repeat investing. Closing that gap converts first-time account openers into long-horizon investors, Groww's highest-LTV cohort.
+Hypothesis: the barrier for Gen Z is not access — GrowWise already solved account opening. It is the gap between internet-driven curiosity and confident repeat investing. Closing that gap converts first-time account openers into long-horizon investors, GrowWise's highest-LTV cohort.
 
-Reversal condition: if usability testing shows users will not bring external content into a broker app, Reality Check becomes a tool inside GR-1 rather than the entry point. The adaptive-plan and transparency spine still stands.
+Reversal condition: if usability testing shows users will not bring external content into a broker app, Reality Check becomes a tool inside Wise rather than the entry point. The adaptive-plan and transparency spine still stands.
 
 ---
 
@@ -18,7 +18,7 @@ Reversal condition: if usability testing shows users will not bring external con
 
 | Field | Answer |
 |---|---|
-| Objective | Design Groww for Indian Gen Z investors (20–26); prove product judgment through artifacts, not only polish |
+| Objective | Design GrowWise for Indian Gen Z investors (20–26); prove product judgment through artifacts, not only polish |
 | Decision to make | Which single product direction best serves this cohort and is demonstrable in ~12 hours |
 | Constraints | No real transactions; working accessible link; prompts + evals submitted; 300–700-word page written by the candidate (not AI) |
 | Deliverable | Interactive prototype + this strategy doc + prompt/eval packet |
@@ -31,7 +31,7 @@ This is a concept prototype, not a production launch. It should be ambitious, in
 
 ## 2. Problem framing
 
-Groww has already made opening an account and buying an investment simple. The remaining problem is that a first-time investor still has to answer five difficult questions:
+GrowWise has already made opening an account and buying an investment simple. The remaining problem is that a first-time investor still has to answer five difficult questions:
 
 1. How much can I invest without affecting daily life?
 2. What should I explore when I do not understand financial products?
@@ -52,14 +52,14 @@ The problem is therefore not access alone. It is the gap between curiosity and c
 - Hindi and regional languages dominate education preferences.
 - 93% of surveyed investors find finfluencers moderately or highly credible.
 - 62% make at least some decisions using finfluencer recommendations.
-- Groww already has millions of first-time investors and students, so this is a retention and lifetime-value opportunity, not a niche experiment.
+- GrowWise already has millions of first-time investors and students, so this is a retention and lifetime-value opportunity, not a niche experiment.
 
-Primary sources: SEBI Investor Survey 2025, SEBI FY2025–26 derivatives study, Groww Annual Report FY2025–26.
+Primary sources: SEBI Investor Survey 2025, SEBI FY2025–26 derivatives study, GrowWise Annual Report FY2025–26.
 
 ### Evidence integrity
 
-- **Prompt facts:** age band 20–26; first paychecks; part-time work; students; Groww wants to serve this group best.
-- **Public evidence:** every statistic above comes from the cited SEBI/Groww publications.
+- **Prompt facts:** age band 20–26; first paychecks; part-time work; students; GrowWise wants to serve this group best.
+- **Public evidence:** every statistic above comes from the cited SEBI/GrowWise publications.
 - **Assumptions:** Gen Z will share external content into a broker app; adaptive plans beat rigid SIPs for irregular earners; transparency after investment reduces early churn. Each assumption is marked where it shapes a feature, and the Defense Surface (section 15) states what evidence would reverse each one.
 - **Not claimed:** desk research is not presented as customer interviews. Reddit/X signals were treated as directional anecdotes, not prevalence data.
 
@@ -86,13 +86,13 @@ The prototype should demonstrate three switchable contexts: Student, Salaried, a
 
 ## 4. Product thesis
 
-# Groww IRL
+# GrowWise
 
 **Your money. Your next move.**
 
-Groww IRL reorganizes Groww around the real life of a young investor: income, goals, internet influence, friends, uncertainty, and future choices.
+GrowWise reorganizes GrowWise around the real life of a young investor: income, goals, internet influence, friends, uncertainty, and future choices.
 
-Current Groww begins with products such as stocks, mutual funds, IPOs, and F&O. Groww IRL begins with the user’s situation and progressively connects it to the right product experience.
+Current GrowWise begins with products such as stocks, mutual funds, IPOs, and F&O. GrowWise begins with the user’s situation and progressively connects it to the right product experience.
 
 ### Core journey
 
@@ -106,31 +106,31 @@ This journey is the prototype’s main story. Other features support it but must
 
 | Alternative | Why it lost | Cost of choosing the spine instead | What would reverse this |
 |---|---|---|---|
-| Gamified trading app — streaks, leaderboards, rewards (StockPe-style) | Rewards engagement volume, not judgment. SEBI data shows high-frequency engagement already correlates with losses for young, small-portfolio traders. Groww cannot be seen to gamify trading | Less "addictive" surface; relies on simulation/identity for retention | If the rubric rewarded pure daily-engagement mechanics |
-| Education-first content layer (Varsity-style courses inside Groww) | Content ≠ action. Low differentiation — Groww and competitors already publish content. Does not touch the moment a user acts on a Reel | Reality Check still needs quality source material | If research showed ignorance, not misplaced trust, was the top blocker |
+| Gamified trading app — streaks, leaderboards, rewards (StockPe-style) | Rewards engagement volume, not judgment. SEBI data shows high-frequency engagement already correlates with losses for young, small-portfolio traders. GrowWise cannot be seen to gamify trading | Less "addictive" surface; relies on simulation/identity for retention | If the rubric rewarded pure daily-engagement mechanics |
+| Education-first content layer (Varsity-style courses inside GrowWise) | Content ≠ action. Low differentiation — GrowWise and competitors already publish content. Does not touch the moment a user acts on a Reel | Reality Check still needs quality source material | If research showed ignorance, not misplaced trust, was the top blocker |
 | Social copy-trading / pooled investing | Regulatory exposure, pooled-trust failure modes, worst outcome for beginners | Squads reduced to learning + goals only; loses virality of "follow my trades" | If SEBI published a clear copy-trading framework |
-| Budgeting/expense app first | Off Groww's monetization; competes with Jupiter/Fi, not with brokers. Groww wins on investing, not daily money management | Income Autopilot stays shallower than a real budgeting tool | If Groww's strategy pivoted to a daily-finance super-app |
+| Budgeting/expense app first | Off GrowWise's monetization; competes with Jupiter/Fi, not with brokers. GrowWise wins on investing, not daily money management | Income Autopilot stays shallower than a real budgeting tool | If GrowWise's strategy pivoted to a daily-finance super-app |
 | Cosmetic Gen Z rebrand only | Shows design taste and zero product judgment — exactly what a take-home rubric penalizes | Chosen path risks "trying to do too much" | If the rubric weighted visual craft over product reasoning |
 
 **Strongest rejected option:** gamified engagement. It is the most obvious "Gen Z" answer and the one most candidates will submit — which is why the rejection reasoning is worth saying out loud in the interview.
 
-### Why this fits Groww specifically (not a generic fintech)
+### Why this fits GrowWise specifically (not a generic fintech)
 
-- **Groww already owns top of funnel.** Its problem is not installs — it is the leaky bucket between first investment and confident repeat investing. This concept attacks that exact gap.
-- **GR-1 already exists.** Reality Check extends GR-1 to where influence actually happens — outside the app — instead of duplicating it.
-- **Groww's economics reward 30-year relationships.** A 22-year-old's lifetime AUM compounds; retention of this cohort is worth more than any single feature conversion.
-- **Groww's base is Tier-2/3, students, first jobs.** Irregular income is the norm in that base, which is precisely what Income Autopilot serves — Zerodha's audience is not this user.
-- **Zerodha owns "serious trader" trust; INDmoney owns aggregation.** "First investor's financial OS" is unclaimed identity space, and Wrapped/Squads give Groww organic acquisition competitors cannot copy without the same user base.
+- **GrowWise already owns top of funnel.** Its problem is not installs — it is the leaky bucket between first investment and confident repeat investing. This concept attacks that exact gap.
+- **Wise already exists.** Reality Check extends Wise to where influence actually happens — outside the app — instead of duplicating it.
+- **GrowWise's economics reward 30-year relationships.** A 22-year-old's lifetime AUM compounds; retention of this cohort is worth more than any single feature conversion.
+- **GrowWise's base is Tier-2/3, students, first jobs.** Irregular income is the norm in that base, which is precisely what Income Autopilot serves — Zerodha's audience is not this user.
+- **Zerodha owns "serious trader" trust; INDmoney owns aggregation.** "First investor's financial OS" is unclaimed identity space, and Wrapped/Squads give GrowWise organic acquisition competitors cannot copy without the same user base.
 
 ---
 
 ## 5. Core solution
 
-## 5.1 GR-1 Reality Check
+## 5.1 Wise Reality Check
 
-The user shares an Instagram Reel, YouTube Short, WhatsApp message, screenshot, voice note, or X post with GR-1.
+The user shares an Instagram Reel, YouTube Short, WhatsApp message, screenshot, voice note, or X post with Wise.
 
-GR-1 separates the content into:
+Wise separates the content into:
 
 - What is supported by evidence
 - What is missing
@@ -143,7 +143,7 @@ Example:
 
 > Claim: “Government-backed stock means zero risk and guaranteed returns.”
 
-GR-1 responds:
+Wise responds:
 
 - Government ownership: supported
 - Zero risk: false
@@ -151,17 +151,17 @@ GR-1 responds:
 - Missing context: valuation, debt, earnings, volatility, time horizon
 - Next step: inspect company and run scenario analysis
 
-GR-1 does not stop at a verdict. It rewrites the claim as an honest 30-second explanation and teaches the manipulation pattern.
+Wise does not stop at a verdict. It rewrites the claim as an honest 30-second explanation and teaches the manipulation pattern.
 
 ### Why it matters
 
-Young investors already discover finance outside Groww. This feature lets Groww own the moment between seeing a claim and acting on it.
+Young investors already discover finance outside GrowWise. This feature lets GrowWise own the moment between seeing a claim and acting on it.
 
 ### Inspiration improved
 
 - Public Alpha and Robinhood Cortex: AI research
 - Fact-checking products: claim extraction
-- Groww GR-1: portfolio context
+- GrowWise Wise: portfolio context
 
 Improvement: multimodal social-content verification connected directly to planning and simulation.
 
@@ -260,7 +260,7 @@ Before confirming a simulated investment, the user receives a clean receipt:
 - Exit process
 - Data and recommendation source
 
-The user can ask GR-1 to explain any row.
+The user can ask Wise to explain any row.
 
 ### Why it matters
 
@@ -304,7 +304,7 @@ When a first investment falls materially, the app changes state:
 - Show whether the goal plan changed
 - Offer pause/edit contribution
 - Run a historical recovery simulation
-- Ask GR-1
+- Ask Wise
 - Reveal complete market data on demand
 
 It never tells the user to “buy the dip” or guarantees recovery.
@@ -325,7 +325,7 @@ User describes an investment idea in natural language:
 
 > “Indian consumer growth, avoid tobacco and gambling, medium risk, ₹1,000 monthly.”
 
-GR-1 creates a mocked basket with:
+Wise creates a mocked basket with:
 
 - Interpretation
 - Holdings/products
@@ -338,7 +338,7 @@ GR-1 creates a mocked basket with:
 
 Production version would require registered research/advisory controls.
 
-## 6.2 Groww Squads
+## 6.2 GrowWise Squads
 
 Private groups for:
 
@@ -363,7 +363,7 @@ The app describes behavior rather than ranking returns:
 
 Dimensions include patience, diversification, research depth, automation, and goal alignment.
 
-## 6.4 Groww Wrapped
+## 6.4 GrowWise Wrapped
 
 Shareable milestones:
 
@@ -376,7 +376,7 @@ Shareable milestones:
 
 Amounts, holdings, salary, and returns are hidden by default.
 
-## 6.5 Groww Campus
+## 6.5 GrowWise Campus
 
 Vision feature containing college finance clubs, delayed-data simulations, regional-language workshops, learning competitions, and campus ambassadors.
 
@@ -402,7 +402,7 @@ Vision feature containing college finance clubs, delayed-data simulations, regio
 - Product discovery
 - Direct search
 
-## GR-1
+## Wise
 
 - Plan
 - Explain
@@ -437,11 +437,11 @@ Vision feature containing college finance clubs, delayed-data simulations, regio
 
 **Indian internet culture meets a financial operating system.**
 
-The app should feel bolder than current Groww without becoming a meme template.
+The app should feel bolder than current GrowWise without becoming a meme template.
 
 ### Visual system
 
-- Groww green for recognition
+- GrowWise green for recognition
 - Deep ink and warm off-white as foundation
 - Acid lime for AI/discovery
 - Cobalt for evidence
@@ -501,7 +501,7 @@ Humor never replaces clarity.
 - Promptfolio
 - Squad
 - Portfolio DNA
-- Groww Wrapped
+- GrowWise Wrapped
 
 ### Prototype assumptions
 
@@ -611,7 +611,7 @@ Sequencing shows judgment, so the concept orders production by risk-adjusted tru
 |---|---|---|
 | 1 | Income Autopilot + Money Trail | Lowest regulatory risk, immediate trust payoff, pure UX/engineering work |
 | 2 | Decision Receipt + First Red Day | Content and design work; no new advice surface |
-| 3 | GR-1 Reality Check + Money Multiverse | Needs model-risk review, citation pipeline, SEBI-aware output guardrails |
+| 3 | Wise Reality Check + Money Multiverse | Needs model-risk review, citation pipeline, SEBI-aware output guardrails |
 | 4 | Squads, Promptfolio, Campus, Wrapped | Needs advisory/research licensing, verification ops, and social moderation |
 
 This order also de-risks the demo criticism: the two "wow" AI features arrive only after the trust infrastructure exists.
@@ -690,11 +690,11 @@ Observe behavior. Do not ask only whether they like the design.
 
 These are the questions a skeptical panel or the AI interview is most likely to ask, answered without reopening the document.
 
-**"Isn't this just GR-1 with extra steps?"**
-No. GR-1 answers questions inside the app. Reality Check captures the influence that happens outside the app — Reels, forwards, screenshots — and turns it into an evidence exercise that ends in a plan, not a trade. That is a new surface, not a reskin.
+**"Isn't this just Wise with extra steps?"**
+No. Wise answers questions inside the app. Reality Check captures the influence that happens outside the app — Reels, forwards, screenshots — and turns it into an evidence exercise that ends in a plan, not a trade. That is a new surface, not a reskin.
 
 **"Why would anyone paste a reel into a broker app?"**
-They already forward these clips to WhatsApp group chats asking "is this real?" The behavior exists; Groww just is not the destination. OS share-sheet integration makes the action one tap. Assumption is stated and testable — this is the stated reversal condition.
+They already forward these clips to WhatsApp group chats asking "is this real?" The behavior exists; GrowWise just is not the destination. OS share-sheet integration makes the action one tap. Assumption is stated and testable — this is the stated reversal condition.
 
 **"Your north star is a lagging, unfalsifiable metric."**
 Correct that it lags — that is why leading indicators are defined (plan creation, receipt comprehension, second contribution, red-day recovery). Falsification condition is stated in section 12.
@@ -711,7 +711,7 @@ Segmentation is by income rhythm and financial context, not age or city. Three s
 **"What did you cut and why?"**
 Gamified engagement mechanics — see decision ledger, section 4.1. It is the most obvious Gen Z answer and the most harmful one given SEBI's own data on young high-frequency traders.
 
-**"Where does Groww make money here?"**
+**"Where does GrowWise make money here?"**
 Retention → AUM compounding → Prime/W/cross-sell later. Wrapped and Squads reduce CAC through organic sharing. Nothing in the spine monetizes trades, which is a feature, not a gap.
 
 **"What is the single biggest risk?"**
@@ -741,9 +741,9 @@ Connecting discovery, decision, and post-investment trust into one journey inste
 
 ## 15. Final recommendation
 
-Build Groww IRL as an ambitious interactive concept centered on five capabilities:
+Build GrowWise as an ambitious interactive concept centered on five capabilities:
 
-1. GR-1 Reality Check
+1. Wise Reality Check
 2. Money Multiverse
 3. Income Autopilot
 4. Decision Receipt
@@ -753,4 +753,4 @@ Use First Red Day to complete the investor lifecycle. Use Promptfolio, Squads, P
 
 The product should leave the reviewer with one clear idea:
 
-> Groww IRL does not make Groww younger by adding slang. It redesigns Groww around how young Indians actually earn, learn, decide, worry, and invest.
+> GrowWise does not make GrowWise younger by adding slang. It redesigns GrowWise around how young Indians actually earn, learn, decide, worry, and invest.

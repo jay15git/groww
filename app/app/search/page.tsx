@@ -59,7 +59,7 @@ export default function Search() {
                 </span>
                 <span className="text-right">
                   <span className="tabular block text-sm font-bold">{inr(s.price, { decimals: 2 })}</span>
-                  <span className={cn("tabular block text-xs font-bold", s.change >= 0 ? "text-groww" : "text-loss")}>{pct(s.change)}</span>
+                  <span className={cn("tabular block text-xs font-bold", s.change >= 0 ? "text-growwise" : "text-loss")}>{pct(s.change)}</span>
                 </span>
               </Link>
             ))}
@@ -76,7 +76,7 @@ export default function Search() {
                   <span className="block text-xs text-muted-foreground">{f.category}</span>
                 </span>
                 <span className="text-right">
-                  <span className="tabular block text-sm font-bold text-groww">{pct(f.threeY)}</span>
+                  <span className="tabular block text-sm font-bold text-growwise">{pct(f.threeY)}</span>
                   <span className="block text-[10px] text-muted-foreground">3Y</span>
                 </span>
               </Link>
@@ -95,7 +95,7 @@ export default function Search() {
                 </span>
                 <span className="text-right">
                   <span className="tabular block text-sm font-bold">{inr(f.price, { decimals: 2 })}</span>
-                  <span className={cn("tabular block text-xs font-bold", f.change >= 0 ? "text-groww" : "text-loss")}>{pct(f.change)}</span>
+                  <span className={cn("tabular block text-xs font-bold", f.change >= 0 ? "text-growwise" : "text-loss")}>{pct(f.change)}</span>
                 </span>
               </Link>
             ))}
@@ -111,7 +111,7 @@ export default function Search() {
                   <span className="block truncate text-sm font-bold">{i.name}</span>
                   <span className="block text-xs text-muted-foreground">{i.dates} · {i.band}</span>
                 </span>
-                <span className={cn("rounded-full px-2.5 py-1 text-[10px] font-bold", i.status === "open" ? "bg-mint2 text-groww" : "bg-muted text-muted-foreground")}>
+                <span className={cn("rounded-full px-2.5 py-1 text-[10px] font-bold", i.status === "open" ? "bg-mint2 text-growwise" : "bg-muted text-muted-foreground")}>
                   {i.status === "open" ? "Open" : i.status === "upcoming" ? "Soon" : "Closed"}
                 </span>
               </Link>

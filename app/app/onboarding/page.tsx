@@ -198,7 +198,7 @@ export default function Onboarding() {
               </div>
               {situation && (
                 <p className="rise mt-4 flex items-center gap-2 text-xs text-muted-foreground" style={{ "--i": 5 } as React.CSSProperties}>
-                  <Icon name="sparkles" size={14} className="text-groww" />
+                  <Icon name="sparkles" size={14} className="text-growwise" />
                   Guessed from {situation.label.toLowerCase()} — change if wrong.
                 </p>
               )}
@@ -281,7 +281,7 @@ export default function Onboarding() {
             canNext ? "bg-ink text-lime" : "bg-ink/10 text-muted-foreground"
           )}
         >
-          {step === steps.length - 1 ? "Enter Groww IRL" : "Continue"}
+          {step === steps.length - 1 ? "Enter GrowWise" : "Continue"}
           <Icon name="next" size={18} />
         </button>
       </div>

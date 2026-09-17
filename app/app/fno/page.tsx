@@ -30,7 +30,7 @@ const kinds = ["Equity", "Commodities"]
 export default function Fno() {
   const [tab, setTab] = useState(0)
   return (
-    <Screen dark nav className="bg-ink">
+    <Screen nav className="bg-ink">
       <MarketHeader title="F&O" />
       <div className="mt-3 flex gap-2.5 overflow-x-auto px-5 pb-1 [scrollbar-width:none]">
         {indices.slice(0, 3).map((ix, i) => (
@@ -137,7 +137,7 @@ function FnoExplore() {
               <Icon name={c.id === "gold" || c.id === "silver" ? "coins" : "energy"} size={20} />
             </span>
             <p className="text-[11px] font-semibold text-paper/70">{c.name}</p>
-            <p className={cn("tabular text-[11px] font-bold", c.change >= 0 ? "text-groww" : "text-[#ff8a8a]")}>
+            <p className={cn("tabular text-[11px] font-bold", c.change >= 0 ? "text-growwise" : "text-[#ff8a8a]")}>
               {pct(c.change)}
             </p>
           </div>
@@ -164,7 +164,7 @@ function FnoExplore() {
           <p className="font-heading text-sm font-bold text-paper">F&O is risky</p>
         </div>
         <p className="mt-1.5 text-xs leading-relaxed text-paper/60">
-          9 in 10 individual F&O traders lose money (SEBI study). GR-1 suggests
+          9 in 10 individual F&O traders lose money (SEBI study). Wise suggests
           learning with small SIPs first.
         </p>
       </div>
@@ -210,7 +210,7 @@ function FnoOrders() {
     <div className="rise mt-4 flex flex-col divide-y divide-paper/8 rounded-2xl bg-paper/5 px-4" style={{ "--i": 0 } as React.CSSProperties}>
       {orders.map((o) => (
         <div key={o.id} className="flex items-center gap-3 py-3.5">
-          <span className={cn("flex size-9 items-center justify-center rounded-full text-[10px] font-bold", o.kind === "BUY" ? "bg-groww/15 text-groww" : "bg-loss/15 text-[#ff8a8a]")}>
+          <span className={cn("flex size-9 items-center justify-center rounded-full text-[10px] font-bold", o.kind === "BUY" ? "bg-growwise/15 text-growwise" : "bg-loss/15 text-[#ff8a8a]")}>
             {o.kind === "BUY" ? "B" : "S"}
           </span>
           <div className="min-w-0 flex-1">

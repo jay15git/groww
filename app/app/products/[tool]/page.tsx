@@ -59,7 +59,7 @@ function StockList({ ids, i }: { ids: string[]; i: number }) {
           </span>
           <span className="text-right">
             <span className="tabular block text-sm font-bold">{inr(s.price, { decimals: 2 })}</span>
-            <span className={cn("tabular block text-xs font-bold", s.change >= 0 ? "text-groww" : "text-loss")}>{pct(s.change)}</span>
+            <span className={cn("tabular block text-xs font-bold", s.change >= 0 ? "text-growwise" : "text-loss")}>{pct(s.change)}</span>
           </span>
         </Link>
       ))}
@@ -70,7 +70,7 @@ function StockList({ ids, i }: { ids: string[]; i: number }) {
 function Mtf() {
   return (
     <>
-      <Hero i={0} title={mtfInfo.tagline} sub={`Pay part now, Groww fronts the rest · ${mtfInfo.rate} · pledge your shares`} />
+      <Hero i={0} title={mtfInfo.tagline} sub={`Pay part now, GrowWise fronts the rest · ${mtfInfo.rate} · pledge your shares`} />
       <div className="rise mt-4 rounded-2xl bg-sand p-4" style={{ "--i": 1 } as React.CSSProperties}>
         <div className="flex items-center gap-2">
           <Icon name="warn" size={16} className="text-ink/70" />
@@ -100,7 +100,7 @@ function StockSip() {
       <div className="rise mt-4 rounded-2xl bg-mint2 p-4" style={{ "--i": 3 } as React.CSSProperties}>
         <div className="flex items-center gap-2">
           <Icon name="sparkles" size={16} />
-          <p className="font-heading text-sm font-bold">GR-1 says</p>
+          <p className="font-heading text-sm font-bold">Wise says</p>
         </div>
         <p className="mt-1.5 text-xs leading-relaxed text-ink/75">
           Single-stock SIPs concentrate risk. Cap them at ~20% of your monthly
@@ -124,11 +124,11 @@ function Etf() {
             <TickerLogo ticker={e.ticker} />
             <span className="min-w-0 flex-1">
               <span className="block truncate text-sm font-bold">{e.name}</span>
-              {e.byGroww && <span className="block text-[10px] font-bold uppercase tracking-wide text-groww">By Groww</span>}
+              {e.byGrowWise && <span className="block text-[10px] font-bold uppercase tracking-wide text-growwise">By GrowWise</span>}
             </span>
             <span className="text-right">
               <span className="tabular block text-sm font-bold">{inr(e.price, { decimals: 2 })}</span>
-              <span className={cn("tabular block text-xs font-bold", e.change >= 0 ? "text-groww" : "text-loss")}>{pct(e.change)}</span>
+              <span className={cn("tabular block text-xs font-bold", e.change >= 0 ? "text-growwise" : "text-loss")}>{pct(e.change)}</span>
             </span>
           </div>
         ))}
@@ -153,7 +153,7 @@ function Bonds() {
                 {b.rating} · {b.tenure} · min {inr(b.min)}
               </span>
             </span>
-            <span className="tabular text-sm font-bold text-groww">{b.yieldPct}%</span>
+            <span className="tabular text-sm font-bold text-growwise">{b.yieldPct}%</span>
           </div>
         ))}
       </div>
@@ -183,7 +183,7 @@ function Events() {
               <span className="block text-sm font-bold">{e.title}</span>
               <span className="block text-xs text-muted-foreground">{e.sub}</span>
             </span>
-            {e.amount && <span className="tabular text-sm font-bold text-groww">{e.amount}</span>}
+            {e.amount && <span className="tabular text-sm font-bold text-growwise">{e.amount}</span>}
           </div>
         ))}
       </div>

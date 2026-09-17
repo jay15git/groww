@@ -17,7 +17,7 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: "Groww IRL — Your money. Your next move.",
+  title: "GrowWise — Your money. Your next move.",
   description:
     "Investing organised around real life. Verify viral claims, simulate futures, and invest with an income-aware plan.",
 }

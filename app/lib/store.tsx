@@ -87,7 +87,7 @@ type Store = {
 
 const Ctx = createContext<Store | null>(null)
 
-const KEY = "groww-irl-v2"
+const KEY = "growwise-v2"
 
 export function StoreProvider({ children }: { children: ReactNode }) {
   const [persona, setPersonaState] = useState<Persona | null>(null)

@@ -46,7 +46,7 @@ function byIds(ids: string[]) {
 export default function Markets() {
   const [tab, setTab] = useState(0)
   return (
-    <Screen dark nav className="bg-ink">
+    <Screen nav className="bg-ink">
       <MarketHeader title="Stocks" />
       <IndexStrip />
       <SubTabs tabs={tabs} active={tab} onChange={setTab} />
@@ -133,7 +133,7 @@ function ExploreTab() {
         ))}
       </div>
 
-      <SectionTitle title="Most bought on Groww" i={2} />
+      <SectionTitle title="Most bought on GrowWise" i={2} />
       <TileGrid ids={mostBought} seeMore start={3} />
 
       {/* Top movers */}
@@ -194,7 +194,7 @@ function ExploreTab() {
             <TickerLogo ticker={v.ticker} dark className="size-9 text-xs" />
             <p className="min-w-0 flex-1 truncate text-sm font-bold text-paper">{v.name}</p>
             <div className="text-right">
-              <p className="tabular text-sm font-bold text-groww">+{v.spike.toLocaleString("en-IN")}%</p>
+              <p className="tabular text-sm font-bold text-growwise">+{v.spike.toLocaleString("en-IN")}%</p>
               <p className="tabular text-[11px] text-paper/45">{v.volume}</p>
             </div>
           </div>
@@ -217,7 +217,7 @@ function ExploreTab() {
             <span
               className={cn(
                 "rounded-md px-2 py-0.5 text-[10px] font-bold",
-                t.signal === "Bullish" ? "bg-groww/15 text-groww" : "bg-loss/15 text-[#ff8a8a]"
+                t.signal === "Bullish" ? "bg-growwise/15 text-growwise" : "bg-loss/15 text-[#ff8a8a]"
               )}
             >
               {t.signal}
@@ -231,7 +231,7 @@ function ExploreTab() {
         ))}
       </div>
       <Link href="/screener" className="press rise mt-3 flex items-center gap-3 rounded-2xl border border-paper/15 px-4 py-3.5" style={{ "--i": 18 } as React.CSSProperties}>
-        <Icon name="filter" size={18} className="text-groww" />
+        <Icon name="filter" size={18} className="text-growwise" />
         <span className="flex-1 text-sm font-bold text-paper">Intraday screener</span>
         <Icon name="next" size={16} className="text-paper/45" />
       </Link>
@@ -248,11 +248,11 @@ function ExploreTab() {
             <span
               className={cn(
                 "h-1.5 rounded-full",
-                s.change >= 0 ? "bg-groww" : "bg-coral"
+                s.change >= 0 ? "bg-growwise" : "bg-coral"
               )}
               style={{ width: Math.min(48, Math.abs(s.change) * 14) + 8 }}
             />
-            <span className={cn("tabular w-16 text-right text-sm font-bold", s.change >= 0 ? "text-groww" : "text-[#ff8a8a]")}>
+            <span className={cn("tabular w-16 text-right text-sm font-bold", s.change >= 0 ? "text-growwise" : "text-[#ff8a8a]")}>
               {pct(s.change)}
             </span>
           </div>
@@ -265,13 +265,13 @@ function ExploreTab() {
       {/* ETFs */}
       <SectionTitle title="Popular ETFs for SIP" action="See more" href="/products/etf" i={21} />
       <div className="mt-3 grid grid-cols-2 gap-2.5">
-        {etfs.filter((e) => !e.byGroww).map((e, i) => (
+        {etfs.filter((e) => !e.byGrowWise).map((e, i) => (
           <StockTile key={e.id} i={22 + i} ticker={e.ticker} name={e.name} price={e.price} change={e.change} href="/products/etf" />
         ))}
       </div>
-      <SectionTitle title="ETFs by Groww" action="See more" href="/products/etf" i={23} />
+      <SectionTitle title="ETFs by GrowWise" action="See more" href="/products/etf" i={23} />
       <div className="mt-3 grid grid-cols-2 gap-2.5">
-        {etfs.filter((e) => e.byGroww).map((e, i) => (
+        {etfs.filter((e) => e.byGrowWise).map((e, i) => (
           <StockTile key={e.id} i={24 + i} ticker={e.ticker} name={e.name} price={e.price} change={e.change} href="/products/etf" />
         ))}
       </div>
@@ -285,7 +285,7 @@ function ExploreTab() {
       </div>
 
       <p className="mt-8 text-center text-xs text-paper/35">
-        Groww IRL · demo data
+        GrowWise · demo data
       </p>
     </>
   )
@@ -329,13 +329,13 @@ function HoldingsTab() {
         <div className="mt-4 flex flex-col gap-2 border-t border-dashed border-paper/15 pt-4">
           <div className="flex justify-between text-sm">
             <span className="text-paper/50">1D returns</span>
-            <span className={cn("tabular font-bold", dayRet >= 0 ? "text-groww" : "text-[#ff8a8a]")}>
+            <span className={cn("tabular font-bold", dayRet >= 0 ? "text-growwise" : "text-[#ff8a8a]")}>
               {kind === 0 ? `${inr(dayRet, { decimals: 2 })} (${pct((dayRet / current) * 100)})` : "₹0.00 (0.00%)"}
             </span>
           </div>
           <div className="flex justify-between text-sm">
             <span className="text-paper/50">Total returns</span>
-            <span className={cn("tabular font-bold", "text-groww")}>
+            <span className={cn("tabular font-bold", "text-growwise")}>
               {kind === 0 ? `${inr(current - invested, { decimals: 2 })} (${pct(((current - invested) / invested) * 100)})` : "₹0.00 (0.00%)"}
             </span>
           </div>
@@ -360,7 +360,7 @@ function HoldingsTab() {
               right={
                 <div className="text-right">
                   <p className="tabular text-sm font-bold text-paper">{inr(h.value)}</p>
-                  <p className={cn("tabular text-xs font-bold", h.change >= 0 ? "text-groww" : "text-[#ff8a8a]")}>{pct(h.change)}</p>
+                  <p className={cn("tabular text-xs font-bold", h.change >= 0 ? "text-growwise" : "text-[#ff8a8a]")}>{pct(h.change)}</p>
                 </div>
               }
             />
@@ -393,7 +393,7 @@ function PositionsTab() {
         <p className="text-[11px] font-bold uppercase tracking-wider text-paper/50">
           Positions ({positions.length})
         </p>
-        <p className={cn("tabular mt-1 font-heading text-[30px] font-extrabold leading-none", dayPnl >= 0 ? "text-groww" : "text-[#ff8a8a]")}>
+        <p className={cn("tabular mt-1 font-heading text-[30px] font-extrabold leading-none", dayPnl >= 0 ? "text-growwise" : "text-[#ff8a8a]")}>
           {inr(dayPnl, { decimals: 2 })}
         </p>
         <p className="mt-1.5 text-xs text-paper/45">Today&rsquo;s P&L · intraday only</p>
@@ -415,7 +415,7 @@ function PositionsTab() {
                 </div>
                 <div className="text-right">
                   <p className="tabular text-sm font-bold text-paper">{inr(ltp, { decimals: 2 })}</p>
-                  <p className={cn("tabular text-xs font-bold", pnl >= 0 ? "text-groww" : "text-[#ff8a8a]")}>
+                  <p className={cn("tabular text-xs font-bold", pnl >= 0 ? "text-growwise" : "text-[#ff8a8a]")}>
                     {inr(pnl, { decimals: 2 })}
                   </p>
                 </div>
@@ -471,7 +471,7 @@ function OrdersTab() {
         <div className="rise mt-4 flex flex-col divide-y divide-paper/8 rounded-2xl bg-paper/5 px-4" style={{ "--i": 0 } as React.CSSProperties}>
           {orders.map((o) => (
             <div key={o.id} className="flex items-center gap-3 py-3.5">
-              <span className={cn("flex size-9 items-center justify-center rounded-full text-[10px] font-bold", o.kind === "BUY" ? "bg-groww/15 text-groww" : "bg-loss/15 text-[#ff8a8a]")}>
+              <span className={cn("flex size-9 items-center justify-center rounded-full text-[10px] font-bold", o.kind === "BUY" ? "bg-growwise/15 text-growwise" : "bg-loss/15 text-[#ff8a8a]")}>
                 {o.kind === "BUY" ? "B" : "S"}
               </span>
               <div className="min-w-0 flex-1">
@@ -509,7 +509,7 @@ function WatchTab() {
     <>
       <div className="rise mt-4 flex items-center justify-between" style={{ "--i": 0 } as React.CSSProperties}>
         <h2 className="font-heading text-base font-bold text-paper">All watchlists</h2>
-        <Link href="/watchlist" className="text-xs font-semibold text-groww">Manage</Link>
+        <Link href="/watchlist" className="text-xs font-semibold text-growwise">Manage</Link>
       </div>
       <div className="rise mt-3 flex gap-2 overflow-x-auto pb-1 [scrollbar-width:none]" style={{ "--i": 1 } as React.CSSProperties}>
         {watchlists.map((w, i) => (

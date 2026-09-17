@@ -61,7 +61,7 @@ export default function Ipos() {
         </div>
 
         <p className="rise mt-5 text-center text-xs text-muted-foreground" style={{ "--i": 6 } as React.CSSProperties}>
-          IPO ≠ guaranteed listing gains. GR-1 checks the fundamentals first.
+          IPO ≠ guaranteed listing gains. Wise checks the fundamentals first.
         </p>
       </div>
     </Screen>
@@ -83,7 +83,7 @@ function IpoCard({ ipo, i }: { ipo: Ipo; i: number }) {
           <p className="text-xs text-muted-foreground">{ipo.dates}</p>
         </div>
         {ipo.gmp && (
-          <span className="rounded-full bg-mint2 px-2.5 py-1 text-[10px] font-bold text-groww">
+          <span className="rounded-full bg-mint2 px-2.5 py-1 text-[10px] font-bold text-growwise">
             GMP {ipo.gmp}
           </span>
         )}
@@ -101,7 +101,7 @@ function IpoCard({ ipo, i }: { ipo: Ipo; i: number }) {
       </div>
       {ipo.status === "open" &&
         (applied ? (
-          <p className="mt-3 flex items-center justify-center gap-1.5 rounded-full bg-mint2 py-2.5 text-xs font-bold text-groww">
+          <p className="mt-3 flex items-center justify-center gap-1.5 rounded-full bg-mint2 py-2.5 text-xs font-bold text-growwise">
             <Icon name="check" size={14} /> Applied · allotment pending
           </p>
         ) : (
@@ -138,7 +138,7 @@ function ApplySheet({ ipo }: { ipo: Ipo }) {
         </SheetHeader>
         {done ? (
           <div className="flex flex-col items-center py-4 text-center">
-            <span className="flex size-14 items-center justify-center rounded-full bg-mint2 text-groww">
+            <span className="flex size-14 items-center justify-center rounded-full bg-mint2 text-growwise">
               <Icon name="check" size={26} />
             </span>
             <p className="mt-3 text-sm font-bold">{lots} lot{lots > 1 ? "s" : ""} · {inr(est)}</p>
@@ -167,7 +167,7 @@ function ApplySheet({ ipo }: { ipo: Ipo }) {
             <button
               type="button"
               onClick={() => { applyIpo(ipo.id); setDone(true) }}
-              className="press mt-4 h-12 w-full rounded-full bg-groww font-heading text-sm font-bold text-paper"
+              className="press mt-4 h-12 w-full rounded-full bg-growwise font-heading text-sm font-bold text-paper"
             >
               Apply via UPI
             </button>

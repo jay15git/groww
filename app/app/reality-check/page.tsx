@@ -22,7 +22,7 @@ export default function RealityCheck() {
         title="Reality Check"
         right={
           <span className="flex h-10 items-center gap-1.5 rounded-full bg-lime px-3.5 font-heading text-xs font-bold text-ink">
-            <Icon name="sparkles" size={14} /> GR-1
+            <Icon name="sparkles" size={14} /> Wise
           </span>
         }
       />

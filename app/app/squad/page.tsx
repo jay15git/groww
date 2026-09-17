@@ -44,7 +44,7 @@ export default function Squad() {
               </p>
               <div className="mt-4 flex items-center gap-2 rounded-2xl bg-muted px-4 py-3.5">
                 <span className="flex-1 font-heading text-sm font-bold tracking-wide">
-                  groww.in/squad/B27-XK4
+                  growwise.in/squad/B27-XK4
                 </span>
                 <button
                   type="button"
@@ -127,7 +127,7 @@ export default function Squad() {
                   {m.streak}-week streak
                 </p>
               </div>
-              <span className="tabular text-sm font-bold text-groww">
+              <span className="tabular text-sm font-bold text-growwise">
                 {m.delta}
               </span>
             </div>
@@ -135,7 +135,7 @@ export default function Squad() {
         </div>
 
         <Link
-          href="/gr1"
+          href="/wise"
           className="press rise mt-4 flex items-center gap-3 rounded-2xl bg-ink p-4 text-paper"
           style={{ "--i": 4 } as React.CSSProperties}
         >
@@ -145,7 +145,7 @@ export default function Squad() {
           <div className="flex-1">
             <p className="font-heading text-sm font-bold">Squad doubt?</p>
             <p className="text-xs text-paper/60">
-              Ask GR-1 — answers you can share, sources included
+              Ask Wise — answers you can share, sources included
             </p>
           </div>
           <Icon name="next" size={16} className="text-paper/60" />

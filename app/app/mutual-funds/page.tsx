@@ -62,7 +62,7 @@ function MfExplore({ goSips }: { goSips: () => void }) {
           <button
             type="button"
             onClick={goSips}
-            className="press mt-3 rounded-full bg-groww px-4 py-2 font-heading text-xs font-bold text-paper"
+            className="press mt-3 rounded-full bg-growwise px-4 py-2 font-heading text-xs font-bold text-paper"
           >
             Start a SIP
           </button>
@@ -88,7 +88,7 @@ function MfExplore({ goSips }: { goSips: () => void }) {
             <TickerLogo ticker={f!.ticker} className="size-9 text-xs" />
             <p className="mt-2.5 line-clamp-2 min-h-10 text-sm font-bold leading-snug">{f!.name}</p>
             <div className="mt-2 flex items-end justify-between">
-              <p className="tabular text-sm font-bold text-groww">{pct(f!.threeY)}</p>
+              <p className="tabular text-sm font-bold text-growwise">{pct(f!.threeY)}</p>
               <span className="text-[10px] text-muted-foreground">3Y</span>
             </div>
           </Link>
@@ -106,7 +106,7 @@ function MfExplore({ goSips }: { goSips: () => void }) {
               onClick={() => setCat(c.id === "large" ? "Large cap" : c.id === "index" ? "Index" : c.id === "gold" ? "Gold" : "All")}
               className="press flex shrink-0 items-center gap-1.5 rounded-full bg-paper px-3.5 py-2 text-xs font-bold"
             >
-              <Icon name={c.icon} size={14} className="text-groww" />
+              <Icon name={c.icon} size={14} className="text-growwise" />
               {c.label}
             </button>
           ))}
@@ -142,14 +142,14 @@ function MfExplore({ goSips }: { goSips: () => void }) {
         )}
       </div>
 
-      {/* GR-1 / prime */}
-      <Link href="/gr1" className="press rise mt-4 flex items-center gap-3 rounded-2xl bg-ink p-4 text-paper" style={{ "--i": 10 } as React.CSSProperties}>
+      {/* Wise / prime */}
+      <Link href="/wise" className="press rise mt-4 flex items-center gap-3 rounded-2xl bg-ink p-4 text-paper" style={{ "--i": 10 } as React.CSSProperties}>
         <span className="flex size-10 items-center justify-center rounded-full bg-lime text-ink">
           <Icon name="sparkles" size={18} />
         </span>
         <div className="flex-1">
           <p className="text-[10px] font-bold uppercase tracking-wider text-lime">Better than Prime</p>
-          <p className="font-heading text-sm font-bold">Ask GR-1 for fund picks matched to your goals</p>
+          <p className="font-heading text-sm font-bold">Ask Wise for fund picks matched to your goals</p>
         </div>
         <Icon name="next" size={16} className="text-paper/50" />
       </Link>
@@ -172,7 +172,7 @@ function FundRow({ id }: { id: string }) {
           </span>
         </span>
         <span className="text-right">
-          <span className={cn("tabular block text-sm font-bold", f.threeY >= 0 ? "text-groww" : "text-loss")}>
+          <span className={cn("tabular block text-sm font-bold", f.threeY >= 0 ? "text-growwise" : "text-loss")}>
             {pct(f.threeY)}
           </span>
           <span className="block text-[10px] text-muted-foreground">3Y</span>
@@ -183,7 +183,7 @@ function FundRow({ id }: { id: string }) {
         aria-label={saved ? "Remove from fund watchlist" : "Watch fund"}
         aria-pressed={saved}
         onClick={() => toggleFundWatch(f.id)}
-        className={cn("press flex size-8 items-center justify-center rounded-full", saved ? "text-groww" : "text-muted-foreground")}
+        className={cn("press flex size-8 items-center justify-center rounded-full", saved ? "text-growwise" : "text-muted-foreground")}
       >
         <Icon name="bookmark" size={16} />
       </button>
@@ -210,11 +210,11 @@ function MfDashboard() {
         <div className="mt-4 flex flex-col gap-2 border-t border-dashed border-paper/15 pt-4">
           <div className="flex justify-between text-sm">
             <span className="text-paper/50">1D returns</span>
-            <span className="tabular font-bold text-groww">{inr(current * 0.008, { decimals: 2 })} (+0.80%)</span>
+            <span className="tabular font-bold text-growwise">{inr(current * 0.008, { decimals: 2 })} (+0.80%)</span>
           </div>
           <div className="flex justify-between text-sm">
             <span className="text-paper/50">Total returns</span>
-            <span className="tabular font-bold text-groww">
+            <span className="tabular font-bold text-growwise">
               {inr(current - invested, { decimals: 2 })} ({pct(((current - invested) / invested) * 100)})
             </span>
           </div>
@@ -238,7 +238,7 @@ function MfDashboard() {
             </span>
             <span className="text-right">
               <span className="tabular block text-sm font-bold">{inr(f.value ?? 0)}</span>
-              <span className={cn("tabular block text-xs font-bold", f.day >= 0 ? "text-groww" : "text-loss")}>
+              <span className={cn("tabular block text-xs font-bold", f.day >= 0 ? "text-growwise" : "text-loss")}>
                 {f.day >= 0 ? "+" : "−"}{Math.abs(f.day)}%
               </span>
             </span>
@@ -249,7 +249,7 @@ function MfDashboard() {
       <div className="rise mt-4 rounded-2xl bg-sand p-4" style={{ "--i": 3 } as React.CSSProperties}>
         <div className="flex items-center gap-2">
           <Icon name="sparkles" size={16} />
-          <p className="font-heading text-sm font-bold">GR-1 says</p>
+          <p className="font-heading text-sm font-bold">Wise says</p>
         </div>
         <p className="mt-1.5 text-xs leading-relaxed text-ink/75">
           Your small-cap sleeve swings the most — only park money there that
@@ -324,7 +324,7 @@ function MfSips() {
               <span className="block truncate text-sm font-bold">{f.name}</span>
               <span className="block text-xs text-muted-foreground">Min {inr(f.minSip)}</span>
             </span>
-            <span className="tabular text-sm font-bold text-groww">{pct(f.threeY)}</span>
+            <span className="tabular text-sm font-bold text-growwise">{pct(f.threeY)}</span>
           </Link>
         ))}
       </div>
@@ -359,13 +359,13 @@ function MfWatchlist() {
                   <span className="block truncate text-sm font-bold">{f.name}</span>
                   <span className="block text-xs text-muted-foreground">{f.category}</span>
                 </span>
-                <span className="tabular text-sm font-bold text-groww">{pct(f.threeY)}</span>
+                <span className="tabular text-sm font-bold text-growwise">{pct(f.threeY)}</span>
               </Link>
               <button
                 type="button"
                 aria-label="Remove from watchlist"
                 onClick={() => toggleFundWatch(f.id)}
-                className="press flex size-8 items-center justify-center rounded-full text-groww"
+                className="press flex size-8 items-center justify-center rounded-full text-growwise"
               >
                 <Icon name="bookmark" size={16} />
               </button>

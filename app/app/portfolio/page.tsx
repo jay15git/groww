@@ -76,7 +76,7 @@ export default function Portfolio() {
               <Link href="/goals" className="press flex-1 rounded-full bg-ink py-2 text-center font-heading text-xs font-bold text-paper">
                 Review my plan
               </Link>
-              <Link href="/gr1" className="press flex-1 rounded-full bg-muted py-2 text-center font-heading text-xs font-bold text-ink">
+              <Link href="/wise" className="press flex-1 rounded-full bg-muted py-2 text-center font-heading text-xs font-bold text-ink">
                 What is volatility?
               </Link>
             </div>
@@ -87,7 +87,7 @@ export default function Portfolio() {
           <h2 className="font-heading text-base font-bold uppercase tracking-wide text-muted-foreground">
             Holdings
           </h2>
-          <Link href="/watchlist" className="text-xs font-semibold text-groww">
+          <Link href="/watchlist" className="text-xs font-semibold text-growwise">
             Watchlist
           </Link>
         </div>
@@ -115,7 +115,7 @@ export default function Portfolio() {
                 <p
                   className={
                     h.change >= 0
-                      ? "tabular text-xs font-bold text-groww"
+                      ? "tabular text-xs font-bold text-growwise"
                       : "tabular text-xs font-bold text-loss"
                   }
                 >
@@ -152,7 +152,7 @@ export default function Portfolio() {
           className="press rise mt-3 flex items-center gap-3 rounded-2xl bg-mint2 p-4"
           style={{ "--i": 5 } as React.CSSProperties}
         >
-          <span className="pulse-dot flex size-10 items-center justify-center rounded-full bg-groww text-paper">
+          <span className="pulse-dot flex size-10 items-center justify-center rounded-full bg-growwise text-paper">
             <Icon name="package" size={18} />
           </span>
           <div className="flex-1">

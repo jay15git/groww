@@ -63,7 +63,7 @@ export default function FundDetail() {
             </h1>
             <p className="text-xs text-muted-foreground">
               NAV {inr(f.nav, { decimals: 2 })} ·{" "}
-              <span className={f.day >= 0 ? "text-groww" : "text-loss"}>
+              <span className={f.day >= 0 ? "text-growwise" : "text-loss"}>
                 {f.day >= 0 ? "+" : "−"}{Math.abs(f.day)}%
               </span>
             </p>
@@ -95,7 +95,7 @@ export default function FundDetail() {
             </span>
             <p className="font-heading text-sm font-bold">Fits your goals?</p>
           </div>
-          <p className="mt-2 text-xs leading-relaxed text-ink/80">{f.gr1}</p>
+          <p className="mt-2 text-xs leading-relaxed text-ink/80">{f.wise}</p>
         </section>
 
         <div className="mt-auto flex gap-2.5 pt-5">
@@ -140,7 +140,7 @@ function SipSheet({ fund }: { fund: (typeof funds)[number] }) {
 
         {done ? (
           <div className="flex flex-col items-center py-4 text-center">
-            <span className="flex size-14 items-center justify-center rounded-full bg-mint2 text-groww">
+            <span className="flex size-14 items-center justify-center rounded-full bg-mint2 text-growwise">
               <Icon name="check" size={26} />
             </span>
             <p className="mt-3 text-sm font-bold">
@@ -215,7 +215,7 @@ function SipSheet({ fund }: { fund: (typeof funds)[number] }) {
             <button
               type="button"
               onClick={() => { addSip({ fundId: fund.id, amount, date }); setDone(true) }}
-              className="press mt-5 h-12 w-full rounded-full bg-groww font-heading text-sm font-bold text-paper"
+              className="press mt-5 h-12 w-full rounded-full bg-growwise font-heading text-sm font-bold text-paper"
             >
               Start SIP · {inr(amount)}/mo
             </button>

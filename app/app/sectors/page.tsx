@@ -11,7 +11,7 @@ export default function Sectors() {
   const sorted = [...sectors].sort((a, b) => b.change - a.change)
   const max = Math.max(...sectors.map((s) => Math.abs(s.change)))
   return (
-    <Screen dark className="bg-ink">
+    <Screen className="bg-ink">
       <ScreenHeader title="All sectors" dark />
       <div className="px-5 pb-8">
         <p className="rise mt-2 text-xs text-paper/45" style={{ "--i": 0 } as React.CSSProperties}>
@@ -25,10 +25,10 @@ export default function Sectors() {
               </span>
               <p className="flex-1 text-sm font-bold text-paper">{s.name}</p>
               <span
-                className={cn("h-1.5 rounded-full", s.change >= 0 ? "bg-groww" : "bg-coral")}
+                className={cn("h-1.5 rounded-full", s.change >= 0 ? "bg-growwise" : "bg-coral")}
                 style={{ width: (Math.abs(s.change) / max) * 56 + 8 }}
               />
-              <span className={cn("tabular w-16 text-right text-sm font-bold", s.change >= 0 ? "text-groww" : "text-[#ff8a8a]")}>
+              <span className={cn("tabular w-16 text-right text-sm font-bold", s.change >= 0 ? "text-growwise" : "text-[#ff8a8a]")}>
                 {pct(s.change)}
               </span>
             </div>

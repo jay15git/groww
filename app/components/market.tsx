@@ -8,7 +8,7 @@ import { indices } from "@/lib/data"
 import { cn, inr, pct } from "@/lib/utils"
 import type React from "react"
 
-/* Groww-style product-home header: logo dot, title, search, avatar */
+/* GrowWise-style product-home header: logo dot, title, search, avatar */
 export function MarketHeader({
   title,
   light = false,
@@ -73,7 +73,7 @@ export function IndexStrip() {
             className={cn(
               "tabular rounded-full px-2 py-0.5 text-[10px] font-bold",
               i.change >= 0
-                ? "bg-groww/15 text-groww"
+                ? "bg-growwise/15 text-growwise"
                 : "bg-loss/15 text-[#ff8a8a]"
             )}
           >
@@ -198,7 +198,7 @@ export function StockTile({
       <p
         className={cn(
           "tabular mt-0.5 text-xs font-bold",
-          change >= 0 ? "text-groww" : "text-[#ff8a8a]"
+          change >= 0 ? "text-growwise" : "text-[#ff8a8a]"
         )}
       >
         {changeAbs !== undefined
@@ -243,7 +243,7 @@ export function StockRow({
               <span
                 className={cn(
                   "font-bold",
-                  change >= 0 ? "text-groww" : "text-[#ff8a8a]"
+                  change >= 0 ? "text-growwise" : "text-[#ff8a8a]"
                 )}
               >
                 {change >= 0 ? "+" : "−"}
@@ -288,7 +288,7 @@ export function IndexCard({ i, idx }: { i: number; idx: (typeof indices)[number]
         <span
           className={cn(
             "tabular text-[11px] font-bold",
-            idx.change >= 0 ? "text-groww" : "text-[#ff8a8a]"
+            idx.change >= 0 ? "text-growwise" : "text-[#ff8a8a]"
           )}
         >
           {pct(idx.change)}

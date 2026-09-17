@@ -56,7 +56,7 @@ export default function AddMoney() {
             {inr(Number(amt) || 0)} added
           </h1>
           <p className="mt-1.5 text-sm text-muted-foreground">
-            Sitting in your Groww balance — ready when you are.
+            Sitting in your GrowWise balance — ready when you are.
           </p>
           <div className="mt-6 flex w-full flex-col gap-2.5">
             <button

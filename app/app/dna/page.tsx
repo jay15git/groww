@@ -36,7 +36,7 @@ export default function PortfolioDNA() {
               </div>
               <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-muted">
                 <div
-                  className="h-full rounded-full bg-groww"
+                  className="h-full rounded-full bg-growwise"
                   style={{ width: `${d.value}%` }}
                 />
               </div>
@@ -66,7 +66,7 @@ export default function PortfolioDNA() {
         </div>
 
         <Link
-          href="/gr1"
+          href="/wise"
           className="press rise mt-5 flex items-center gap-3 rounded-2xl bg-ink p-4 text-paper"
           style={{ "--i": 8 } as React.CSSProperties}
         >
@@ -74,7 +74,7 @@ export default function PortfolioDNA() {
             <Icon name="sparkles" size={18} />
           </span>
           <div className="flex-1">
-            <p className="font-heading text-sm font-bold">Ask GR-1 about this</p>
+            <p className="font-heading text-sm font-bold">Ask Wise about this</p>
             <p className="text-xs text-paper/60">
               Why am I a Curious Builder? What would change it?
             </p>

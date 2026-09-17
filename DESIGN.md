@@ -1,4 +1,4 @@
-# Groww IRL design system
+# GrowWise design system
 
 ## Direction
 
@@ -15,14 +15,14 @@ The world combines three familiar artifacts:
 - Desktop view presents the phone-scale product inside a wider editorial launch canvas, never stretches the mobile UI into a dashboard.
 - Asymmetric blocks, cropped labels, ruled receipt rows, large numerals, and occasional offset color fields create character.
 - Core controls remain familiar and stable. Expression comes from content framing, typography, and transitions rather than unusual navigation.
-- Five primary destinations: Today, Discover, GR-1, Squads, Portfolio.
+- Five primary destinations: Today, Discover, Wise, Squads, Portfolio.
 
 ## Color strategy
 
 Full palette with named roles:
 - Ink `#101915`: primary text and dark surfaces.
 - Rice `#F6F1E7`: warm primary background.
-- Groww green `#00B386`: action, progress, brand recognition.
+- GrowWise green `#00B386`: action, progress, brand recognition.
 - Acid `#C7F36B`: selected discovery and AI states.
 - Cobalt `#4169E1`: evidence and information.
 - Mango `#FFB547`: future scenarios and learning.
@@ -47,7 +47,7 @@ Color never carries financial state alone. Icons and labels accompany gain, loss
 - `Receipt`: clean review document containing amount, goal, risk, cost, exit, and source.
 - `TrailStep`: tracked money status with owner, state, time, and recovery.
 - `PersonaSwitch`: prototype-only control for Student, Salaried, and Freelancer states.
-- `BottomNav`: five destinations with central GR-1 action.
+- `BottomNav`: five destinations with central Wise action.
 - `ActionSheet`: consequence preview before state changes.
 
 Avoid nested cards. Lists and ruled sections should replace extra containers.
@@ -95,7 +95,7 @@ Boards scanned: `investment app ui design`, `stock trading app ui design dark`, 
 
 ### Patterns worth taking
 
-- **Lime/acid green on ink or rice** is the dominant modern fintech signal (Zeyevi, Paynx, Wise-style). Matches Groww green → push toward acid green accent, not bank-blue.
+- **Lime/acid green on ink or rice** is the dominant modern fintech signal (Zeyevi, Paynx, Wise-style). Matches GrowWise green → push toward acid green accent, not bank-blue.
 - **Big tabular balance number** top of home, everything else secondary. Portfolio value is the hero; use tabular figures.
 - **Dark mode = trading desk.** Dense green/red candle charts, compact rows. Reserve dark + neon for Portfolio/market surfaces, not discovery.
 - **Rounded chunky cards, 20-28px radius**, soft shadows, pastel section tints (mint, lilac, butter) for goals/pots.

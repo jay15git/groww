@@ -41,8 +41,8 @@ export function BottomNav() {
           })}
         </div>
         <Link
-          href="/gr1"
-          aria-label="Ask GR-1"
+          href="/wise"
+          aria-label="Ask Wise"
           className="nav-item flex size-12 shrink-0 items-center justify-center rounded-full bg-lime text-ink shadow-[0_4px_14px_rgba(200,240,77,0.4)]"
         >
           <Icon name="sparkles" size={22} />

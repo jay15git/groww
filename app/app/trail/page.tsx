@@ -52,7 +52,7 @@ export default function Trail() {
                 <span
                   className={cn(
                     "absolute left-[15px] top-8 h-[calc(100%-16px)] w-0.5 rounded-full",
-                    s.state === "done" ? "bg-groww" : "bg-line"
+                    s.state === "done" ? "bg-growwise" : "bg-line"
                   )}
                   aria-hidden
                 />
@@ -60,7 +60,7 @@ export default function Trail() {
               <span
                 className={cn(
                   "z-10 flex size-8 shrink-0 items-center justify-center rounded-full",
-                  s.state === "done" && "bg-groww text-paper",
+                  s.state === "done" && "bg-growwise text-paper",
                   s.state === "active" && "pulse-dot bg-ink text-lime",
                   s.state === "pending" && "bg-paper text-muted-foreground"
                 )}

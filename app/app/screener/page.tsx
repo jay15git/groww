@@ -34,7 +34,7 @@ export default function Screener() {
   const isVol = screenerFilters[f] === "High volume"
 
   return (
-    <Screen dark className="bg-ink">
+    <Screen className="bg-ink">
       <ScreenHeader title="Intraday screener" dark />
       <div className="px-5 pb-8">
         <div className="rise mt-2 flex gap-2 overflow-x-auto pb-1 [scrollbar-width:none]" style={{ "--i": 0 } as React.CSSProperties}>
@@ -63,7 +63,7 @@ export default function Screener() {
                 </span>
                 <p className="min-w-0 flex-1 truncate text-sm font-bold text-paper">{v.name}</p>
                 <div className="text-right">
-                  <p className="tabular text-sm font-bold text-groww">+{v.spike.toLocaleString("en-IN")}%</p>
+                  <p className="tabular text-sm font-bold text-growwise">+{v.spike.toLocaleString("en-IN")}%</p>
                   <p className="tabular text-[11px] text-paper/45">vol {v.volume}</p>
                 </div>
               </div>

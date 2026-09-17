@@ -104,7 +104,7 @@ export type Fund = {
   expense: number
   aum: string
   value?: number
-  gr1: string
+  wise: string
 }
 
 export const funds: Fund[] = [
@@ -120,7 +120,7 @@ export const funds: Fund[] = [
     expense: 0.63,
     aum: "₹56k Cr",
     value: 6512.4,
-    gr1: "Good for goals 5+ yrs away. High equity — expect swings.",
+    wise: "Good for goals 5+ yrs away. High equity — expect swings.",
   },
   {
     id: "sbi-blue",
@@ -134,7 +134,7 @@ export const funds: Fund[] = [
     expense: 0.66,
     aum: "₹48k Cr",
     value: 4108.3,
-    gr1: "Steady large-cap core. Lower drama than mid/small caps.",
+    wise: "Steady large-cap core. Lower drama than mid/small caps.",
   },
   {
     id: "quant-sc",
@@ -148,7 +148,7 @@ export const funds: Fund[] = [
     expense: 0.64,
     aum: "₹11k Cr",
     value: 1811.25,
-    gr1: "Highest swings here. Only for money you won't need soon.",
+    wise: "Highest swings here. Only for money you won't need soon.",
   },
   {
     id: "bandhan-sc",
@@ -161,7 +161,7 @@ export const funds: Fund[] = [
     minSip: 100,
     expense: 0.41,
     aum: "₹9.8k Cr",
-    gr1: "Top 3Y performer — also the widest swings. Small, steady SIPs only.",
+    wise: "Top 3Y performer — also the widest swings. Small, steady SIPs only.",
   },
   {
     id: "nippon-multi",
@@ -174,7 +174,7 @@ export const funds: Fund[] = [
     minSip: 100,
     expense: 0.59,
     aum: "₹4.2k Cr",
-    gr1: "Spreads across equity, gold and debt — smoother ride than pure equity.",
+    wise: "Spreads across equity, gold and debt — smoother ride than pure equity.",
   },
   {
     id: "motilal-mid",
@@ -187,7 +187,7 @@ export const funds: Fund[] = [
     minSip: 500,
     expense: 0.57,
     aum: "₹26k Cr",
-    gr1: "Mid-cap growth tilt. Needs a 5+ year horizon to ride out drawdowns.",
+    wise: "Mid-cap growth tilt. Needs a 5+ year horizon to ride out drawdowns.",
   },
   {
     id: "hdfc-mid",
@@ -200,7 +200,7 @@ export const funds: Fund[] = [
     minSip: 100,
     expense: 0.78,
     aum: "₹76k Cr",
-    gr1: "Big, seasoned mid-cap fund. Steadier than most in its category.",
+    wise: "Big, seasoned mid-cap fund. Steadier than most in its category.",
   },
   {
     id: "sbi-nifty50",
@@ -213,7 +213,7 @@ export const funds: Fund[] = [
     minSip: 500,
     expense: 0.3,
     aum: "₹18k Cr",
-    gr1: "Cheap index exposure to tomorrow's large caps. Low fee, high beta.",
+    wise: "Cheap index exposure to tomorrow's large caps. Low fee, high beta.",
   },
   {
     id: "sbi-gold",
@@ -226,7 +226,7 @@ export const funds: Fund[] = [
     minSip: 500,
     expense: 0.18,
     aum: "₹6.4k Cr",
-    gr1: "Gold hedge — zigzags opposite equity. 5–10% of portfolio max.",
+    wise: "Gold hedge — zigzags opposite equity. 5–10% of portfolio max.",
   },
   {
     id: "axis-silver",
@@ -239,7 +239,7 @@ export const funds: Fund[] = [
     minSip: 100,
     expense: 0.22,
     aum: "₹1.1k Cr",
-    gr1: "Silver is trending hard — and dropping hard. Satellite position only.",
+    wise: "Silver is trending hard — and dropping hard. Satellite position only.",
   },
   {
     id: "hdfc-defence",
@@ -252,7 +252,7 @@ export const funds: Fund[] = [
     minSip: 100,
     expense: 0.45,
     aum: "₹5.6k Cr",
-    gr1: "Single-sector bet on defence. Hot now — treat as a side bet, not core.",
+    wise: "Single-sector bet on defence. Hot now — treat as a side bet, not core.",
   },
 ]
 
@@ -401,7 +401,7 @@ export const squad = {
 
 export type ChatMsg = {
   id: string
-  from: "user" | "gr1"
+  from: "user" | "wise"
   text: string
   card?: "receipt" | "split" | "voice"
 }
@@ -409,12 +409,12 @@ export type ChatMsg = {
 export const chatScript: Record<string, ChatMsg[]> = {
   default: [
     { id: "u1", from: "user", text: "Got ₹5k freelance payout. Invest all?" },
-    { id: "g1", from: "gr1", text: "Nice one. Keep ₹1,500 for your buffer — it's below 1 month of expenses. The rest can work.", card: "split" },
-    { id: "g2", from: "gr1", card: "receipt", text: "₹3,500 invested · goal-linked · exit rules inside. Review before you confirm." },
+    { id: "g1", from: "wise", text: "Nice one. Keep ₹1,500 for your buffer — it's below 1 month of expenses. The rest can work.", card: "split" },
+    { id: "g2", from: "wise", card: "receipt", text: "₹3,500 invested · goal-linked · exit rules inside. Review before you confirm." },
   ],
 }
 
-export const gr1Replies: [RegExp, string][] = [
+export const wiseReplies: [RegExp, string][] = [
   [/penny|10x|reel|guarantee/i, "That reel is a pump script. 'Guaranteed 10x' has no basis — the creator holds the stock and sells when followers buy. Want me to Reality-Check it properly?"],
   [/sip|invest|500|5000|₹/i, "For your income rhythm, I'd keep SIPs below 15% of a bad month — not a good one. Simulate it in Money Multiverse before locking."],
   [/goa|trip|vietnam|travel/i, "Goa in December is possible without killing your SIP — ₹1,900/mo for 4 months covers it. Your buffer stays intact either way."],
@@ -423,7 +423,7 @@ export const gr1Replies: [RegExp, string][] = [
   [/hi|hey|hello|yo/i, "Hey. Ask me about a reel, a stock, or whether you can afford something — I'll check against your actual numbers."],
 ]
 
-export const gr1Fallback =
+export const wiseFallback =
   "I can explain products, Reality-Check claims, or simulate decisions against your goals. Try: 'Can I afford Goa in December?'"
 
 export const navTabs = [
@@ -553,7 +553,7 @@ export const wrapped = {
   note: "Amounts and holdings stay private by default. Milestones, not money.",
 }
 
-/* ── Stocks hub (Groww parity) ──────────────────────────────── */
+/* ── Stocks hub (GrowWise parity) ──────────────────────────────── */
 
 export type ProductTool = {
   id: string
@@ -621,10 +621,10 @@ export const sectors: { id: string; name: string; icon: IconName; change: number
 ]
 
 export const etfs = [
-  { id: "groww-pse", ticker: "G", name: "Groww Nifty PSE ETF", price: 95.52, change: -0.61, byGroww: true },
-  { id: "groww-psu", ticker: "G", name: "Groww Nifty PSU Bank ETF", price: 83.33, change: 1.52, byGroww: true },
-  { id: "nippon-nifty", ticker: "N", name: "Nippon India ETF Nifty 50 BeES", price: 265.02, change: 0.17, byGroww: false },
-  { id: "nippon-gold", ticker: "N", name: "Nippon India ETF Gold BeES", price: 124.91, change: 1.04, byGroww: false },
+  { id: "growwise-pse", ticker: "G", name: "GrowWise Nifty PSE ETF", price: 95.52, change: -0.61, byGrowWise: true },
+  { id: "growwise-psu", ticker: "G", name: "GrowWise Nifty PSU Bank ETF", price: 83.33, change: 1.52, byGrowWise: true },
+  { id: "nippon-nifty", ticker: "N", name: "Nippon India ETF Nifty 50 BeES", price: 265.02, change: 0.17, byGrowWise: false },
+  { id: "nippon-gold", ticker: "N", name: "Nippon India ETF Gold BeES", price: 124.91, change: 1.04, byGrowWise: false },
 ]
 
 /* ── F&O ────────────────────────────────────────────────────── */

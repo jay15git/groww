@@ -15,7 +15,7 @@ export default function Multiverse() {
   const [picked, setPicked] = useState("A")
   return (
     <Screen>
-      <ScreenHeader title="Money Multiverse" action="sparkles" actionLabel="Ask GR-1" actionHref="/gr1" />
+      <ScreenHeader title="Money Multiverse" action="sparkles" actionLabel="Ask Wise" actionHref="/wise" />
       <div className="flex min-h-full flex-col px-5 pb-8">
         <p className="rise mt-2 text-sm text-muted-foreground" style={{ "--i": 0 } as React.CSSProperties}>
           Same you. Different futures. Pick one to live in.

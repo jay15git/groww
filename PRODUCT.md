@@ -18,13 +18,13 @@ The prototype must visibly demonstrate adaptation across three representative co
 
 ## Product Purpose
 
-Groww IRL helps young Indians turn noisy financial information and irregular first incomes into informed investment actions. It connects discovery, education, planning, execution clarity, and post-investment confidence in one journey.
+GrowWise helps young Indians turn noisy financial information and irregular first incomes into informed investment actions. It connects discovery, education, planning, execution clarity, and post-investment confidence in one journey.
 
 Success means users can verify a social-media claim, understand its missing context, compare future scenarios, create an income-appropriate plan, explain the risk and cost of their first investment, and track where their money is after confirmation.
 
 ## Positioning
 
-Groww IRL reorganizes investing around real-life money moments rather than financial products. Its unique mechanism connects a multimodal AI truth check to a future simulator, adaptive income plan, decision receipt, and transparent money trail.
+GrowWise reorganizes investing around real-life money moments rather than financial products. Its unique mechanism connects a multimodal AI truth check to a future simulator, adaptive income plan, decision receipt, and transparent money trail.
 
 ## Operating Context
 
@@ -32,8 +32,8 @@ The assignment is a product-management take-home evaluated through a 300–700 w
 
 Primary demo journey:
 1. User sees a viral investment claim.
-2. User shares it to GR-1 Reality Check.
-3. GR-1 separates evidence, missing context, and hype.
+2. User shares it to Wise Reality Check.
+3. Wise separates evidence, missing context, and hype.
 4. User explores future scenarios in Money Multiverse.
 5. User creates an adaptive plan based on income rhythm.
 6. User reviews a Decision Receipt and confirms a simulated investment.
@@ -43,10 +43,10 @@ Primary demo journey:
 
 - Mobile-first responsive interactive prototype.
 - Three switchable personas: student, salaried first-jobber, freelancer.
-- Core surfaces: Today, Discover, GR-1, Squads, Portfolio.
+- Core surfaces: Today, Discover, Wise, Squads, Portfolio.
 - Mocked market, portfolio, transaction, cohort, and AI data.
 - No real KYC, bank connection, market API, recommendation, order, or money movement.
-- GR-1 may explain, compare, simulate, and extract claims; it must not promise returns or present direct buy/sell instructions.
+- Wise may explain, compare, simulate, and extract claims; it must not promise returns or present direct buy/sell instructions.
 - Every projection must identify assumptions and show ranges rather than guaranteed outcomes.
 - Every social feature must keep money ownership individual in the concept.
 - English and Hinglish are demonstrated; regional-language architecture is represented but full translation is out of scope.
@@ -54,9 +54,9 @@ Primary demo journey:
 
 ## Brand Commitments
 
-The concept preserves the Groww name and recognizability while deliberately proposing a bolder Gen Z visual expression. Product tone is culturally aware and witty during discovery and learning, calm during planning, and precise during transactions, losses, consent, errors, and support.
+The concept preserves the GrowWise name and recognizability while deliberately proposing a bolder Gen Z visual expression. Product tone is culturally aware and witty during discovery and learning, calm during planning, and precise during transactions, losses, consent, errors, and support.
 
-Campaign name: Groww IRL.
+Campaign name: GrowWise.
 Tagline: Your money. Your next move.
 
 ## Evidence on Hand
@@ -64,7 +64,7 @@ Tagline: Your money. Your next move.
 - Assignment image and brief provided by user.
 - Product Intern job description at `/Users/jayant/Downloads/Product Intern (1) (1).pdf`.
 - Prior Claude conversation at `/Users/jayant/Downloads/ContextSwitchAI/Claude_Product_intern_app_design_for_Indian_Gen_2026-09-16_21-26-56.md`.
-- Groww Annual Report FY2025–26 downloaded during research.
+- GrowWise Annual Report FY2025–26 downloaded during research.
 - SEBI Investor Survey 2025 and FY2025–26 equity-derivatives findings downloaded during research.
 - Competitor and behavioral-design research collected from official product documentation, regulators, app stores, forums, and public case studies.
 

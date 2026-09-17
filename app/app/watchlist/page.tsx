@@ -32,7 +32,7 @@ export default function Watchlist() {
   )
 
   return (
-    <Screen dark className="bg-ink">
+    <Screen className="bg-ink">
       <ScreenHeader
         title="Watchlist"
         dark
@@ -164,7 +164,7 @@ export default function Watchlist() {
               </div>
               <div className="text-right">
                 <p className="tabular text-sm font-bold">{inr(w.price, { decimals: 2 })}</p>
-                <p className={cn("tabular text-xs font-bold", w.change >= 0 ? "text-groww" : "text-[#ff8a8a]")}>
+                <p className={cn("tabular text-xs font-bold", w.change >= 0 ? "text-growwise" : "text-[#ff8a8a]")}>
                   {pct(w.change)}
                 </p>
               </div>
@@ -178,7 +178,7 @@ export default function Watchlist() {
         </div>
 
         <p className="rise mt-4 text-center text-xs text-paper/35" style={{ "--i": 2 } as React.CSSProperties}>
-          Watching doesn&rsquo;t mean buying. GR-1 can check any of these.
+          Watching doesn&rsquo;t mean buying. Wise can check any of these.
         </p>
       </div>
     </Screen>

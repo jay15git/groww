@@ -19,7 +19,7 @@ import type React from "react"
 const quickActions: { label: string; icon: IconName; href: string }[] = [
   { label: "Add", icon: "down", href: "/add-money" },
   { label: "Invest", icon: "up2", href: "/mutual-funds" },
-  { label: "Ask GR-1", icon: "sparkles", href: "/gr1" },
+  { label: "Ask Wise", icon: "sparkles", href: "/wise" },
   { label: "More", icon: "more", href: "/markets" },
 ]
 
@@ -89,7 +89,7 @@ export default function Today() {
                   </Link>
                   <Link href="/wrapped" className="press flex items-center gap-3 rounded-2xl bg-muted px-4 py-3.5 text-left">
                     <Icon name="award" size={18} />
-                    <span className="flex-1 text-sm font-bold">Groww Wrapped</span>
+                    <span className="flex-1 text-sm font-bold">GrowWise Wrapped</span>
                     <Icon name="next" size={16} className="text-muted-foreground" />
                   </Link>
                   <button
@@ -170,10 +170,10 @@ export default function Today() {
               <Icon name="chart" size={16} /> Simulate
             </Link>
             <Link
-              href="/gr1"
+              href="/wise"
               className="press flex h-10 flex-1 items-center justify-center gap-1.5 rounded-full bg-paper/10 text-sm font-semibold text-paper"
             >
-              <Icon name="sparkles" size={16} /> Ask GR-1
+              <Icon name="sparkles" size={16} /> Ask Wise
             </Link>
           </div>
         </section>
@@ -206,7 +206,7 @@ export default function Today() {
               Reality Check
             </p>
             <p className="text-xs text-ink/60">
-              Drop a finance reel — GR-1 checks the hype
+              Drop a finance reel — Wise checks the hype
             </p>
           </div>
           <Icon name="next" size={18} className="text-ink" />
@@ -216,7 +216,7 @@ export default function Today() {
           <h2 className="font-heading text-base font-bold uppercase tracking-wide text-muted-foreground">
             Your next moves
           </h2>
-          <Link href="/goals" className="text-xs font-semibold text-groww">
+          <Link href="/goals" className="text-xs font-semibold text-growwise">
             See all
           </Link>
         </div>
@@ -235,11 +235,11 @@ export default function Today() {
                 <div className="flex-1">
                   <div className="flex items-baseline justify-between">
                     <p className="font-heading text-[15px] font-bold">{g.name}</p>
-                    <span className="tabular text-xs font-bold text-groww">{pc}%</span>
+                    <span className="tabular text-xs font-bold text-growwise">{pc}%</span>
                   </div>
                   <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-muted">
                     <div
-                      className="h-full rounded-full bg-groww"
+                      className="h-full rounded-full bg-growwise"
                       style={{ width: `${pc}%` }}
                     />
                   </div>
@@ -256,7 +256,7 @@ export default function Today() {
           <h2 className="font-heading text-base font-bold uppercase tracking-wide text-muted-foreground">
             Recent moves
           </h2>
-          <Link href="/trail" className="text-xs font-semibold text-groww">
+          <Link href="/trail" className="text-xs font-semibold text-growwise">
             See all
           </Link>
         </div>
@@ -273,7 +273,7 @@ export default function Today() {
               <span
                 className={
                   m.amount > 0
-                    ? "tabular text-sm font-bold text-groww"
+                    ? "tabular text-sm font-bold text-growwise"
                     : "tabular text-sm font-semibold text-ink"
                 }
               >

@@ -18,7 +18,7 @@ const sections: { group: string; items: { label: string; sub?: string; icon: Ico
     ],
   },
   {
-    group: "Groww IRL",
+    group: "GrowWise",
     items: [
       { label: "Autopilot", sub: "Income-rhythm investing rules", icon: "refresh", href: "/autopilot" },
       { label: "Goals", sub: "What your money is for", icon: "target", href: "/goals" },
@@ -32,7 +32,7 @@ const sections: { group: string; items: { label: string; sub?: string; icon: Ico
     items: [
       { label: "Reports & statements", sub: "P&L, tax, contract notes", icon: "fileVerified", href: "/profile" },
       { label: "Bank & UPI", sub: "Linked accounts", icon: "bank", href: "/add-money" },
-      { label: "Help & support", sub: "FAQs, tickets", icon: "help", href: "/gr1" },
+      { label: "Help & support", sub: "FAQs, tickets", icon: "help", href: "/wise" },
     ],
   },
 ]
@@ -61,7 +61,7 @@ export default function Profile() {
         </section>
 
         <section className="rise mt-3 flex items-center gap-3 rounded-2xl bg-mint2 p-4" style={{ "--i": 1 } as React.CSSProperties}>
-          <Icon name="badgeCheck" size={20} className="text-groww" />
+          <Icon name="badgeCheck" size={20} className="text-growwise" />
           <div className="flex-1">
             <p className="text-sm font-bold">KYC verified</p>
             <p className="text-xs text-muted-foreground">Demo account · full access enabled</p>
@@ -114,7 +114,7 @@ export default function Profile() {
         </button>
 
         <p className="rise mt-5 text-center text-[11px] text-muted-foreground" style={{ "--i": 8 } as React.CSSProperties}>
-          Groww IRL · concept demo
+          GrowWise · concept demo
         </p>
       </div>
     </Screen>

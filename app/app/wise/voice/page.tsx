@@ -12,7 +12,7 @@ import type React from "react"
 const stages = ["Listening…", "Thinking…", "Answering…"]
 const bars = [10, 22, 34, 18, 42, 26, 14, 36, 20, 30, 12, 24]
 
-export default function GR1Voice() {
+export default function WiseVoice() {
   const [stage, setStage] = useState(0)
   const router = useRouter()
 
@@ -22,14 +22,14 @@ export default function GR1Voice() {
   }, [])
 
   return (
-    <Screen dark className="bg-ink">
+    <Screen className="bg-ink">
       <ScreenHeader
-        title="GR-1 Voice"
+        title="Wise Voice"
         dark
-        onBack={() => router.push("/gr1")}
+        onBack={() => router.push("/wise")}
         right={
           <Link
-            href="/gr1"
+            href="/wise"
             aria-label="Switch to chat"
             className="press flex size-10 items-center justify-center rounded-full bg-paper/10 text-paper"
           >
@@ -69,7 +69,7 @@ export default function GR1Voice() {
 
         <button
           type="button"
-          onClick={() => router.push("/gr1")}
+          onClick={() => router.push("/wise")}
           className="press rise mt-10 flex size-14 items-center justify-center rounded-full bg-paper/10 text-paper"
           aria-label="End voice"
           style={{ "--i": 5 } as React.CSSProperties}

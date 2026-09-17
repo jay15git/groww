@@ -31,13 +31,13 @@ export default function Promptfolio() {
         title="Promptfolio"
         right={
           <span className="flex h-10 items-center gap-1.5 rounded-full bg-lime px-3.5 font-heading text-xs font-bold text-ink">
-            <Icon name="sparkles" size={14} /> GR-1
+            <Icon name="sparkles" size={14} /> Wise
           </span>
         }
       />
       <div className="flex min-h-full flex-col px-5 pb-8">
         <p className="rise mt-2 text-sm text-muted-foreground" style={{ "--i": 0 } as React.CSSProperties}>
-          Describe an investing idea in plain words. GR-1 drafts a basket —
+          Describe an investing idea in plain words. Wise drafts a basket —
           you inspect it before anything moves.
         </p>
 
@@ -98,7 +98,7 @@ export default function Promptfolio() {
           <>
             <section className="rise mt-5 rounded-3xl bg-paper p-5 shadow-sm" style={{ "--i": 0 } as React.CSSProperties}>
               <p className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground">
-                GR-1 read your idea as
+                Wise read your idea as
               </p>
               <p className="mt-1.5 font-heading text-base font-bold leading-snug">
                 {promptfolio.interpretation}

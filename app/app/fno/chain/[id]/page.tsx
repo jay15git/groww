@@ -34,7 +34,7 @@ export default function OptionChain() {
   }
 
   return (
-    <Screen dark className="bg-ink">
+    <Screen className="bg-ink">
       <ScreenHeader title={chain.underlying} dark />
       <div className="px-5 pb-8">
         <div className="rise mt-1 flex items-end justify-between" style={{ "--i": 0 } as React.CSSProperties}>
@@ -53,7 +53,7 @@ export default function OptionChain() {
 
         {/* Column headers */}
         <div className="rise mt-5 grid grid-cols-[1fr_auto_1fr] items-center gap-2 text-center" style={{ "--i": 1 } as React.CSSProperties}>
-          <p className="text-[11px] font-bold uppercase tracking-wide text-groww">Calls</p>
+          <p className="text-[11px] font-bold uppercase tracking-wide text-growwise">Calls</p>
           <p className="w-16 text-[11px] font-bold uppercase tracking-wide text-paper/45">Strike</p>
           <p className="text-[11px] font-bold uppercase tracking-wide text-[#ff8a8a]">Puts</p>
         </div>
@@ -80,7 +80,7 @@ export default function OptionChain() {
                     <button
                       type="button"
                       onClick={() => trade("CE", s.strike, s.ceLtp, "BUY")}
-                      className="press flex size-6 items-center justify-center rounded-full bg-groww/15 text-[10px] font-bold text-groww"
+                      className="press flex size-6 items-center justify-center rounded-full bg-growwise/15 text-[10px] font-bold text-growwise"
                       aria-label={`Buy ${s.strike} CE`}
                     >
                       B
@@ -88,7 +88,7 @@ export default function OptionChain() {
                     <p className="tabular text-sm font-bold text-paper">{s.ceLtp}</p>
                   </div>
                   <div className="mt-1 flex items-center justify-between text-[10px]">
-                    <span className={cn("tabular font-bold", s.ceChg >= 0 ? "text-groww" : "text-[#ff8a8a]")}>
+                    <span className={cn("tabular font-bold", s.ceChg >= 0 ? "text-growwise" : "text-[#ff8a8a]")}>
                       {s.ceChg >= 0 ? "+" : ""}{s.ceChg}%
                     </span>
                     <span className="tabular text-paper/40">{s.ceOi}L</span>
@@ -107,7 +107,7 @@ export default function OptionChain() {
                     <button
                       type="button"
                       onClick={() => trade("PE", s.strike, s.peLtp, "BUY")}
-                      className="press flex size-6 items-center justify-center rounded-full bg-groww/15 text-[10px] font-bold text-groww"
+                      className="press flex size-6 items-center justify-center rounded-full bg-growwise/15 text-[10px] font-bold text-growwise"
                       aria-label={`Buy ${s.strike} PE`}
                     >
                       B
@@ -115,7 +115,7 @@ export default function OptionChain() {
                   </div>
                   <div className="mt-1 flex items-center justify-between text-[10px]">
                     <span className="tabular text-paper/40">{s.peOi}L</span>
-                    <span className={cn("tabular font-bold", s.peChg >= 0 ? "text-groww" : "text-[#ff8a8a]")}>
+                    <span className={cn("tabular font-bold", s.peChg >= 0 ? "text-growwise" : "text-[#ff8a8a]")}>
                       {s.peChg >= 0 ? "+" : ""}{s.peChg}%
                     </span>
                   </div>

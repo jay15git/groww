@@ -7,18 +7,18 @@ import { Icon } from "@/components/icon"
 import { Screen } from "@/components/screen"
 import { ScreenHeader } from "@/components/screen-header"
 import { ScrollArea } from "@/components/ui/scroll-area"
-import { chatScript, gr1Fallback, gr1Replies, type ChatMsg } from "@/lib/data"
+import { chatScript, wiseFallback, wiseReplies, type ChatMsg } from "@/lib/data"
 import { cn } from "@/lib/utils"
 import type React from "react"
 
 const chips = ["Check this reel", "Can I afford Goa?", "Why is my portfolio red?"]
 
 function replyFor(text: string): string {
-  for (const [re, msg] of gr1Replies) if (re.test(text)) return msg
-  return gr1Fallback
+  for (const [re, msg] of wiseReplies) if (re.test(text)) return msg
+  return wiseFallback
 }
 
-export default function GR1Chat() {
+export default function WiseChat() {
   const [msgs, setMsgs] = useState<ChatMsg[]>(chatScript.default)
   const [input, setInput] = useState("")
   const [thinking, setThinking] = useState(false)
@@ -35,7 +35,7 @@ export default function GR1Chat() {
     setInput("")
     setThinking(true)
     setTimeout(() => {
-      setMsgs((m) => [...m, { id: `g-${Date.now()}`, from: "gr1", text: replyFor(text) }])
+      setMsgs((m) => [...m, { id: `g-${Date.now()}`, from: "wise", text: replyFor(text) }])
       setThinking(false)
     }, 900)
   }
@@ -43,11 +43,11 @@ export default function GR1Chat() {
   return (
     <Screen scroll={false}>
       <ScreenHeader
-        title="GR-1"
+        title="Wise"
         onBack={() => router.push("/today")}
         right={
           <Link
-            href="/gr1/voice"
+            href="/wise/voice"
             aria-label="Switch to voice"
             className="press flex size-10 items-center justify-center rounded-full bg-ink text-lime"
           >
@@ -75,7 +75,7 @@ export default function GR1Chat() {
                   <p className="font-heading text-sm font-bold">Decision Receipt</p>
                 </div>
                 <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground">{m.text}</p>
-                <p className="mt-2 font-heading text-xs font-bold text-groww">Review →</p>
+                <p className="mt-2 font-heading text-xs font-bold text-growwise">Review →</p>
               </button>
             ) : (
               <div key={m.id} className="rise mr-auto flex max-w-[88%] gap-2.5">
@@ -138,8 +138,8 @@ export default function GR1Chat() {
             <input
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              placeholder="Ask GR-1 anything…"
-              aria-label="Message GR-1"
+              placeholder="Ask Wise anything…"
+              aria-label="Message Wise"
               className="min-w-0 flex-1 bg-transparent text-sm outline-none placeholder:text-muted-foreground"
             />
           </div>

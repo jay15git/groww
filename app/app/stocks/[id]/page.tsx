@@ -66,7 +66,7 @@ export default function StockDetail() {
             <p className="tabular font-heading text-[26px] font-extrabold leading-none tracking-tight">
               {inr(s.price, { decimals: 2 })}
             </p>
-            <p className={cn("tabular mt-1 text-xs font-bold", neg ? "text-loss" : "text-groww")}>
+            <p className={cn("tabular mt-1 text-xs font-bold", neg ? "text-loss" : "text-growwise")}>
               {neg ? "▼" : "▲"} {inr(Math.abs(s.changeAbs), { decimals: 2 })} ({pct(s.change)}) today
             </p>
           </div>
@@ -99,7 +99,7 @@ export default function StockDetail() {
             <span className="flex size-7 items-center justify-center rounded-full bg-ink text-lime">
               <Icon name="sparkles" size={14} />
             </span>
-            <p className="font-heading text-sm font-bold">GR-1 read</p>
+            <p className="font-heading text-sm font-bold">Wise read</p>
           </div>
           <p className="mt-2 text-xs leading-relaxed text-ink/80">
             {neg
@@ -168,7 +168,7 @@ function OrderSheet({ stock, side }: { stock: (typeof allStocks)[number]; side: 
 
         {done ? (
           <div className="flex flex-col items-center py-4 text-center">
-            <span className="flex size-14 items-center justify-center rounded-full bg-mint2 text-groww">
+            <span className="flex size-14 items-center justify-center rounded-full bg-mint2 text-growwise">
               <Icon name="check" size={26} />
             </span>
             <p className="mt-3 text-sm font-bold">
@@ -235,7 +235,7 @@ function OrderSheet({ stock, side }: { stock: (typeof allStocks)[number]; side: 
               onClick={confirm}
               className={cn(
                 "press mt-4 h-12 w-full rounded-full font-heading text-sm font-bold",
-                side === "BUY" ? "bg-groww text-paper" : "bg-loss text-paper"
+                side === "BUY" ? "bg-growwise text-paper" : "bg-loss text-paper"
               )}
             >
               {side === "BUY" ? "Buy" : "Sell"} · {inr(cost, { decimals: 0 })}

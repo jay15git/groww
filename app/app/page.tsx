@@ -1,16 +1,14 @@
 import Link from "next/link"
-import { StatusBar } from "@/components/status-bar"
 import { Icon } from "@/components/icon"
 
 export default function Onboarding() {
   return (
     <div className="flex min-h-0 flex-1 flex-col bg-lime">
-      <StatusBar />
       <div className="flex flex-1 flex-col px-6 pb-8">
         <div className="flex items-center gap-1.5 pt-1">
           <Icon name="sparkles" size={18} />
           <span className="font-heading text-sm font-bold tracking-tight">
-            Groww IRL
+            GrowWise
           </span>
         </div>
 
